@@ -12,7 +12,7 @@ print(E)
 
 #Get vertices from edge input
 V=[[item[1],item[2]] for item in E_matrix]
-V=np.unique((sum(V,[])))
+V=list(np.unique((sum(V,[]))))
 print(V)
 
 #A structure to keep the trees in, initialize one "tree" pr element to begin with!
@@ -22,3 +22,18 @@ for element in V:
     element_trees[element] = []
 
 print(element_trees["a"])
+
+#this needs to keep happening until everything is in one tree: 
+while len(V)>1:
+#choosing the min entry, and merge the two subtrees
+    min0,min1,min2=E[0][0],E[0][1],E[0][2]
+    element_trees[min1]=(","+min0+":"+min1+"->"+min2+str(element_trees[min2]))
+    del(element_trees[min2]) #delete tree2 after merging it into tree1
+    E=np.delete(E, 0, axis=0)
+    print(V)
+    V.remove(min2) #remove vertix from the list of vertices
+    print(V)
+    print(element_trees[min1])
+    print(E)
+
+#we get to the problem: what happens if the next elemenent has already had its tree deleted but it still has potential connections in E?
