@@ -1,0 +1,17 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "backtrack",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/project2/global_affine_ideas.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args": ["${workspaceFolder}/project2/examples/seq1_case1.fasta", "${workspaceFolder}/project2/examples/seq2_case1.fasta", "5", "0", "${workspaceFolder}/project2/examples/example_score_matrix.txt"]
+        }
+    ]
+}

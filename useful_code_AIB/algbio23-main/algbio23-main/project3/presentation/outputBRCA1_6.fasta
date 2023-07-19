@@ -1,0 +1,12 @@
+>brca1_bos_taurus
+a-t-ggatttatctgcggatcgtgttgaagaag-tac--aa-aat-g-ttcttaatg-c-ta-tgca-gaaaatcttag--a-gtgtc-caa-t-atgtctggagttgatcaaagag-cct-gtttctacaaagtgtga--tca-c--a-tattttgcaaat-tttg-tatgct-gaa-ac-ttctcaacca-gagga-aggggcct-t-ca--ca-gtgtcc--tttgtgtaagaacga-
+>brca1_canis_lupus
+a-t-ggatttatctgcggatcatgttgaagaag-tac--aa-aat-g-tcctcaatg-c-ta-tgca-gaaaatcttag--a-gtgtc-caa-t-atgtctggagttgatcaaagag-cct-gtctctacaaagtgtga--cca-c--a-tattttgcaaat-tttg-tatgct-gaa-ac-ttctcaacca-gaaga-aagggcct-t-ca--ca-atgtcc--tttgtgtaagaatga-
+>brca1_gallus_gallus
+g-c-gaa---atgta-aca-cg-gtagaggtga-t-c--gg-ggt-g--cgtt-ata-c--g-tgcgtggtgacctcggtcg-gtgt--tga-cggtgcctggggttcctcagagtgttttggggtctgaaggatg-gac-ttgtc--agtg-attgccatt-ggagacgtgca-aaatgtgctttcagccatgcaga-a-gaa-ct-t--g--ga-gtgtccagtctgtttagatgtgat
+>brca1_homo_sapiens
+g-t-accttgattt-cgtattctg-agaggctgctgcttagcggtagccccttggt--t-tc-cgt--ggcaacggaaa--a-gcg-c-ggg-a-at-tacaga-taaattaaa-a---ct-gcgactgcgcggcgtgagctcg-ctga-gacttcctggacgggggacaggct-gtg-gg-gtttc--tca-gataactgggcccc-tgcgctcaggaggcc--ttcac-c---ctc-t-
+>brca1_macaca_mulatta
+a-t-ggatttatctgctgttcgcgttgaagaag-tac--aa-aat-g-tcattaatg-c-ta-tgca-gaaaatcttag--a-gtgtc-caa-t-ctgtctggagttgatcaaggaa-cct-gtctccacaaagtgtga--cca-c--a-tattttgcagat-tttg-catgct-gaa-ac-ttctcaacca-gaaga-aagggcct-t-ca--ca-gtgtcc--tttgtgtaagaatga-
+>brca1_mus_musculus
+gttccgaaaggctagcgctaggcgcc-aagcgg-c-c-----ggt-t-tccttggcgacggagagcgcgggaattttag--atagattgtaatt-gcggct-gcg-cggccgctgcc-cgt-gcagccagaggatccag---ca-c--c-tctcttggggct-tctc-cgtcctcggc-gc-tt-ggaagta--cgga-tcttttttct-cg--ga-gaaaag--ttcac-t-ggaactg-

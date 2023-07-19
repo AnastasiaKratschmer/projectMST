@@ -1,0 +1,7 @@
+experimentsdata/CLUSTALnj,experimentsdata/CLUSTALquicktree,experimentsdata/MUSCLEnj,experimentsdata/MUSCLEquicktree,experimentsdata/kalignnj,experimentsdata/kalignquicktree
+0,264,784,784,274,316
+264,0,784,784,318,206
+784,784,0,192,784,784
+784,784,192,0,784,784
+274,318,784,784,0,258
+316,206,784,784,258,0
