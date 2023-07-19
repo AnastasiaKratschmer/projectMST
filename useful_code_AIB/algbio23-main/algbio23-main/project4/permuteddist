@@ -1,0 +1,7 @@
+experimentsdata/CLUSTALnj_permuted,experimentsdata/CLUSTALquicktree_permuted,experimentsdata/MUSCLEnj_permuted,experimentsdata/MUSCLEquicktree_permuted,experimentsdata/kalignnj_permuted,experimentsdata/kalignquicktree_permuted
+0,268,784,784,300,318
+268,0,784,784,288,198
+784,784,0,208,784,784
+784,784,208,0,784,784
+300,288,784,784,0,226
+318,198,784,784,226,0
