@@ -261,23 +261,26 @@ def get_visiting_order(res_matrix,source_node):
         node1 = row[2]  # Extract the first node from the third column
         node2 = row[3]  # Extract the second node from the fourth column
         edges.append((node1, node2, {'weight': weight}))  # Add the tuple to the list
+        
     for row in res_matrix:
         if row[0]=="*":  # Extract the weight from the second column
             node1 = row[2]  # Extract the first node from the third column
             node2 = row[3]  # Extract the second node from the fourth column
             edge=tuple(sorted([node1,node2]))
-            edges_in_min_path.append(edge) # Add the tuple to the list
-    G = nx.Graph()
-    G.add_nodes_from(np.unique(res_matrix[:, 2:]))
-    G.add_edges_from(edges)
-    shortest_path=edges_in_min_path
-    pos = nx.spring_layout(G)
-    edge_colors = ['deeppink' if e in shortest_path else 'lavender' for e in G.edges()] #
-    nx.draw(G, pos, with_labels=True, node_color='bisque', edge_color=edge_colors, width=2, font_size=10)
+            edges_in_min_path.append(edge) # Add the tuple to the list #WORKS TILL HERE
+    G = nx.Graph()#WORKS TILL HERE
+    G.add_nodes_from(np.unique(res_matrix[:, 2:])) #WORKS TILL HERE
+    G.add_edges_from(edges) #WORKS TILL HERE
+    shortest_path=edges_in_min_path #WORKS TILL HERE
+    pos = nx.spring_layout(G) #WORKS TILL HERE
+    edge_colors = ['deeppink' if e in shortest_path else 'lavender' for e in G.edges()] #WORKS TILL HERE
+    nx.draw(G, pos, with_labels=True, node_color='bisque', edge_color=edge_colors, width=2, font_size=10) #WORKS TILL HERE
     # Show the plot
-    plt.show() 
+    plt.ion() #to make it keep running even without manually closing fig!!
+    plt.show() #SO I GUESS: WORKS TILL HERE
+    
     dfs_order = list(nx.bfs_tree(G, source=source_node)) #I guess we can use the middle string as the source node or something. or one of the ones that's the most different from the others to hopefully start "at a side".
-    #and really consider using another method than depth-first! like "nx.bfs_edges"
+    #and really consider using another method than depth-first! like "nx.bfs_edges" #WORKS TILL HERE
     return dfs_order
 
 def convert_format_mat_to_pseudomat(mini_mat):
