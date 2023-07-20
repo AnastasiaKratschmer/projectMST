@@ -15,11 +15,13 @@ def sp_approx(seqs: list[str], score_matrix: dict, gap_cost: int, verbose=False,
         for j, seq2 in enumerate(seqs):
               matrix[i, j] = get_cost_2(linear_C(gap_cost, score_matrix, seq1, seq2))
     print(matrix)
-    matrix_for_MST=matrix
+    matrix_for_MST=matrix 
     matrix_for_MST=convert_to_desired_format2(matrix_for_MST)
     min_span_edges=find_min_span_edges(matrix_for_MST)
+    print(matrix_for_MST)
+    print(min_span_edges)
     visiting_order=get_visiting_order(min_span_edges,"A") #A needs to be substituted at some point
-    print(visiting_order) #visiting order is now letters, but we would need that as numbers/idices from the score matrix to keep track.
+    print(visiting_order) #visiting order is now letters, but we would need that as numbers/idices from the score matrix to keep track. #APPARENTLY NOT ACTUALLY IN USE
 
     
 
@@ -52,7 +54,7 @@ def sp_approx(seqs: list[str], score_matrix: dict, gap_cost: int, verbose=False,
     total_cost = compute_cost(M, score_matrix, gap_cost)
     
     if return_center_string: return total_cost, M, s1_idx
-    return total_cost, M, matrix_for_MST
+    return total_cost, M, matrix_for_MST, visiting_order
 
 def compute_cost(M, score_matrix, gap_cost):
     # the cost of the alignment is the sum of the cost of each column
@@ -100,10 +102,10 @@ if __name__ == "__main__":
     # ----- What we see in the terminal
     print("Beep boop!\n")
     print("Computing the approximate cost of aligning the " + str(len(seqs)) + " sequences...")
-    cost, M,matrix_for_MST = sp_approx(seqs, score_matrix, gap)
+    cost, M,matrix_for_MST,visiting_order = sp_approx(seqs, score_matrix, gap)
+    print("vis ord:"+str(visiting_order))
     print("Done!\n")
     print("Cost: " + str(cost))
-    print("new mat:")
     
 
     print()
