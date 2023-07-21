@@ -329,3 +329,26 @@ def convert_to_desired_format2(distance_matrix):
 
     return matrixx_np
 
+def convert_to_desired_format_nr_version(distance_matrix):
+    # Get the number of nodes in the distance matrix
+    num_nodes = len(distance_matrix)
+
+    # Initialize an empty list to store the rows of the new format
+    matrixx_rows = []
+
+    # Process the distance_matrix to generate the rows of the new format
+    for i in range(num_nodes):
+        for j in range(i+1, num_nodes):  # Avoid duplicates and self-distances
+            distance = int(distance_matrix[i, j])
+            node1 = str(i)  # Node names as A, B, C, ...
+            node2 = str(j)
+            matrixx_rows.append(["", distance, node1, node2])
+
+    # Convert the list of rows to a NumPy array
+    matrixx_np = np.array(matrixx_rows)
+    return matrixx_np
+
+def nothing(x):
+    return x*33
+
+
