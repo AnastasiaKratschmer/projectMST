@@ -106,6 +106,7 @@ if __name__ == "__main__":
     print("vis ord:"+str(visiting_order))
     print("Done!\n")
     print("Cost: " + str(cost))
+    print(score_matrix)
     
 
     print()
