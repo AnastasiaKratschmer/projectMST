@@ -27,6 +27,7 @@ def sp_approx(seqs: list[str], score_matrix: dict, gap_cost: int, verbose=False,
 
     # find center string/guide 
     s1_idx = np.argmin(matrix.sum(axis = 1))
+    
     s1 = seqs[s1_idx]
     seqs.insert(0, seqs.pop(s1_idx)) # move guide to front of list
     if verbose: print("The center string, s1, is sequence no." + str(s1_idx+1)) # just a print statement to see which string is the center string
@@ -106,7 +107,7 @@ if __name__ == "__main__":
     print("vis ord:"+str(visiting_order))
     print("Done!\n")
     print("Cost: " + str(cost))
-    print(score_matrix)
-    
+    #print(score_matrix)
+    print(M)
 
     print()
