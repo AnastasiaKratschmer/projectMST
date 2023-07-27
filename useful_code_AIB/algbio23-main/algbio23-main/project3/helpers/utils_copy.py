@@ -253,7 +253,7 @@ def find_min_span_edges(pseudomatrix):
     res_mat=E
     return res_mat
 
-def get_visiting_order(res_matrix,source_node,traversal="df"):
+def get_visiting_order(res_matrix,source_node,traversal="df",layout="spring"):
     edges=[]
     edges_in_min_path=[]
     for row in res_matrix:
@@ -272,6 +272,20 @@ def get_visiting_order(res_matrix,source_node,traversal="df"):
     G.add_nodes_from(np.unique(res_matrix[:, 2:])) #WORKS TILL HERE
     G.add_edges_from(edges) #WORKS TILL HERE
     shortest_path=edges_in_min_path #WORKS TILL HERE
+    if layout=="spring":
+        pos = nx.spring_layout(G)
+    elif layout=="planar":
+        pos=nx.planar_layout(G)
+    elif layout=="shell":
+        pos=nx.shell_layout(G)
+    elif layout=="circular":
+        pos=nx.circular_layout(G)
+    elif layout=="spiral":
+        pos=nx.spiral_layout(G)
+    elif layout=="spectral":
+        pos=nx.spectral_layout(G)
+    else:
+        print("Error! The specified layout is not available, choose spring, planar, shell, circular, spiral or spectral. Good luck!")
     pos = nx.spring_layout(G) #WORKS TILL HERE
     edge_colors = ['deeppink' if e in shortest_path else 'lavender' for e in G.edges()] #WORKS TILL HERE
     nx.draw(G, pos, with_labels=True, node_color='bisque', edge_color=edge_colors, width=2, font_size=10) #WORKS TILL HERE
