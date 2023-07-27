@@ -150,27 +150,27 @@ def extend_alignment(M, A):
     # print("extend M= " +str(M))
     while i < len(M) and j < len(A):
         # Case 1:
-        if M[i][0] == '-' and A[j][0] == '-':
+        if M[i][-1] == '-' and A[j][0] == '-':
             M[i].append(A[j][1])
             MA.append(M[i])
             i = i + 1
             j = j + 1
 
         # Case 2:
-        elif M[i][0] == '-' and A[j][0] != '-':
+        elif M[i][-1] == '-' and A[j][0] != '-':
             M[i].append('-')
             MA.append(M[i])
             i = i + 1
         
         # Case 3:
-        elif M[i][0] != '-' and A[j][0] == '-':
+        elif M[i][-1] != '-' and A[j][0] == '-':
             c = ['-']*len(M[i])
             c.append(A[j][1])
             MA.append(c)
             j = j + 1
         
         # Case 4:
-        elif M[i][0] != '-' and A[j][0] != '-':
+        elif M[i][-1] != '-' and A[j][0] != '-':
             M[i].append(A[j][1])
             MA.append(M[i])
             i = i + 1
@@ -183,7 +183,7 @@ def extend_alignment(M, A):
             i = i + 1
             
     if j < len(A):
-        k = len(M[0])
+        k = len(M[-1])
         while j < len(A):
             c = ['-']*(k-1)
             c.append(A[j][1])
@@ -253,7 +253,7 @@ def find_min_span_edges(pseudomatrix):
     res_mat=E
     return res_mat
 
-def get_visiting_order(res_matrix,source_node):
+def get_visiting_order(res_matrix,source_node,traversal="df"):
     edges=[]
     edges_in_min_path=[]
     for row in res_matrix:
@@ -278,10 +278,14 @@ def get_visiting_order(res_matrix,source_node):
     # Show the plot
     plt.ion() #to make it keep running even without manually closing fig!!
     plt.show() #SO I GUESS: WORKS TILL HERE
-    
-    dfs_order = list(nx.bfs_tree(G, source=source_node)) #I guess we can use the middle string as the source node or something. or one of the ones that's the most different from the others to hopefully start "at a side".
+    if traversal=="bf":
+        order = list(nx.bfs_tree(G, source=source_node))
+        print("my traversal is bf") #I guess we can use the middle string as the source node or something. or one of the ones that's the most different from the others to hopefully start "at a side".
     #and really consider using another method than depth-first! like "nx.bfs_edges" #WORKS TILL HERE
-    return dfs_order
+    if traversal=="df":
+        order = list(nx.dfs_tree(G, source=source_node))
+        print("My traversal is df")
+    return order
 
 def convert_format_mat_to_pseudomat(mini_mat):
     # Get the node names (excluding the first row and first column)
