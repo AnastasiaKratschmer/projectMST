@@ -257,10 +257,11 @@ def get_visiting_order(res_matrix,source_node,traversal="df",layout="spring"):
     edges=[]
     edges_in_min_path=[]
     for row in res_matrix:
-        weight = int(row[1])  # Extract the weight from the second column
-        node1 = row[2]  # Extract the first node from the third column
-        node2 = row[3]  # Extract the second node from the fourth column
-        edges.append((node1, node2, {'weight': weight}))  # Add the tuple to the list
+        if row[0]=="*": #was not there before, but to make sure only the edges in min span tree are added this is added for now.
+            weight = int(row[1])  # Extract the weight from the second column
+            node1 = row[2]  # Extract the first node from the third column
+            node2 = row[3]  # Extract the second node from the fourth column
+            edges.append((node1, node2, {'weight': weight}))  # Add the tuple to the list
         
     for row in res_matrix:
         if row[0]=="*":  # Extract the weight from the second column
@@ -270,7 +271,7 @@ def get_visiting_order(res_matrix,source_node,traversal="df",layout="spring"):
             edges_in_min_path.append(edge) # Add the tuple to the list #WORKS TILL HERE
     G = nx.Graph()#WORKS TILL HERE
     G.add_nodes_from(np.unique(res_matrix[:, 2:])) #WORKS TILL HERE
-    G.add_edges_from(edges) #WORKS TILL HERE
+    G.add_edges_from(edges) #WORKS TILL HERE 
     shortest_path=edges_in_min_path #WORKS TILL HERE
     if layout=="spring":
         pos = nx.spring_layout(G)
@@ -299,7 +300,7 @@ def get_visiting_order(res_matrix,source_node,traversal="df",layout="spring"):
     if traversal=="df":
         order = list(nx.dfs_tree(G, source=source_node))
         print("My traversal is df")
-    return order
+    return order,G
 
 def convert_format_mat_to_pseudomat(mini_mat):
     # Get the node names (excluding the first row and first column)
