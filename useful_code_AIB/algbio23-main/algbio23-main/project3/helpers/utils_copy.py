@@ -269,7 +269,7 @@ def get_visiting_order(res_matrix,source_node,traversal="df",layout="spring"):
             node2 = row[3]  # Extract the second node from the fourth column
             edge=tuple(sorted([node1,node2]))
             edges_in_min_path.append(edge) # Add the tuple to the list #WORKS TILL HERE
-    G = nx.Graph()#WORKS TILL HERE
+    G = nx.Graph()#WORKS TILL HERE 
     G.add_nodes_from(np.unique(res_matrix[:, 2:])) #WORKS TILL HERE
     G.add_edges_from(edges) #WORKS TILL HERE 
     shortest_path=edges_in_min_path #WORKS TILL HERE
