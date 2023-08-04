@@ -216,6 +216,8 @@ class Tree:
 def find_min_span_edges(pseudomatrix):
     sorted_indices = np.lexsort((pseudomatrix[:, 1].astype(int),))
     E = pseudomatrix[sorted_indices]
+    print("this is E (sorted matrix without any stars yet): ")
+    print(E)
     names= np.unique(pseudomatrix[:, 2:])
     name_dict= {letter:i for i, letter in enumerate(names)}
     E[:,0]=''
@@ -223,7 +225,7 @@ def find_min_span_edges(pseudomatrix):
     for item in names:
         trees.append(Tree(item))
         x=0
-    for i,item in enumerate(E):
+    for i,item in enumerate(E):#is this enumeration even needed????????
         while len(set(name_dict.values()))>1:
             min0,min1,min2=E[x][1],E[x][2],E[x][3] #get the next line in the matrix to get the letters/names of the trees
             tree1_id= name_dict[min1] #getting the positions of the letters in the current list of trees
@@ -258,16 +260,16 @@ def get_visiting_order(res_matrix,source_node,traversal="df",layout="spring"):
     edges_in_min_path=[]
     for row in res_matrix:
         if row[0]=="*": #was not there before, but to make sure only the edges in min span tree are added this is added for now.
-            weight = int(row[1])  # Extract the weight from the second column
-            node1 = row[2]  # Extract the first node from the third column
-            node2 = row[3]  # Extract the second node from the fourth column
+            weight = int(row[1])  # Extract the weight 
+            node1 = row[2]  # Extract the first node
+            node2 = row[3]  # Extract the second node 
             edges.append((node1, node2, {'weight': weight}))  # Add the tuple to the list
         
     for row in res_matrix:
-        if row[0]=="*":  # Extract the weight from the second column
-            node1 = row[2]  # Extract the first node from the third column
-            node2 = row[3]  # Extract the second node from the fourth column
-            edge=tuple(sorted([node1,node2]))
+        if row[0]=="*":  # Finding only edges determined to be included in the min path.
+            node1 = row[2]  # Extract the first node 
+            node2 = row[3]  # Extract the second node
+            edge=tuple(sorted([node1,node2])) #needs be alphabethical
             edges_in_min_path.append(edge) # Add the tuple to the list #WORKS TILL HERE
     G = nx.Graph()#WORKS TILL HERE 
     G.add_nodes_from(np.unique(res_matrix[:, 2:])) #WORKS TILL HERE
@@ -287,7 +289,7 @@ def get_visiting_order(res_matrix,source_node,traversal="df",layout="spring"):
         pos=nx.spectral_layout(G)
     else:
         print("Error! The specified layout is not available, choose spring, planar, shell, circular, spiral or spectral. Good luck!")
-    pos = nx.spring_layout(G) #WORKS TILL HERE
+    #pos = nx.spring_layout(G) #WORKS TILL HERE
     edge_colors = ['deeppink' if e in shortest_path else 'lavender' for e in G.edges()] #WORKS TILL HERE
     nx.draw(G, pos, with_labels=True, node_color='bisque', edge_color=edge_colors, width=2, font_size=10) #WORKS TILL HERE
     # Show the plot
@@ -371,3 +373,55 @@ def nothing(x):
     return x*33
 
 
+def find_min_span_edges_testing(pseudomatrix):
+    sorted_indices = np.lexsort((pseudomatrix[:, 1].astype(int),))
+    E = pseudomatrix[sorted_indices]
+    print("this is E (sorted matrix without any stars yet): ")
+    print(E)
+    names= np.unique(pseudomatrix[:, 2:])
+    name_dict= {letter:i for i, letter in enumerate(names)}
+    E[:,0]=''
+    trees=[]
+    for item in names:
+        trees.append(Tree(item))
+        x=0
+    it=0
+    for i,item in enumerate(E):#is this enumeration even needed????????
+        while len(set(name_dict.values()))>1:
+            it+=1
+            print("\n \n this is it "+str(it))
+            min0,min1,min2=E[x][1],E[x][2],E[x][3] #get the next line in the matrix to get the letters/names of the trees
+            tree1_id= name_dict[min1] #getting the positions of the letters in the current list of trees
+            tree2_id= name_dict[min2]
+            print("before anything happens: tree1_id is "+str(tree1_id)+" and tree2_id is "+str(tree2_id))
+            print(str(min0)+" "+str(min1)+" "+str(min2))
+            if tree2_id == tree1_id:
+                x += 1
+                break
+            else:
+                E[x][0] = "*"
+                tree1 = trees[tree1_id]
+                tree2 = trees[tree2_id]
+                Tree.add(tree1, tree2)
+                trees.pop(tree2_id)
+                print("in namedict, before merging we have the numbers: " + str(name_dict[min1]) + " and " + str(name_dict[min2]))
+                if tree1_id < tree2_id:
+                    orig_tree2_id = tree2_id
+                    for key, value in name_dict.items():
+                        if value == orig_tree2_id:
+                            name_dict[key] = tree1_id
+                        elif value > orig_tree2_id:
+                            name_dict[key] -= 1
+                else:
+                    orig_tree1_id = tree1_id
+                    for key, value in name_dict.items():
+                        if value == orig_tree1_id:
+                            name_dict[key] = tree2_id
+                        elif value > orig_tree1_id:
+                            name_dict[key] -= 1
+                x += 1
+            print("in namedict, now we have the numbers: "+str(name_dict[min1])+" and "+str(name_dict[min2]))
+            print("and the whole dict is:"+str(name_dict))
+            
+    res_mat=E
+    return res_mat
