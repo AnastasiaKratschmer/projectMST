@@ -425,3 +425,200 @@ def find_min_span_edges_testing(pseudomatrix):
             
     res_mat=E
     return res_mat
+
+def my_traversal_simply(graph, starting_key):
+    neighborhood = {}
+    for node in graph.nodes():
+        neighbors = list(graph.neighbors(node))
+        neighborhood[node] = neighbors
+        print(f"Neighbors of node {node}: {neighbors}")
+    
+    alignment_pairs = {}
+    queue = [starting_key]  # Initialize the queue with the starting node
+    while queue:
+        current_node = queue.pop(0)  # Get the first node from the queue
+        
+        if current_node in neighborhood:
+            for successor in neighborhood[current_node]:
+                if successor not in alignment_pairs:
+                    alignment_pairs[successor] = current_node
+                    queue.append(successor)  # Add successor to the queue for further traversal
+    if starting_key in alignment_pairs:
+        del alignment_pairs[starting_key]
+        
+    print(alignment_pairs)
+    pos_dict={}
+    #pos_dict_addition={}
+    #pos_dict[starting_key]=0
+    #pos_dict_addition={key: str(index+1) for index, key in enumerate(alignment_pairs.values())}
+    #print("pos dict: "+str(pos_dict))
+    #print("pos dict add: "+str(pos_dict_addition))
+    #merged_dict = {**pos_dict, **pos_dict_addition}
+
+    #return(alignment_pairs, merged_dict)
+    #pos_dict = {}
+    #pos_dict[starting_key] = 0
+    #pos_dict.update({key: str(index) for index, key in enumerate(alignment_pairs.values())})
+    #return(alignment_pairs,pos_dict)
+    index_dict = {}
+    index = 0
+
+    # Add starting key with index 0
+    starting_key = '0'
+    index_dict[starting_key] = str(index)
+    index += 1
+
+    # Add values from alignment_pairs with increasing indices
+    for key, value in alignment_pairs.items():
+        if key not in index_dict:
+            index_dict[key] = str(index)
+            index += 1
+        if value not in index_dict:
+            index_dict[value] = str(index)
+            index += 1
+    return(alignment_pairs,index_dict)
+
+#al,pos_dict=my_traversal_simply(graph,"0")
+#print(al,pos_dict)
+
+def extend_alignment_chaos(M,str1_nr,A,position_dictionary):#needs inclusion of str1_nr to come from the outside....
+    MA = []
+    i = 0
+    j = 0
+    col_in_M_of_parent_string=int(position_dictionary[str1_nr])
+    # print("extend M= " +str(M))
+    while i < len(M) and j < len(A):
+        # Case 1:
+        if M[i][col_in_M_of_parent_string] == '-' and A[j][0] == '-':
+            M[i].append(A[j][1])
+            MA.append(M[i])
+            i = i + 1
+            j = j + 1
+
+        # Case 2:
+        elif M[i][col_in_M_of_parent_string] == '-' and A[j][0] != '-':
+            M[i].append('-')
+            MA.append(M[i])
+            i = i + 1
+        
+        # Case 3:
+        elif M[i][col_in_M_of_parent_string] != '-' and A[j][0] == '-':
+            c = ['-']*len(M[i])
+            c.append(A[j][1])
+            MA.append(c)
+            j = j + 1
+        
+        # Case 4:
+        elif M[i][col_in_M_of_parent_string] != '-' and A[j][0] != '-':
+            M[i].append(A[j][1])
+            MA.append(M[i])
+            i = i + 1
+            j = j + 1
+
+    if i < len(M):
+        while i < len(M):
+            M[i].append('-')
+            MA.append(M[i])
+            i = i + 1
+            
+    if j < len(A):
+        k = len(M[col_in_M_of_parent_string])
+        while j < len(A):
+            c = ['-']*(k-1)
+            c.append(A[j][1])
+            MA.append(c)
+            j = j + 1
+    return MA
+
+def new_sp_approxi_combi(seqs: list[str], score_matrix: dict, gap_cost: int, verbose=False, return_center_string=False,layout="spring",traversal_here="df"):
+    # STEP 1: Find the center string, s1
+    matrix = np.full((len(seqs), len(seqs)), np.nan)
+    # loop over all distinct pairs
+    for i, seq1 in enumerate(seqs):
+        for j, seq2 in enumerate(seqs):
+              matrix[i, j] = get_cost_2(linear_C(gap_cost, score_matrix, seq1, seq2))
+    print(matrix)
+    matrix_for_MST=matrix 
+    matrix_for_MST=convert_to_desired_format_nr_version(matrix_for_MST)
+    min_span_edges=find_min_span_edges_testing(matrix_for_MST)
+    print(matrix_for_MST)
+    print(min_span_edges)
+
+    max_indices = np.where(matrix == np.max(matrix))
+    max_row_index = max_indices[0][0]
+    print(max_row_index)
+
+    #need to use the my_transversal_simply but already to put in the graph!
+    visiting_order,G=get_visiting_order(min_span_edges,str(int(max_row_index)),traversal_here,layout) #str(int(np.argmin(matrix.sum(axis = 1)))) to get the min arg as the starting point.
+    #print(visiting_order) #visiting order is now letters, but we would need that as numbers/idices from the score matrix to keep track. #APPARENTLY NOT ACTUALLY IN USE
+    alignment_pairs,index_dict=my_traversal_simply(G,str(int(max_row_index)))
+    print(alignment_pairs)
+    print(index_dict)
+
+    # find center string/guide 
+    s1_idx = np.argmin(matrix.sum(axis = 1))
+    print("nr of seqs:")
+    print(len(seqs))
+    #seqs_new = [None for _ in range(len(seqs))]
+    #s1 = seqs[s1_idx]
+    #seqs_new[0]=seqs[s1_idx]
+    #for i,element in enumerate(visiting_order,start=1):
+     #       seqs_new[i]=seqs[int(element)]
+    seqs_new = [None for _ in range(len(seqs))]
+    s1 = seqs[s1_idx] #should be "seqs[s1_idx]", but is set to 2 for testing purposes
+    seqs_new[0] = seqs[int(max_row_index)] #should be "seqs[s1_idx]", but is set to 2 for testing purposes
+    i=1
+    print("new seqs before loop")
+    print(seqs_new)
+    new_s1_index=None
+    for i, idx in enumerate(visiting_order):
+        seqs_new[int(idx)] = seqs[i]
+        if i==s1_idx:
+            new_s1_index=idx
+        print("idx:"+str(idx)+", i="+str(i))
+    print("new s1-index:")
+    print(new_s1_index)
+    print("seqs new:")
+    print(seqs_new)
+    print("old seqs:")
+    print(seqs)
+    print("matrix for source node inspo:")
+    print(matrix)
+         
+         
+    #seqs.insert(0, seqs.pop(s1_idx)) # move guide to front of list
+    if verbose: print("The center string, s1, is sequence no." + str(s1_idx+1)) # just a print statement to see which string is the center string
+
+    # STEP 2: Construct alignment M
+    M: list[list[str]] = [[letter] for letter in [*seqs[int(max_row_index)]]]
+    print("M right now:")
+    print(M)
+    print("s1 right now:")
+    print(s1)
+    print("seqs right now")
+    print(seqs)
+    cost_list = []
+    # print("first M = \n" + str(M))
+    for key,value in alignment_pairs.items(): #was just seqs bebore
+        #you need here to get the pairs from the new dict instead
+        cost = linear_C(gap_cost, score_matrix, seqs[int(value)], seqs[int(key)]) #was just seqs before
+        print("\n now aligning...."+str(seqs[int(value)])+ " and "+ str(seqs[int(key)]))
+        cost_list.append(get_cost_2(cost))
+        
+        # prepare A-matrix for extension
+        alignment1_str, alignment2_str = linear_backtrack(seqs[int(value)], seqs[int(key)], cost, score_matrix, gap_cost)
+        str1_nr=value
+        alignment1, alignment2 = [*alignment1_str], [*alignment2_str]
+        #here you need to provide the nr of the sequences to be able to index in the indexing dict in the extend_alignment_chaos func
+        A = [list(e) for e in zip(alignment1,alignment2)]
+        print("A right now is: "+str(A))
+        print("M right now: "+str(M))
+        # extend
+        Mk = extend_alignment_chaos(M,str1_nr, A,index_dict) #needs the chaos version
+        M = Mk
+    
+    # ACTUALLY COMPUTE (approximate) COST
+    total_cost = compute_cost(M, score_matrix, gap_cost)
+
+    #if return_center_string: return total_cost, M, s1_idx #IDK why this runs for no reason when it's uncommented..
+    return total_cost, M, matrix_for_MST, visiting_order,G
