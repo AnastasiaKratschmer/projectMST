@@ -10,7 +10,7 @@ Ideas:
 ```
 * Using the idea from above: now just making my own traversal order very much like bf, just more handheld and where absolutely everything is aligned to its own closest match.
 ```diff
-! A GOOD LOOKING TRAVERSAL ORDER IS BEING SPIT OUT, NOW I JUST NEED TO INCORPORATE IT (3/8 2023).
+! A GOOD LOOKING TRAVERSAL ORDER IS BEING SPIT OUT, but the merge is has the problem that the positon_dict going into the extend_alignment_chaos is static, but the position of a certain string in the M(A) is far from...... so that needs fixin' 5/8 2023, but promising results on some seqs (far from all) ).
 ```
 
 ```diff
