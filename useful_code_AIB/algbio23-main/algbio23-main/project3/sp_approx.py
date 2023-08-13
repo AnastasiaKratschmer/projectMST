@@ -96,3 +96,4 @@ if __name__ == "__main__":
     print("Done!\n")
     print("Cost: " + str(cost))
     print()
+    print(M)
