@@ -463,7 +463,7 @@ def my_traversal_simply(graph, starting_key):
     index = 0
 
     # Add starting key with index 0
-    starting_key = '0'
+    #starting_key = '0'#ummm let's try without this one!!?!?!?
     index_dict[starting_key] = str(index)
     index += 1
 
