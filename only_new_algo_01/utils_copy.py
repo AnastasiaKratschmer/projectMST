@@ -438,10 +438,11 @@ def my_traversal_simply(graph, starting_key):
         current_node = queue.pop(0)  # Get the first node from the queue
         
         if current_node in neighborhood:
-            for successor in neighborhood[current_node]:
-                if successor not in alignment_pairs:
-                    alignment_pairs[successor] = current_node
-                    queue.append(successor)  # Add successor to the queue for further traversal
+            if current_node != starting_key:
+                for successor in neighborhood[current_node]:
+                    if successor not in alignment_pairs: #just added to try to not handle weird first case!!
+                        alignment_pairs[successor] = current_node
+                        queue.append(successor)  # Add successor to the queue for further traversal
     if starting_key in alignment_pairs:
         del alignment_pairs[starting_key]
         
@@ -463,7 +464,7 @@ def my_traversal_simply(graph, starting_key):
     index = 0
 
     # Add starting key with index 0
-    #starting_key = '0'#ummm let's try without this one!!?!?!?
+    #starting_key = '0'#ummm let's try without this one!!?!?!? yeah like this, without that mess!!
     index_dict[starting_key] = str(index)
     index += 1
 
