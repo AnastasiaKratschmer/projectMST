@@ -2,6 +2,7 @@ from Bio import SeqIO
 import os
 import sys
 import numpy as np
+import random as random
 
 
 def parse_fasta(filename):
@@ -15,6 +16,9 @@ def parse_fasta_multiple(filename):
     name = []
     for record in SeqIO.parse(filename, "fasta"):
         seq.append(record.seq.lower())
+        for letter in record:
+            if letter=='n' or letter=='N':
+                letter=random.sample(['a','c','t','g'],1)
         name.append(record.name)
     return seq, name
 
