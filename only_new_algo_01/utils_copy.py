@@ -3,6 +3,9 @@ import os
 import sys
 import numpy as np
 import random as random
+import numpy as np
+import networkx as nx
+import matplotlib.pyplot as plt
 
 
 def parse_fasta(filename):
@@ -16,9 +19,6 @@ def parse_fasta_multiple(filename):
     name = []
     for record in SeqIO.parse(filename, "fasta"):
         seq.append(record.seq.lower())
-        #for letter in record:
-         #   if letter=='n' or letter=='N':
-          #      letter=random.sample(['a','c','t','g'],1)
         print(record.name)
         name.append(record.name)
     return seq, name
@@ -149,131 +149,7 @@ def linear_backtrack(A: str, B: str, T, score_matrix, gap: int, verbose=False):
     
     return ''.join(alignment_of_A), ''.join(alignment_of_B)
 
-""" def extend_alignment(M, A):
-    '''
-    M = [['a','a','c'], ['-','t','t'], ['-','t','-'], ['c','c','c'], ['g','-','g'], ['t','t','a']]
-    means
-        a - - c g t
-    M = a t t c - t 
-        c t - c g a
 
-    A = [['a','a'], ['c','c'], ['g','g'], ['-','g'], ['t','t']]
-    means
-    A = a c g - t
-        a c g g t
-    '''
-
-    MA = []
-    i = 0
-    j = 0
-
-    # print("extend M= " +str(M))
-    while i < len(M) and j < len(A):
-        # Case 1:
-        if M[i][-1] == '-' and A[j][0] == '-':
-            M[i].append(A[j][1])
-            MA.append(M[i])
-            i = i + 1
-            j = j + 1
-
-        # Case 2:
-        elif M[i][-1] == '-' and A[j][0] != '-':
-            M[i].append('-')
-            MA.append(M[i])
-            i = i + 1
-        
-        # Case 3:
-        elif M[i][-1] != '-' and A[j][0] == '-':
-            c = ['-']*len(M[i])
-            c.append(A[j][1])
-            MA.append(c)
-            j = j + 1
-        
-        # Case 4:
-        elif M[i][-1] != '-' and A[j][0] != '-':
-            M[i].append(A[j][1])
-            MA.append(M[i])
-            i = i + 1
-            j = j + 1
-
-    if i < len(M):
-        while i < len(M):
-            M[i].append('-')
-            MA.append(M[i])
-            i = i + 1
-            
-    if j < len(A):
-        k = len(M[-1])
-        while j < len(A):
-            c = ['-']*(k-1)
-            c.append(A[j][1])
-            MA.append(c)
-            j = j + 1
-    return MA """
-
-import numpy as np
-import networkx as nx
-import matplotlib.pyplot as plt
-
-class Tree:
-    def __init__ (self,name):
-        self.name=name
-        self.next=[]
-        self.components=[self.name]
-    def __str__(self):
-        return f"{self.name} {self.next}"
-    def __repr__(self):
-        return f"Tree(name='{self.name}', next={self.next})"
-    @classmethod
-    def add(cls, tree1, tree2):
-        if not tree1.next:
-            tree1.next.append(tree2)
-        else:
-            tree1.next.append(tree2)
-        tree1.components = tree1.components + tree2.components
-        del tree2 
-
-"""def find_min_span_edges(pseudomatrix):
-    sorted_indices = np.lexsort((pseudomatrix[:, 1].astype(int),))
-    E = pseudomatrix[sorted_indices]
-    print("this is E (sorted matrix without any stars yet): ")
-    print(E)
-    names= np.unique(pseudomatrix[:, 2:])
-    name_dict= {letter:i for i, letter in enumerate(names)}
-    E[:,0]=''
-    trees=[]
-    for item in names:
-        trees.append(Tree(item))
-        x=0
-    for i,item in enumerate(E):#is this enumeration even needed????????
-        while len(set(name_dict.values()))>1:
-            min0,min1,min2=E[x][1],E[x][2],E[x][3] #get the next line in the matrix to get the letters/names of the trees
-            tree1_id= name_dict[min1] #getting the positions of the letters in the current list of trees
-            tree2_id= name_dict[min2]
-            if tree2_id==tree1_id:
-                x+=1
-                break
-            else:
-                E[x][0]="*"
-                tree1=trees[tree1_id] #get the first tree
-                tree2=trees[tree2_id] #get he second tree
-                Tree.add(tree1,tree2) #merge the two trees, meaning that our tree-list gets shorter. PROBLEM THOUGH: the last it. does not fully merge right now----
-                trees.pop(tree2_id) #remove the tree that we just merged into another tree
-                if tree1_id<tree2_id:
-                    orig_tree2_id=tree2_id
-                    name_dict[min2]=tree1_id # update the number associated with the letter/treee in the dictionary
-                    for key in name_dict:
-                        if name_dict[key] >= orig_tree2_id:
-                            name_dict[key] -= 1
-                else:
-                    orig_tree1_id=tree1_id
-                    name_dict[min1]=tree2_id # update the number associated with the letter/treee in the dictionary
-                    for key in name_dict:
-                        if name_dict[key] >= orig_tree1_id:
-                            name_dict[key] -= 1
-                x+=1
-    res_mat=E
-    return res_mat"""
 
 def get_visiting_order(res_matrix,source_node,traversal="df",layout="spring"): #only used for making the graph now!,
     edges=[]
@@ -323,51 +199,6 @@ def get_visiting_order(res_matrix,source_node,traversal="df",layout="spring"): #
         print("My traversal is df")
     return order,G
 
-""" def convert_format_mat_to_pseudomat(mini_mat):
-    # Get the node names (excluding the first row and first column)
-    node_names = mini_mat[0, 1:]
-    
-    # Initialize an empty list to store the rows of the new format
-    matrixx_rows = []
-    print(len(mini_mat))
-    print(mini_mat)
-    x=len(mini_mat)-1
-    processed_edges=set()
-    # Process the mini_mat to generate the rows of the new format
-    for i, row in enumerate(mini_mat[1:, 1:]):
-        for j, distance in enumerate(row):
-            if i != j:
-                node1 = mini_mat[i + 1, 0]
-                node2 = mini_mat[0, j + 1]
-                edge = (node1, node2) if node1 < node2 else (node2, node1)
-                if edge not in processed_edges:
-                    matrixx_rows.append(["", int(distance), node1, node2])
-                    processed_edges.add(edge)
-    
-    # Convert the list of rows to a NumPy array
-    matrixx_np = np.array(matrixx_rows)
-    
-    return matrixx_np
-
-def convert_to_desired_format2(distance_matrix):
-    # Get the number of nodes in the distance matrix
-    num_nodes = len(distance_matrix)
-
-    # Initialize an empty list to store the rows of the new format
-    matrixx_rows = []
-
-    # Process the distance_matrix to generate the rows of the new format
-    for i in range(num_nodes):
-        for j in range(i + 1, num_nodes):  # Avoid duplicates and self-distances
-            distance = int(distance_matrix[i, j])
-            node1 = chr(ord('A') + i)  # Node names as A, B, C, ...
-            node2 = chr(ord('A') + j)
-            matrixx_rows.append(["", distance, node1, node2])
-
-    # Convert the list of rows to a NumPy array
-    matrixx_np = np.array(matrixx_rows)
-
-    return matrixx_np """
 
 def convert_to_desired_format_nr_version(distance_matrix): #makes the distance matrix into the pseudomatrix needed for the MST
     # Get the number of nodes in the distance matrix
@@ -387,9 +218,6 @@ def convert_to_desired_format_nr_version(distance_matrix): #makes the distance m
     matrixx_np = np.array(matrixx_rows)
     return matrixx_np
 
-"""def nothing(x): 
-    return x*33"""
-
 
 def find_min_span_edges_testing(pseudomatrix):
     sorted_indices = np.lexsort((pseudomatrix[:, 1].astype(int),))
@@ -399,10 +227,7 @@ def find_min_span_edges_testing(pseudomatrix):
     names= np.unique(pseudomatrix[:, 2:])
     name_dict= {letter:i for i, letter in enumerate(names)}
     E[:,0]=''
-    trees=[]
-    for item in names:
-        trees.append(Tree(item))
-        x=0
+    x=0
     it=0
     for i,item in enumerate(E):#is this enumeration even needed????????
         while len(set(name_dict.values()))>1:
@@ -418,10 +243,6 @@ def find_min_span_edges_testing(pseudomatrix):
                 break
             else:
                 E[x][0] = "*"
-                #tree1 = trees[tree1_id]
-                #tree2 = trees[tree2_id]
-                #Tree.add(tree1, tree2)
-                #trees.pop(tree2_id)
                 print("in namedict, before merging we have the numbers: " + str(name_dict[min1]) + " and " + str(name_dict[min2]))
                 if tree1_id < tree2_id:
                     orig_tree2_id = tree2_id
