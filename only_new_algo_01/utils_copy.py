@@ -23,6 +23,22 @@ def parse_fasta_multiple(filename):
         name.append(record.name)
     return seq, name
 
+def parse_fasta_multiple_remove_n(filename):
+    seq = []
+    name = []
+    for record in SeqIO.parse(filename, "fasta"):
+        seq.append(record.seq.lower())
+        new_seq = []
+        for letter in record.seq:
+            if letter == 'n' or letter == 'N':
+                new_seq.append(random.choice(['a', 'c', 't', 'g']))
+            else:
+                new_seq.append(letter)
+        new_seq = ''.join(new_seq)
+        seq.append(new_seq.lower())
+        name.append(record.name)
+    return seq, name
+
 def write_alignments_to_file(alignment1, alignment2, filename):
     with open(filename, 'w') as f_out:
         f_out.write('>' + 'seq1' + '\n' + alignment1 + '\n\n' +
