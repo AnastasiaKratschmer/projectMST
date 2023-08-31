@@ -112,8 +112,8 @@ def linear_C(gap, score_matrix, seq1, seq2, verbose=False):
 def get_cost_2(cost_matrix):
     return cost_matrix[-1,-1]
 
-def get_cost_3(cost_matrix):
-    return cost_matrix[-1,-1,-1]
+""" def get_cost_3(cost_matrix):
+     return cost_matrix[-1,-1,-1] """
 
 def linear_backtrack(A: str, B: str, T, score_matrix, gap: int, verbose=False):
     i = len(A) 
@@ -149,7 +149,7 @@ def linear_backtrack(A: str, B: str, T, score_matrix, gap: int, verbose=False):
     
     return ''.join(alignment_of_A), ''.join(alignment_of_B)
 
-def extend_alignment(M, A):
+""" def extend_alignment(M, A):
     '''
     M = [['a','a','c'], ['-','t','t'], ['-','t','-'], ['c','c','c'], ['g','-','g'], ['t','t','a']]
     means
@@ -209,7 +209,7 @@ def extend_alignment(M, A):
             c.append(A[j][1])
             MA.append(c)
             j = j + 1
-    return MA
+    return MA """
 
 import numpy as np
 import networkx as nx
@@ -231,9 +231,9 @@ class Tree:
         else:
             tree1.next.append(tree2)
         tree1.components = tree1.components + tree2.components
-        del tree2
+        del tree2 
 
-def find_min_span_edges(pseudomatrix):
+"""def find_min_span_edges(pseudomatrix):
     sorted_indices = np.lexsort((pseudomatrix[:, 1].astype(int),))
     E = pseudomatrix[sorted_indices]
     print("this is E (sorted matrix without any stars yet): ")
@@ -273,9 +273,9 @@ def find_min_span_edges(pseudomatrix):
                             name_dict[key] -= 1
                 x+=1
     res_mat=E
-    return res_mat
+    return res_mat"""
 
-def get_visiting_order(res_matrix,source_node,traversal="df",layout="spring"):
+def get_visiting_order(res_matrix,source_node,traversal="df",layout="spring"): #only used for making the graph now!,
     edges=[]
     edges_in_min_path=[]
     for row in res_matrix:
@@ -290,11 +290,11 @@ def get_visiting_order(res_matrix,source_node,traversal="df",layout="spring"):
             node1 = row[2]  # Extract the first node 
             node2 = row[3]  # Extract the second node
             edge=tuple(sorted([node1,node2])) #needs be alphabethical
-            edges_in_min_path.append(edge) # Add the tuple to the list #WORKS TILL HERE
-    G = nx.Graph()#WORKS TILL HERE 
-    G.add_nodes_from(np.unique(res_matrix[:, 2:])) #WORKS TILL HERE
-    G.add_edges_from(edges) #WORKS TILL HERE 
-    shortest_path=edges_in_min_path #WORKS TILL HERE
+            edges_in_min_path.append(edge) # Add the tuple to the list 
+    G = nx.Graph()
+    G.add_nodes_from(np.unique(res_matrix[:, 2:]))
+    G.add_edges_from(edges)
+    shortest_path=edges_in_min_path
     if layout=="spring":
         pos = nx.spring_layout(G)
     elif layout=="planar":
@@ -309,22 +309,21 @@ def get_visiting_order(res_matrix,source_node,traversal="df",layout="spring"):
         pos=nx.spectral_layout(G)
     else:
         print("Error! The specified layout is not available, choose spring, planar, shell, circular, spiral or spectral. Good luck!")
-    #pos = nx.spring_layout(G) #WORKS TILL HERE
-    edge_colors = ['deeppink' if e in shortest_path else 'lavender' for e in G.edges()] #WORKS TILL HERE
-    nx.draw(G, pos, with_labels=True, node_color='bisque', edge_color=edge_colors, width=2, font_size=10) #WORKS TILL HERE
+    edge_colors = ['deeppink' if e in shortest_path else 'lavender' for e in G.edges()] 
+    nx.draw(G, pos, with_labels=True, node_color='bisque', edge_color=edge_colors, width=2, font_size=10) 
     # Show the plot
     plt.ion() #to make it keep running even without manually closing fig!!
-    plt.show() #SO I GUESS: WORKS TILL HERE
+    plt.show()
+    #don't use the following part right now!!!!!
     if traversal=="bf":
         order = list(nx.bfs_tree(G, source=source_node))
         print("my traversal is bf") #I guess we can use the middle string as the source node or something. or one of the ones that's the most different from the others to hopefully start "at a side".
-    #and really consider using another method than depth-first! like "nx.bfs_edges" #WORKS TILL HERE
     if traversal=="df":
         order = list(nx.dfs_tree(G, source=source_node))
         print("My traversal is df")
     return order,G
 
-def convert_format_mat_to_pseudomat(mini_mat):
+""" def convert_format_mat_to_pseudomat(mini_mat):
     # Get the node names (excluding the first row and first column)
     node_names = mini_mat[0, 1:]
     
@@ -368,12 +367,11 @@ def convert_to_desired_format2(distance_matrix):
     # Convert the list of rows to a NumPy array
     matrixx_np = np.array(matrixx_rows)
 
-    return matrixx_np
+    return matrixx_np """
 
-def convert_to_desired_format_nr_version(distance_matrix):
+def convert_to_desired_format_nr_version(distance_matrix): #makes the distance matrix into the pseudomatrix needed for the MST
     # Get the number of nodes in the distance matrix
     num_nodes = len(distance_matrix)
-
     # Initialize an empty list to store the rows of the new format
     matrixx_rows = []
 
@@ -381,16 +379,16 @@ def convert_to_desired_format_nr_version(distance_matrix):
     for i in range(num_nodes):
         for j in range(i+1, num_nodes):  # Avoid duplicates and self-distances
             distance = int(distance_matrix[i, j])
-            node1 = str(i)  # Node names as A, B, C, ...
+            node1 = str(i)  # Node names as 1,2,3 ...
             node2 = str(j)
             matrixx_rows.append(["", distance, node1, node2])
 
-    # Convert the list of rows to a NumPy array
+    # Convert the list of rows to a np array
     matrixx_np = np.array(matrixx_rows)
     return matrixx_np
 
-def nothing(x):
-    return x*33
+"""def nothing(x): 
+    return x*33"""
 
 
 def find_min_span_edges_testing(pseudomatrix):
@@ -420,10 +418,10 @@ def find_min_span_edges_testing(pseudomatrix):
                 break
             else:
                 E[x][0] = "*"
-                tree1 = trees[tree1_id]
-                tree2 = trees[tree2_id]
-                Tree.add(tree1, tree2)
-                trees.pop(tree2_id)
+                #tree1 = trees[tree1_id]
+                #tree2 = trees[tree2_id]
+                #Tree.add(tree1, tree2)
+                #trees.pop(tree2_id)
                 print("in namedict, before merging we have the numbers: " + str(name_dict[min1]) + " and " + str(name_dict[min2]))
                 if tree1_id < tree2_id:
                     orig_tree2_id = tree2_id
