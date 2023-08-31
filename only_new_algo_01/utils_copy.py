@@ -16,9 +16,10 @@ def parse_fasta_multiple(filename):
     name = []
     for record in SeqIO.parse(filename, "fasta"):
         seq.append(record.seq.lower())
-        for letter in record:
-            if letter=='n' or letter=='N':
-                letter=random.sample(['a','c','t','g'],1)
+        #for letter in record:
+         #   if letter=='n' or letter=='N':
+          #      letter=random.sample(['a','c','t','g'],1)
+        print(record.name)
         name.append(record.name)
     return seq, name
 
