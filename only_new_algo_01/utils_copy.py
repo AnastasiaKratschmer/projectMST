@@ -151,7 +151,7 @@ def linear_backtrack(A: str, B: str, T, score_matrix, gap: int, verbose=False):
 
 
 
-def get_visiting_order(res_matrix,source_node,traversal="df",layout="spring"): #only used for making the graph now!,
+def fill_graph(res_matrix,source_node,layout="spring"): #only used for making the graph now!,
     edges=[]
     edges_in_min_path=[]
     for row in res_matrix:
@@ -190,14 +190,7 @@ def get_visiting_order(res_matrix,source_node,traversal="df",layout="spring"): #
     # Show the plot
     plt.ion() #to make it keep running even without manually closing fig!!
     plt.show()
-    #don't use the following part right now!!!!!
-    if traversal=="bf":
-        order = list(nx.bfs_tree(G, source=source_node))
-        print("my traversal is bf") #I guess we can use the middle string as the source node or something. or one of the ones that's the most different from the others to hopefully start "at a side".
-    if traversal=="df":
-        order = list(nx.dfs_tree(G, source=source_node))
-        print("My traversal is df")
-    return order,G
+    return G
 
 
 def convert_to_desired_format_nr_version(distance_matrix): #makes the distance matrix into the pseudomatrix needed for the MST
@@ -355,7 +348,8 @@ def extend_alignment_chaos(M,str1_nr,A,position_dictionary):#needs inclusion of 
             j = j + 1
     return MA
 
-def new_sp_approxi_combi(seqs: list[str], score_matrix: dict, gap_cost: int, verbose=False, return_center_string=False,layout="spring",traversal_here="df"):
+def new_sp_approxi_combi(seqs: list[str], score_matrix: dict, gap_cost: int, verbose=False, return_center_string=False,layout="spring"):
+    # STEP 1: Find the center string
     matrix = np.full((len(seqs), len(seqs)), np.nan)
     # loop over all distinct pairs
     for i, seq1 in enumerate(seqs):
@@ -373,7 +367,7 @@ def new_sp_approxi_combi(seqs: list[str], score_matrix: dict, gap_cost: int, ver
     print(max_row_index)
 
     #need to use the my_transversal_simply to get transversal order but still use get_visiting_order to put edges in the graph!
-    visiting_order,G=get_visiting_order(min_span_edges,str(int(max_row_index)),traversal_here,layout) #str(int(np.argmin(matrix.sum(axis = 1)))) to get the min arg as the starting point.
+    G=fill_graph(min_span_edges,str(int(max_row_index)),layout) #str(int(np.argmin(matrix.sum(axis = 1)))) to get the min arg as the starting point.
     alignment_pairs,index_dict=my_traversal_simply(G,str(int(max_row_index)))
     print(alignment_pairs)
     print(index_dict)
@@ -405,7 +399,7 @@ def new_sp_approxi_combi(seqs: list[str], score_matrix: dict, gap_cost: int, ver
     
     # ACTUALLY COMPUTE (approximate) COST
     total_cost = compute_cost(M, score_matrix, gap_cost)
-    return total_cost, M, matrix_for_MST, visiting_order,G
+    return total_cost, M, matrix_for_MST,G
 
 
 def compute_cost(M, score_matrix, gap_cost):
