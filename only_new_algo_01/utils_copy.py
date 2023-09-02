@@ -215,11 +215,12 @@ def convert_to_desired_format_nr_version(distance_matrix): #makes the distance m
     return matrixx_np
 
 
-def find_min_span_edges_testing(pseudomatrix): #the function actually implementing Kruskal's algo
+def find_min_span_edges_testing(pseudomatrix, verbose=False): #the function actually implementing Kruskal's algo
     sorted_indices = np.lexsort((pseudomatrix[:, 1].astype(int),)) #sort edges to have the shorter ones first.
     E = pseudomatrix[sorted_indices]
-    print("this is E (sorted matrix without any stars yet): ")
-    print(E)
+    if verbose: 
+        print("this is E (sorted matrix without any stars yet): ")
+        print(E)
     names= np.unique(pseudomatrix[:, 2:]) #extracting all node names to keep track of them in name_dict.
     name_dict= {letter:i for i, letter in enumerate(names)}
     E[:,0]='' #always start proces by setting zero'th col as empy. May be redundant, but just to be sure ;) 
@@ -227,18 +228,15 @@ def find_min_span_edges_testing(pseudomatrix): #the function actually implementi
     it=0 # iteration number for print statement...
     while len(set(name_dict.values()))>1: #so while all nodes are still not unified in one tree..
         it+=1 #only there for print statement below :) 
-        print("\n \n this is it "+str(it)) #the aforementioned print statement!
+        if verbose: print("\n \n this is it "+str(it)+" of the find_min_span_edges_testing-func.") #the aforementioned print statement!
         min0,min1,min2=E[x][1],E[x][2],E[x][3] #take the next row in the pseudomatrix to get the len of the edge and the names of the two nodes it connects
         tree1_id= name_dict[min1] #getting the positions of the nodes currently in question in the current list of trees
         tree2_id= name_dict[min2]
-        print("before anything happens: tree1_id is "+str(tree1_id)+" and tree2_id is "+str(tree2_id)) #a small print statement
-        print(str(min0)+" "+str(min1)+" "+str(min2)) #print statement
         if tree2_id == tree1_id: #if the two nodes are already in the same tree, skip this row.
             x += 1
             break
         else:
             E[x][0] = "*" #if they were not already in the same tree, then mark that the row/edge is going to be used!
-            print("in namedict, before merging we have the numbers: " + str(name_dict[min1]) + " and " + str(name_dict[min2])) #another print stament.
             #generally making sure that the new tree assigned to the node is the one with the lowest number. Also updating name_dict to keep the name interval 'closed'.
             if tree1_id < tree2_id:
                 orig_tree2_id = tree2_id
@@ -255,18 +253,19 @@ def find_min_span_edges_testing(pseudomatrix): #the function actually implementi
                     elif value > orig_tree1_id:
                         name_dict[key] -= 1
             x += 1
-            print("in namedict, now we have the numbers: "+str(name_dict[min1])+" and "+str(name_dict[min2]))
-            print("and the whole dict is:"+str(name_dict))
+    if verbose: 
+        print ("Here are the edges included in the MST, marked with a star! \n")
+        print(E)
             
     res_mat=E 
     return res_mat
 
-def my_traversal_simply(graph, starting_key): #bf inspired traversal
+def my_traversal_simply(graph, starting_key, verbose= False): #bf inspired traversal
     neighborhood = {}
     for node in graph.nodes():
         neighbors = list(graph.neighbors(node)) #get the neighbors in the graph
         neighborhood[node] = neighbors
-        print(f"Neighbors of node {node}: {neighbors}") #a lil' unecessary print statement
+        if verbose: print(f"Neighbors of node {node}: {neighbors}") #a lil' unecessary print statement
     
     alignment_pairs = {}
     queue = [starting_key]  # Initialize the queue with the starting node, coming from the 'outside' of the function
@@ -281,7 +280,7 @@ def my_traversal_simply(graph, starting_key): #bf inspired traversal
     if starting_key in alignment_pairs: #the starting key should not be aligned TO anything (though other seq(s) should probably be aligned TO IT!)
         del alignment_pairs[starting_key]
         
-    print(alignment_pairs)
+    if verbose: print(alignment_pairs)
     #the second part of this func. makes a dict structure to keep track of the position of each string in the merging of all the pairwise alignments in extend_alignment_chaos :) 
     index_dict = {}
     index = 0
@@ -298,15 +297,15 @@ def my_traversal_simply(graph, starting_key): #bf inspired traversal
     return(alignment_pairs,index_dict)
 
 
-def extend_alignment_chaos(M,str1_nr,A,index_dict): #needs inclusion of str1_nr, to come from the outside.... str1_nr is the name "predecessor" string  
+def extend_alignment_chaos(M,str1_nr,A,index_dict, verbose: False): #needs inclusion of str1_nr, to come from the outside.... str1_nr is the name "predecessor" string  
     MA = []
     i = 0
     j = 0
     col_in_M_of_parent_string=int(index_dict[str1_nr]) #getting the column from the index dict that holds the "predecessor" string, to know where it is in the MSA
     while i < len(M) and j < len(A):
-        #print("i:"+str(i)+", j:"+str(j))
-        #print("parent string nr: "+ str(str1_nr))
-        #print("which is in col:"+str(col_in_M_of_parent_string))
+        if verbose: print("i:"+str(i)+", j:"+str(j))
+        if verbose: print("parent string nr: "+ str(str1_nr))
+        if verbose: print("which is in col:"+str(col_in_M_of_parent_string))
         # Case 1:
         if M[i][col_in_M_of_parent_string] == '-' and A[j][0] == '-':
             M[i].append(A[j][1])
@@ -355,39 +354,42 @@ def new_sp_approxi_combi(seqs: list[str], score_matrix: dict, gap_cost: int, ver
     # Loop over all pairs
     for i, seq1 in enumerate(seqs):
         for j, seq2 in enumerate(seqs):
-              matrix[i, j] = get_cost_2(linear_C(gap_cost, score_matrix, seq1, seq2))
-    print(matrix)
+              matrix[i, j] = get_cost_2(linear_C(gap_cost, score_matrix, seq1, seq2,verbose=verbose))
+    if verbose:
+        print("Here comes the distance matrix produced by the alignments: \n")
+        print(matrix)
     matrix_for_MST=matrix #copy the matrix, so that we can keep the old matrix and make a changed version to the "pseudomatrix" version
-    matrix_for_MST=convert_to_desired_format_nr_version(matrix_for_MST) #making the "pseudomatrix"
-    min_span_edges=find_min_span_edges_testing(matrix_for_MST) #Run Kruskal's algorithm on the "pseudomatrix"
-    print(matrix_for_MST)
-    print(min_span_edges)
+    matrix_for_MST=convert_to_desired_format_nr_version(matrix_for_MST,verbose=verbose) #making the "pseudomatrix"
+    min_span_edges=find_min_span_edges_testing(matrix_for_MST,verbose=verbose) #Run Kruskal's algorithm on the "pseudomatrix"
+    if verbose:
+        print("Here comes the pseudomatrix, filled out with with the edges inclued in the MST: \n")
+        print(min_span_edges)
 
     max_indices = np.where(matrix == np.max(matrix)) # Choosing where to start traversal. I want to start at one of the nodes that is the furthest away from any other so start from a side of graph.. hmmmm...
     max_row_index = max_indices[0][0] #just choose one of them.
-    print(max_row_index)
+    if verbose:
+        print("Starting key for traversal based on max_row_idex: ")
+        print(max_row_index)
 
     #Put the nodes and the minimum spanning edges into a graph.
-    G=fill_graph(min_span_edges,str(int(max_row_index)),layout) #using the max_row_index as the starting key! (an making the graph!)
-    alignment_pairs,index_dict=my_traversal_simply(G,str(int(max_row_index))) #'traverse' to get alignment_pairs (pairs of sucessors and predecessors) and their position in the MSA to come (index_dict)
-    print(alignment_pairs)
-    print(index_dict)
+    G=fill_graph(min_span_edges,str(int(max_row_index)),layout,verbose=verbose) #using the max_row_index as the starting key! (an making the graph!)
+    alignment_pairs,index_dict=my_traversal_simply(G,str(int(max_row_index)),verbose=verbose) #'traverse' to get alignment_pairs (pairs of sucessors and predecessors) and their position in the MSA to come (index_dict)
+    if verbose:
+        print("Here come your alignment pairs and the idex dict: \n")
+        print(alignment_pairs)
+        print(index_dict)
 
      # Constructing alignment M
     M: list[list[str]] = [[letter] for letter in [*seqs[int(max_row_index)]]] #make structure where evey column in the alignment is represented as a string in a list (in a list)
-    print("M right now:")
-    print(M)
-    print("seqs right now")
-    print(seqs)
     cost_list = []
     #using the pairings of predecessors and successors in the alignment_pairs dict, align the strings.
     for key,value in alignment_pairs.items():
-        cost = linear_C(gap_cost, score_matrix, seqs[int(value)], seqs[int(key)]) #the alignment call itself :) 
-        print("\n now aligning...."+str(seqs[int(value)])+ " and "+ str(seqs[int(key)]))
+        cost = linear_C(gap_cost, score_matrix, seqs[int(value)], seqs[int(key)],verbose=verbose) #the alignment call itself :) 
+        if verbose: print("\n now aligning...."+str(seqs[int(value)])+ " and "+ str(seqs[int(key)]))
         cost_list.append(get_cost_2(cost))
         
         # prepare A-matrix for extension
-        alignment1_str, alignment2_str = linear_backtrack(seqs[int(value)], seqs[int(key)], cost, score_matrix, gap_cost) #backtract to get the alignments!
+        alignment1_str, alignment2_str = linear_backtrack(seqs[int(value)], seqs[int(key)], cost, score_matrix, gap_cost,verbose=verbose) #backtract to get the alignments!
         str1_nr=value #the predecessor/parent string
         alignment1, alignment2 = [*alignment1_str], [*alignment2_str] #splitting up the alignments into elements to have the right format for the list of lists (M)
         
@@ -395,11 +397,15 @@ def new_sp_approxi_combi(seqs: list[str], score_matrix: dict, gap_cost: int, ver
         print("A right now is: "+str(A))
         print("M right now: "+str(M))
         # extend
-        Mk = extend_alignment_chaos(M,str1_nr, A,index_dict) 
+        Mk = extend_alignment_chaos(M,str1_nr, A,index_dict,verbose=verbose) 
         M = Mk
+    if verbose:
+        print("Here is the alignment in full omg: \n")
+        print(M)
     
     # ACTUALLY COMPUTE (approximate) COST
     total_cost = compute_cost(M, score_matrix, gap_cost)
+    print("Total cost of MSA:"+str(total_cost))
     return total_cost, M, matrix_for_MST,G
 
 
