@@ -35,9 +35,10 @@ def parse_fasta_multiple_remove_n(filename):
             else:
                 new_seq.append(letter)
         new_seq = ''.join(new_seq)
-        seq.append(new_seq.lower())
+        new_seq=new_seq.lower()
+        #seq.append(new_seq.lower())
         name.append(record.name)
-    return seq, name
+    return new_seq, name
 
 def write_alignments_to_file(alignment1, alignment2, filename):
     with open(filename, 'w') as f_out:
