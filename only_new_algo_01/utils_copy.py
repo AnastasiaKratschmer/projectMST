@@ -67,7 +67,6 @@ def create_score_matrix(filename: str, verbose=False):
             scores_for_this_row = {}
             for l,score in zip(alphabet, scores[1:]): 
                 scores_for_this_row[l] = int(score)
-                # print("Scores for this row/letter: ", scores_for_this_row)
             score_matrix[letter] = scores_for_this_row
         if verbose: print("Score matrix: ", score_matrix)
     return score_matrix
@@ -394,8 +393,9 @@ def new_sp_approxi_combi(seqs: list[str], score_matrix: dict, gap_cost: int, ver
         alignment1, alignment2 = [*alignment1_str], [*alignment2_str] #splitting up the alignments into elements to have the right format for the list of lists (M)
         
         A = [list(e) for e in zip(alignment1,alignment2)] #zipping the elements of the two aligned strings together pairwisely
-        print("A right now is: "+str(A))
-        print("M right now: "+str(M))
+        if verbose:
+            print("A right now is: "+str(A))
+            print("M right now: "+str(M))
         # extend
         Mk = extend_alignment_chaos(M,str1_nr, A,index_dict,verbose=verbose) 
         M = Mk
