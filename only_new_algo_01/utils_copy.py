@@ -356,7 +356,7 @@ def new_sp_approxi_combi(seqs: list[str], score_matrix: dict, gap_cost: int, ver
         print("Here comes the distance matrix produced by the alignments: \n")
         print(matrix)
     matrix_for_MST=matrix #copy the matrix, so that we can keep the old matrix and make a changed version to the "pseudomatrix" version
-    matrix_for_MST=convert_to_desired_format_nr_version(matrix_for_MST,verbose=verbose) #making the "pseudomatrix"
+    matrix_for_MST=convert_to_desired_format_nr_version(matrix_for_MST) #making the "pseudomatrix"
     min_span_edges=find_min_span_edges_testing(matrix_for_MST,verbose=verbose) #Run Kruskal's algorithm on the "pseudomatrix"
     if verbose:
         print("Here comes the pseudomatrix, filled out with with the edges inclued in the MST: \n")
@@ -369,7 +369,7 @@ def new_sp_approxi_combi(seqs: list[str], score_matrix: dict, gap_cost: int, ver
         print(max_row_index)
 
     #Put the nodes and the minimum spanning edges into a graph.
-    G=fill_graph(min_span_edges,str(int(max_row_index)),layout,verbose=verbose) #using the max_row_index as the starting key! (an making the graph!)
+    G=fill_graph(min_span_edges,str(int(max_row_index)),layout) #using the max_row_index as the starting key! (an making the graph!)
     alignment_pairs,index_dict=my_traversal_simply(G,str(int(max_row_index)),verbose=verbose) #'traverse' to get alignment_pairs (pairs of sucessors and predecessors) and their position in the MSA to come (index_dict)
     if verbose:
         print("Here come your alignment pairs and the idex dict: \n")
@@ -391,9 +391,8 @@ def new_sp_approxi_combi(seqs: list[str], score_matrix: dict, gap_cost: int, ver
         alignment1, alignment2 = [*alignment1_str], [*alignment2_str] #splitting up the alignments into elements to have the right format for the list of lists (M)
         
         A = [list(e) for e in zip(alignment1,alignment2)] #zipping the elements of the two aligned strings together pairwisely
-        if verbose:
-            print("A right now is: "+str(A))
-            print("M right now: "+str(M))
+        if verbose: print("A right now is: "+str(A))
+        if verbose: print("M right now: "+str(M))
         # extend
         Mk = extend_alignment_chaos(M,str1_nr, A,index_dict,verbose=verbose) 
         M = Mk
