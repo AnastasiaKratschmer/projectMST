@@ -24,7 +24,7 @@ def parse_fasta_multiple(filename):
     return seq, name
 
 
-def parse_fasta_multiple_remove_n(filename):
+def parse_fasta_multiple_remove_n(filename): #the parse fasta function that removes ns and puts a random base instead :) 
     seq = []
     name = []
     for record in SeqIO.parse(filename, "fasta"):
@@ -153,11 +153,11 @@ def linear_backtrack(A: str, B: str, T, score_matrix, gap: int, verbose=False):
 
 
 
-def fill_graph(res_matrix,source_node,layout="spring"): #only used for making the graph now!,
+def fill_graph(res_matrix,source_node,layout="spring"): 
     edges=[]
     edges_in_min_path=[]
     for row in res_matrix:
-        if row[0]=="*": #was not there before, but to make sure only the edges in min span tree are added this is added for now.
+        if row[0]=="*": #to make sure that only the edges in min span tree are added this is added for now. Could add the others to for illustratory purposes. But easier this way..
             weight = int(row[1])  # Extract the weight 
             node1 = row[2]  # Extract the first node
             node2 = row[3]  # Extract the second node 
@@ -173,6 +173,7 @@ def fill_graph(res_matrix,source_node,layout="spring"): #only used for making th
     G.add_nodes_from(np.unique(res_matrix[:, 2:]))
     G.add_edges_from(edges)
     shortest_path=edges_in_min_path
+    #the following part is to choose the layout you want, but let's just keep the standard "spring"- My experience says it makes no diff.
     if layout=="spring":
         pos = nx.spring_layout(G)
     elif layout=="planar":
@@ -195,7 +196,7 @@ def fill_graph(res_matrix,source_node,layout="spring"): #only used for making th
     return G
 
 
-def convert_to_desired_format_nr_version(distance_matrix): #makes the distance matrix into the pseudomatrix needed for the MST
+def convert_to_desired_format_nr_version(distance_matrix): #makes the distance matrix into the pseudomatrix format needed for selecting edges int the func. find_min_span_edges_testing
     # Get the number of nodes in the distance matrix
     num_nodes = len(distance_matrix)
     # Initialize an empty list to store the rows of the new format
@@ -205,59 +206,59 @@ def convert_to_desired_format_nr_version(distance_matrix): #makes the distance m
     for i in range(num_nodes):
         for j in range(i+1, num_nodes):  # Avoid duplicates and self-distances
             distance = int(distance_matrix[i, j])
-            node1 = str(i)  # Node names as 1,2,3 ...
+            node1 = str(i)  # Node names as 1,2,3 ... could maybe be given better names, for instance the names from the fasta file..
             node2 = str(j)
-            matrixx_rows.append(["", distance, node1, node2])
+            matrixx_rows.append(["", distance, node1, node2]) #the zero'th col is empty now but is for marking if the edge is included in the MST
 
     # Convert the list of rows to a np array
     matrixx_np = np.array(matrixx_rows)
     return matrixx_np
 
 
-def find_min_span_edges_testing(pseudomatrix):
-    sorted_indices = np.lexsort((pseudomatrix[:, 1].astype(int),))
+def find_min_span_edges_testing(pseudomatrix): #the function actually implementing Kruskal's algo
+    sorted_indices = np.lexsort((pseudomatrix[:, 1].astype(int),)) #sort edges to have the shorter ones first.
     E = pseudomatrix[sorted_indices]
     print("this is E (sorted matrix without any stars yet): ")
     print(E)
-    names= np.unique(pseudomatrix[:, 2:])
+    names= np.unique(pseudomatrix[:, 2:]) #extracting all node names to keep track of them in name_dict.
     name_dict= {letter:i for i, letter in enumerate(names)}
-    E[:,0]=''
-    x=0
-    it=0
-    for i,item in enumerate(E):#is this enumeration even needed????????
-        while len(set(name_dict.values()))>1:
-            it+=1
-            print("\n \n this is it "+str(it))
-            min0,min1,min2=E[x][1],E[x][2],E[x][3] #get the next line in the matrix to get the letters/names of the trees
-            tree1_id= name_dict[min1] #getting the positions of the letters in the current list of trees
-            tree2_id= name_dict[min2]
-            print("before anything happens: tree1_id is "+str(tree1_id)+" and tree2_id is "+str(tree2_id))
-            print(str(min0)+" "+str(min1)+" "+str(min2))
-            if tree2_id == tree1_id:
-                x += 1
-                break
+    E[:,0]='' #always start proces by setting zero'th col as empy. May be redundant, but just to be sure ;) 
+    x=0 #to keep track of current row
+    it=0 # iteration number for print statement...
+    while len(set(name_dict.values()))>1: #so while all nodes are still not unified in one tree..
+        it+=1 #only there for print statement below :) 
+        print("\n \n this is it "+str(it)) #the aforementioned print statement!
+        min0,min1,min2=E[x][1],E[x][2],E[x][3] #take the next row in the pseudomatrix to get the len of the edge and the names of the two nodes it connects
+        tree1_id= name_dict[min1] #getting the positions of the nodes currently in question in the current list of trees
+        tree2_id= name_dict[min2]
+        print("before anything happens: tree1_id is "+str(tree1_id)+" and tree2_id is "+str(tree2_id)) #a small print statement
+        print(str(min0)+" "+str(min1)+" "+str(min2)) #print statement
+        if tree2_id == tree1_id: #if the two nodes are already in the same tree, skip this row.
+            x += 1
+            break
+        else:
+            E[x][0] = "*" #if they were not already in the same tree, then mark that the row/edge is going to be used!
+            print("in namedict, before merging we have the numbers: " + str(name_dict[min1]) + " and " + str(name_dict[min2])) #another print stament.
+            #generally making sure that the new tree assigned to the node is the one with the lowest number. Also updating name_dict to keep the name interval 'closed'.
+            if tree1_id < tree2_id:
+                orig_tree2_id = tree2_id
+                for key, value in name_dict.items():
+                    if value == orig_tree2_id:
+                        name_dict[key] = tree1_id
+                    elif value > orig_tree2_id:
+                        name_dict[key] -= 1
             else:
-                E[x][0] = "*"
-                print("in namedict, before merging we have the numbers: " + str(name_dict[min1]) + " and " + str(name_dict[min2]))
-                if tree1_id < tree2_id:
-                    orig_tree2_id = tree2_id
-                    for key, value in name_dict.items():
-                        if value == orig_tree2_id:
-                            name_dict[key] = tree1_id
-                        elif value > orig_tree2_id:
-                            name_dict[key] -= 1
-                else:
-                    orig_tree1_id = tree1_id
-                    for key, value in name_dict.items():
-                        if value == orig_tree1_id:
-                            name_dict[key] = tree2_id
-                        elif value > orig_tree1_id:
-                            name_dict[key] -= 1
-                x += 1
+                orig_tree1_id = tree1_id
+                for key, value in name_dict.items():
+                    if value == orig_tree1_id:
+                        name_dict[key] = tree2_id
+                    elif value > orig_tree1_id:
+                        name_dict[key] -= 1
+            x += 1
             print("in namedict, now we have the numbers: "+str(name_dict[min1])+" and "+str(name_dict[min2]))
             print("and the whole dict is:"+str(name_dict))
             
-    res_mat=E
+    res_mat=E 
     return res_mat
 
 def my_traversal_simply(graph, starting_key):
