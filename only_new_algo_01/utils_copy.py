@@ -298,15 +298,15 @@ def my_traversal_simply(graph, starting_key): #bf inspired traversal
     return(alignment_pairs,index_dict)
 
 
-def extend_alignment_chaos(M,str1_nr,A,index_dict): #needs inclusion of str1_nr, to come from the outside....
+def extend_alignment_chaos(M,str1_nr,A,index_dict): #needs inclusion of str1_nr, to come from the outside.... str1_nr is the name "predecessor" string  
     MA = []
     i = 0
     j = 0
-    col_in_M_of_parent_string=int(index_dict[str1_nr])
+    col_in_M_of_parent_string=int(index_dict[str1_nr]) #getting the column from the index dict that holds the "predecessor" string, to know where it is in the MSA
     while i < len(M) and j < len(A):
-        print("i:"+str(i)+", j:"+str(j))
-        print("parent string nr: "+ str(str1_nr))
-        print("which is in col:"+str(col_in_M_of_parent_string))
+        #print("i:"+str(i)+", j:"+str(j))
+        #print("parent string nr: "+ str(str1_nr))
+        #print("which is in col:"+str(col_in_M_of_parent_string))
         # Case 1:
         if M[i][col_in_M_of_parent_string] == '-' and A[j][0] == '-':
             M[i].append(A[j][1])
@@ -333,7 +333,7 @@ def extend_alignment_chaos(M,str1_nr,A,index_dict): #needs inclusion of str1_nr,
             MA.append(M[i])
             i = i + 1
             j = j + 1
-
+    #when one of the strings has ended, put in gaps, till the other ends as well. 
     if i < len(M):
         while i < len(M):
             M[i].append('-')
@@ -350,52 +350,52 @@ def extend_alignment_chaos(M,str1_nr,A,index_dict): #needs inclusion of str1_nr,
     return MA
 
 def new_sp_approxi_combi(seqs: list[str], score_matrix: dict, gap_cost: int, verbose=False, return_center_string=False,layout="spring"):
-    # STEP 1: Find the center string
+    # Make a matrix to hold pairwise alignment costs for all alignment combinations!
     matrix = np.full((len(seqs), len(seqs)), np.nan)
-    # loop over all distinct pairs
+    # Loop over all pairs
     for i, seq1 in enumerate(seqs):
         for j, seq2 in enumerate(seqs):
               matrix[i, j] = get_cost_2(linear_C(gap_cost, score_matrix, seq1, seq2))
     print(matrix)
-    matrix_for_MST=matrix 
-    matrix_for_MST=convert_to_desired_format_nr_version(matrix_for_MST)
-    min_span_edges=find_min_span_edges_testing(matrix_for_MST)
+    matrix_for_MST=matrix #copy the matrix, so that we can keep the old matrix and make a changed version to the "pseudomatrix" version
+    matrix_for_MST=convert_to_desired_format_nr_version(matrix_for_MST) #making the "pseudomatrix"
+    min_span_edges=find_min_span_edges_testing(matrix_for_MST) #Run Kruskal's algorithm on the "pseudomatrix"
     print(matrix_for_MST)
     print(min_span_edges)
 
-    max_indices = np.where(matrix == np.max(matrix))
-    max_row_index = max_indices[0][0]
+    max_indices = np.where(matrix == np.max(matrix)) # Choosing where to start traversal. I want to start at one of the nodes that is the furthest away from any other so start from a side of graph.. hmmmm...
+    max_row_index = max_indices[0][0] #just choose one of them.
     print(max_row_index)
 
-    #need to use the my_transversal_simply to get transversal order but still use get_visiting_order to put edges in the graph!
-    G=fill_graph(min_span_edges,str(int(max_row_index)),layout) #str(int(np.argmin(matrix.sum(axis = 1)))) to get the min arg as the starting point.
-    alignment_pairs,index_dict=my_traversal_simply(G,str(int(max_row_index)))
+    #Put the nodes and the minimum spanning edges into a graph.
+    G=fill_graph(min_span_edges,str(int(max_row_index)),layout) #using the max_row_index as the starting key! (an making the graph!)
+    alignment_pairs,index_dict=my_traversal_simply(G,str(int(max_row_index))) #'traverse' to get alignment_pairs (pairs of sucessors and predecessors) and their position in the MSA to come (index_dict)
     print(alignment_pairs)
     print(index_dict)
 
-     # STEP 2: Construct alignment M
-    M: list[list[str]] = [[letter] for letter in [*seqs[int(max_row_index)]]]
+     # Constructing alignment M
+    M: list[list[str]] = [[letter] for letter in [*seqs[int(max_row_index)]]] #make structure where evey column in the alignment is represented as a string in a list (in a list)
     print("M right now:")
     print(M)
     print("seqs right now")
     print(seqs)
     cost_list = []
-    for key,value in alignment_pairs.items(): #was just seqs bebore
-        #you need here to get the pairs from the new dict instead
-        cost = linear_C(gap_cost, score_matrix, seqs[int(value)], seqs[int(key)]) #was just seqs before
+    #using the pairings of predecessors and successors in the alignment_pairs dict, align the strings.
+    for key,value in alignment_pairs.items():
+        cost = linear_C(gap_cost, score_matrix, seqs[int(value)], seqs[int(key)]) #the alignment call itself :) 
         print("\n now aligning...."+str(seqs[int(value)])+ " and "+ str(seqs[int(key)]))
         cost_list.append(get_cost_2(cost))
         
         # prepare A-matrix for extension
-        alignment1_str, alignment2_str = linear_backtrack(seqs[int(value)], seqs[int(key)], cost, score_matrix, gap_cost)
-        str1_nr=value
-        alignment1, alignment2 = [*alignment1_str], [*alignment2_str]
-        #here you need to provide the nr of the sequences to be able to index in the indexing dict in the extend_alignment_chaos func
-        A = [list(e) for e in zip(alignment1,alignment2)]
+        alignment1_str, alignment2_str = linear_backtrack(seqs[int(value)], seqs[int(key)], cost, score_matrix, gap_cost) #backtract to get the alignments!
+        str1_nr=value #the predecessor/parent string
+        alignment1, alignment2 = [*alignment1_str], [*alignment2_str] #splitting up the alignments into elements to have the right format for the list of lists (M)
+        
+        A = [list(e) for e in zip(alignment1,alignment2)] #zipping the elements of the two aligned strings together pairwisely
         print("A right now is: "+str(A))
         print("M right now: "+str(M))
         # extend
-        Mk = extend_alignment_chaos(M,str1_nr, A,index_dict) #needs the chaos version
+        Mk = extend_alignment_chaos(M,str1_nr, A,index_dict) 
         M = Mk
     
     # ACTUALLY COMPUTE (approximate) COST
