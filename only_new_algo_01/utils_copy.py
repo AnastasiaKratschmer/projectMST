@@ -27,10 +27,11 @@ def parse_fasta_multiple(filename):
 def parse_fasta_multiple_remove_n(filename): #the parse fasta function that removes ns and puts a random base instead :) 
     seq = []
     name = []
+    bases=['a', 'c', 't', 'g']
     for record in SeqIO.parse(filename, "fasta"):
         new_seq = []  # Initialize new_seq for each record
         for letter in record.seq:
-            if letter == 'n' or letter == 'N':
+            if letter not in bases:
                 new_seq.append(random.choice(['a', 'c', 't', 'g']))
             else:
                 new_seq.append(letter)
