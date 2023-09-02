@@ -261,35 +261,36 @@ def find_min_span_edges_testing(pseudomatrix): #the function actually implementi
     res_mat=E 
     return res_mat
 
-def my_traversal_simply(graph, starting_key):
+def my_traversal_simply(graph, starting_key): #bf inspired traversal
     neighborhood = {}
     for node in graph.nodes():
-        neighbors = list(graph.neighbors(node))
+        neighbors = list(graph.neighbors(node)) #get the neighbors in the graph
         neighborhood[node] = neighbors
-        print(f"Neighbors of node {node}: {neighbors}")
+        print(f"Neighbors of node {node}: {neighbors}") #a lil' unecessary print statement
     
     alignment_pairs = {}
-    queue = [starting_key]  # Initialize the queue with the starting node
+    queue = [starting_key]  # Initialize the queue with the starting node, coming from the 'outside' of the function
     while queue:
-        current_node = queue.pop(0)  # Get the first node from the queue
+        current_node = queue.pop(0)  # Get the first node from the queue, call it current_node while it is removed from the queue.
         
         if current_node in neighborhood:
-            for successor in neighborhood[current_node]:
-                if successor not in alignment_pairs:
-                    alignment_pairs[successor] = current_node
-                    queue.append(successor)  # Add successor to the queue for further traversal
-    if starting_key in alignment_pairs:
+            for successor in neighborhood[current_node]: #take the neighbors of the current node
+                if successor not in alignment_pairs: # if its not already in the alignment pairs, the neighbor is a succesor, not a predecessor and should be handled
+                    alignment_pairs[successor] = current_node #set the successor to be aligned to it's own predesessor, the "current node"
+                    queue.append(successor)  # Add successor to the queue for further traversal handeling
+    if starting_key in alignment_pairs: #the starting key should not be aligned TO anything (though other seq(s) should probably be aligned TO IT!)
         del alignment_pairs[starting_key]
         
     print(alignment_pairs)
+    #the second part of this func. makes a dict structure to keep track of the position of each string in the merging of all the pairwise alignments in extend_alignment_chaos :) 
     index_dict = {}
     index = 0
 
     # Add starting key with index 0
-    index_dict[starting_key] = str(index)
+    index_dict[starting_key] = str(index) #the starting key will be the first string but into the MSA-merge
     index += 1
 
-    # Add values from alignment_pairs with increasing indices
+    # Add values from alignment_pairs with increasing indices, because the merging order follows the alignment_pairs-dictionary
     for key, value in alignment_pairs.items():
         if key not in index_dict:
             index_dict[key] = str(index)
