@@ -291,21 +291,18 @@ def my_traversal_simply(graph, starting_key): #bf inspired traversal
     index += 1
 
     # Add values from alignment_pairs with increasing indices, because the merging order follows the alignment_pairs-dictionary
-    for key, value in alignment_pairs.items():
-        if key not in index_dict:
+    for key, value in alignment_pairs.items(): #the function crashes is value is not there. so it's there, although unaccessed :) 
+        if key not in index_dict: #filling the index_dict with the positions of each node (representing the a string ) in the alignment_pairs
             index_dict[key] = str(index)
-            index += 1
-        if value not in index_dict:
-            index_dict[value] = str(index)
             index += 1
     return(alignment_pairs,index_dict)
 
 
-def extend_alignment_chaos(M,str1_nr,A,position_dictionary):#needs inclusion of str1_nr, to come from the outside....
+def extend_alignment_chaos(M,str1_nr,A,index_dict): #needs inclusion of str1_nr, to come from the outside....
     MA = []
     i = 0
     j = 0
-    col_in_M_of_parent_string=int(position_dictionary[str1_nr])
+    col_in_M_of_parent_string=int(index_dict[str1_nr])
     while i < len(M) and j < len(A):
         print("i:"+str(i)+", j:"+str(j))
         print("parent string nr: "+ str(str1_nr))
@@ -317,7 +314,7 @@ def extend_alignment_chaos(M,str1_nr,A,position_dictionary):#needs inclusion of 
             i = i + 1
             j = j + 1
 
-        # Case 2:
+        # Case 2
         elif M[i][col_in_M_of_parent_string] == '-' and A[j][0] != '-':
             M[i].append('-')
             MA.append(M[i])
