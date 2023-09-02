@@ -106,8 +106,6 @@ def linear_C(gap, score_matrix, seq1, seq2, verbose=False):
             v2 = matrix[i-1, j] + gap
             v3 = matrix[i, j-1] + gap
             matrix[i,j] = min(v1, v2, v3)#, 0)
-
-    if verbose: print("Cost matrix:\n" + str(matrix))
     return(matrix)
 
 def get_cost_2(cost_matrix):
