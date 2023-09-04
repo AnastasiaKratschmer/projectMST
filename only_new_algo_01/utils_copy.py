@@ -31,14 +31,11 @@ def parse_fasta_multiple_remove_n(filename): #the parse fasta function that remo
     for record in SeqIO.parse(filename, "fasta"):
         new_seq = []  # Initialize new_seq for each record
         for letter in record.seq:
-            print("the letter before changing is "+ str(letter))
             if letter not in bases:
                 random_base=random.choice(['a', 'c', 't', 'g'])
-                print("after, the letter is "+ str(random_base))
                 new_seq.append(random_base)
             else:
                 new_seq.append(letter)
-                print("after, the letter is still "+ str(letter))
         new_seq = ''.join(new_seq)
         new_seq = new_seq.lower()
         seq.append(new_seq.lower())  # Append the modified sequence to the seq list
