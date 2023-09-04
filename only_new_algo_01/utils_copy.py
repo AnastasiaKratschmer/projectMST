@@ -225,6 +225,8 @@ def find_min_span_edges_testing(pseudomatrix, verbose=False): #the function actu
         print(E)
     names= np.unique(pseudomatrix[:, 2:]) #extracting all node names to keep track of them in name_dict.
     name_dict= {letter:i for i, letter in enumerate(names)}
+    if verbose:
+        print("the names of nodes going into the first name dict are: "+str(names)+" and the name_dict is orginally "+ str(name_dict))
     E[:,0]='' #always start proces by setting zero'th col as empy. May be redundant, but just to be sure ;) 
     x=0 #to keep track of current row
     it=0 # iteration number for print statement...
@@ -235,8 +237,9 @@ def find_min_span_edges_testing(pseudomatrix, verbose=False): #the function actu
         tree1_id= name_dict[min1] #getting the positions of the nodes currently in question in the current list of trees
         tree2_id= name_dict[min2]
         if tree2_id == tree1_id: #if the two nodes are already in the same tree, skip this row.
+            if verbose: print("the two nodes are already in the same tree")
             x += 1
-            break
+            continue
         else:
             E[x][0] = "*" #if they were not already in the same tree, then mark that the row/edge is going to be used!
             #generally making sure that the new tree assigned to the node is the one with the lowest number. Also updating name_dict to keep the name interval 'closed'.
@@ -255,6 +258,7 @@ def find_min_span_edges_testing(pseudomatrix, verbose=False): #the function actu
                     elif value > orig_tree1_id:
                         name_dict[key] -= 1
             x += 1
+            if verbose: print("after that iteration, we end up with this dict: "+ str(name_dict)+ "and the set is: "+ str(set(name_dict.values()))+" and the len of that set is "+ str(len(set(name_dict.values()))))
     if verbose: 
         print ("Here are the edges included in the MST, marked with a star! \n")
         print(E)
