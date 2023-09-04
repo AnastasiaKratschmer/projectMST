@@ -12,7 +12,8 @@ Ideas:
 ```diff
 ! A GOOD LOOKING TRAVERSAL ORDER IS BEING SPIT OUT, but the merge is has the problem that the positon_dict going into the extend_alignment_chaos is static, but the position of a certain string in the M(A) is far from...... so that needs fixin' 5/8 2023, but promising results on some seqs (far from all) ).
 ```
-* Update 28/8: the version in only_new_algo_01 does work, the result is just not that good for now.. I think there may still be problems with the traversal :) 
+* Update 28/8: the version in only_new_algo_01 does work, the result is just not that good for now.. I think there may still be problems with the traversal :)
+* Update 3/9: No real updates in functionality, but the code is cleaner, and prints only all the messy stuff when verbose. And removes stuff that is not in the approved list of bases. 
 
 ```diff
 - text in red
