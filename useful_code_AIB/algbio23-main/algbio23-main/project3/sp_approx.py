@@ -62,10 +62,10 @@ def sum_of_column(col: list[str], score_matrix: dict, gap: int):
                  j = j+1
             # if letter, -: add gap to cost
             # the ^ is apparently an exclusive or... a normal or should also be fine, bc we have just covered the double sitch above!
-            if col[i] == '-' or col[j] == '-': #maybe change this ^to or, 'because that made it work for me
+            elif col[i] == '-' or col[j] == '-': #maybe change this ^to or, 'because that made it work for me
                  cost = cost + gap
             # if letter, letter: add subst (look up in score_matrix) to cost
-            if col[i] != '-' and col[j] != '-':
+            elif col[i] != '-' and col[j] != '-':
                  cost = cost + score_matrix[col[i]][col[j]]  
     return cost
 
