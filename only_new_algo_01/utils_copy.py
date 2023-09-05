@@ -309,8 +309,10 @@ def extend_alignment_chaos(M,str1_nr,A,index_dict, verbose: False): #needs inclu
         if verbose: print("i:"+str(i)+", j:"+str(j))
         if verbose: print("parent string nr: "+ str(str1_nr))
         if verbose: print("which is in col:"+str(col_in_M_of_parent_string))
+        if verbose: print("I compare "+ str(M[i][col_in_M_of_parent_string])+" and "+str(A[j][0]))
         # Case 1:
         if M[i][col_in_M_of_parent_string] == '-' and A[j][0] == '-':
+            if verbose: print("I go to case 1 (two gaps)")
             M[i].append(A[j][1])
             MA.append(M[i])
             i = i + 1
@@ -318,12 +320,14 @@ def extend_alignment_chaos(M,str1_nr,A,index_dict, verbose: False): #needs inclu
 
         # Case 2
         elif M[i][col_in_M_of_parent_string] == '-' and A[j][0] != '-':
+            if verbose:print("I go to case 2 (gap,char)")
             M[i].append('-')
             MA.append(M[i])
             i = i + 1
         
         # Case 3:
         elif M[i][col_in_M_of_parent_string] != '-' and A[j][0] == '-':
+            if verbose:print("I go to case 3 (char, gap)")
             c = ['-']*len(M[i])
             c.append(A[j][1])
             MA.append(c)
@@ -331,6 +335,11 @@ def extend_alignment_chaos(M,str1_nr,A,index_dict, verbose: False): #needs inclu
         
         # Case 4:
         elif M[i][col_in_M_of_parent_string] != '-' and A[j][0] != '-':
+            if verbose: 
+                print("I go to case 4 (char, char)")
+                if M[i][col_in_M_of_parent_string] !=A[j][0]:
+                    print("Omg, I found a MISMATCH!!!")
+            
             M[i].append(A[j][1])
             MA.append(M[i])
             i = i + 1
