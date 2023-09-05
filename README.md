@@ -14,7 +14,7 @@ Ideas:
 ```
 * Update 28/8: the version in only_new_algo_01 does work, the result is just not that good for now.. I think there may still be problems with the traversal :)
 * Update 3/9: No real updates in functionality, but the code is cleaner, and prints only all the messy stuff when verbose. And removes stuff that is not in the approved list of bases. 
-
+* 5/9 2023: A troubeling observation: it is cheaper (for the braca1 testseqs to just not to just not have any gaps (gapcost=100) than to get gaps (gapcost=5).. Hmmmm...... Also it's a mystery why the algorithm performs worse than the 1/2-approx. as the new algo should just find treat something as the center string, if that is really favorable. So maybe there's something wrong with the merging proccess. 
 ```diff
 - text in red
 + text in green
