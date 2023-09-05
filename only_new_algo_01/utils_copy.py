@@ -315,6 +315,7 @@ def extend_alignment_chaos(M,str1_nr,A,index_dict, verbose: False): #needs inclu
             if verbose: print("I go to case 1 (two gaps)")
             M[i].append(A[j][1])
             MA.append(M[i])
+            if verbose: print("Now MA is this: \n "+ str(MA))
             i = i + 1
             j = j + 1
 
@@ -323,6 +324,7 @@ def extend_alignment_chaos(M,str1_nr,A,index_dict, verbose: False): #needs inclu
             if verbose:print("I go to case 2 (gap,char)")
             M[i].append('-')
             MA.append(M[i])
+            if verbose: print("Now MA is this: \n "+ str(MA))
             i = i + 1
         
         # Case 3:
@@ -331,17 +333,16 @@ def extend_alignment_chaos(M,str1_nr,A,index_dict, verbose: False): #needs inclu
             c = ['-']*len(M[i])
             c.append(A[j][1])
             MA.append(c)
+            if verbose: print("Now MA is this: \n "+ str(MA))
             j = j + 1
         
         # Case 4:
         elif M[i][col_in_M_of_parent_string] != '-' and A[j][0] != '-':
             if verbose: 
                 print("I go to case 4 (char, char)")
-                if M[i][col_in_M_of_parent_string] !=A[j][0]:
-                    print("Omg, I found a MISMATCH!!!")
-            
             M[i].append(A[j][1])
             MA.append(M[i])
+            if verbose: print("Now MA is this: \n "+ str(MA))
             i = i + 1
             j = j + 1
     #when one of the strings has ended, put in gaps, till the other ends as well. 
@@ -436,9 +437,9 @@ def sum_of_column(col: list[str], score_matrix: dict, gap: int):
             if col[i] == '-' and col[j] == '-':
                  j = j+1
             # if letter, -: add gap to cost
-            if col[i] == '-' or col[j] == '-':
+            elif col[i] == '-' or col[j] == '-':
                  cost = cost + gap
             # if letter, letter: add subst (look up in score_matrix) to cost
-            if col[i] != '-' and col[j] != '-':
+            elif col[i] != '-' and col[j] != '-':
                  cost = cost + score_matrix[col[i]][col[j]]  
     return cost
