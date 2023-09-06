@@ -189,7 +189,7 @@ def fill_graph(res_matrix,source_node,layout="spring"):
         print("Error! The specified layout is not available, choose spring, planar, shell, circular, spiral or spectral. Good luck!")
     edge_colors = ['deeppink' if e in shortest_path else 'lavender' for e in G.edges()] 
     nx.draw(G, pos, with_labels=True, node_color='bisque', edge_color=edge_colors, width=2, font_size=10)
-    nx.draw_networkx_edge_labels(G,pos, rotate=False)
+    #nx.draw_networkx_edge_labels(G,pos, rotate=False)
     # Show the plot
     plt.ion() #to make it keep running even without manually closing fig!!
     plt.show()

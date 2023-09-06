@@ -31,7 +31,7 @@ if __name__ == "__main__":
     # ----- What we see in the terminal
     print("It's running!!\n")
     print("Computing the approximate cost of aligning the " + str(len(seqs)) + " sequences...")
-    cost, M, matrix_for_MST, G = new_sp_approxi_combi(seqs, score_matrix, gap)
+    cost, M, matrix_for_MST, G = new_sp_approxi_combi(seqs, score_matrix, gap, verbose=True)
     print("Done!\n")
     #print("Cost: " + str(cost))
     print()
