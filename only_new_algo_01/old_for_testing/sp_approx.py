@@ -44,7 +44,7 @@ def sp_approx(seqs: list[str], score_matrix: dict, gap_cost: int, verbose=False,
     total_cost = compute_cost(M, score_matrix, gap_cost)
     
     if return_center_string: return total_cost, M, s1_idx
-    return total_cost, M
+    return total_cost, M, matrix
 
 def compute_cost(M, score_matrix, gap_cost):
     # the cost of the alignment is the sum of the cost of each column
@@ -92,8 +92,9 @@ if __name__ == "__main__":
     # ----- What we see in the terminal
     print("Beep boop!\n")
     print("Computing the approximate cost of aligning the " + str(len(seqs)) + " sequences...")
-    cost, M = sp_approx(seqs, score_matrix, gap)
+    cost, M, matrix = sp_approx(seqs, score_matrix, gap,verbose=True)
     print("Done!\n")
     print("Cost: " + str(cost))
     print()
     print(M)
+    print(matrix)
