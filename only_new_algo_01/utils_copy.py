@@ -444,3 +444,35 @@ def sum_of_column(col: list[str], score_matrix: dict, gap: int):
             elif col[i] != '-' and col[j] != '-':
                  cost = cost + score_matrix[col[i]][col[j]]  
     return cost
+
+def al_integrity_testt(A_dict, alignment_pairs, index_dict, MSA):
+    integrity=True
+    for key, value in alignment_pairs.items():
+        position_key = index_dict[key]
+        position_value = index_dict[value]
+        seq1 = []
+        seq2 = []
+        for element in MSA:
+            seq1.append(element[int(position_key)])
+            seq2.append(element[int(position_value)])
+        zipped = [list(e) for e in zip(seq1, seq2)]
+
+        if ord(key) < ord(value):
+            key_for_A_dict = str(key) + "_" + str(value)
+        else:
+            key_for_A_dict = str(value) + "_" + str(key)
+
+        # Add debugging print statement
+        print("key_for_A_dict:", key_for_A_dict)
+
+        # Check if key_for_A_dict exists in A_dict
+        if key_for_A_dict in A_dict:
+            pair_al = A_dict[key_for_A_dict]
+            for i in range(min(len(zipped), len(pair_al))):
+                if zipped[i] != pair_al[i]:
+                    print("A problem occurred: At position " + str(i) + ", " + str(zipped[i]) + " is not " + str(pair_al[i]))
+                    integrity=False
+            print("A problem occurred: key_for_A_dict not found in A_dict")
+        if integrity:
+            print("Alignment integrity looks fine!")
+
