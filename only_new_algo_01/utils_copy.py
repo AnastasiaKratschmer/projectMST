@@ -368,7 +368,7 @@ def new_sp_approxi_combi(seqs: list[str], score_matrix: dict, gap_cost: int, ver
     # Loop over all pairs
     for i, seq1 in enumerate(seqs):
         for j, seq2 in enumerate(seqs):
-              matrix[i, j] = get_cost_2(linear_C(gap_cost, score_matrix, seq1, seq2,verbose=verbose))
+            matrix[i, j] = get_cost_2(linear_C(gap_cost, score_matrix, seq1, seq2,verbose=verbose))
     if verbose:
         print("Here comes the distance matrix produced by the alignments: \n")
         print(matrix)
@@ -396,10 +396,12 @@ def new_sp_approxi_combi(seqs: list[str], score_matrix: dict, gap_cost: int, ver
      # Constructing alignment M
     M: list[list[str]] = [[letter] for letter in [*seqs[int(max_row_index)]]] #make structure where evey column in the alignment is represented as a string in a list (in a list)
     cost_list = []
+    A_dict={}
     #using the pairings of predecessors and successors in the alignment_pairs dict, align the strings.
     for key,value in alignment_pairs.items():
+        if verbose: print("this is the key: "+str(key)+" and this is the value: "+str(value))
         cost = linear_C(gap_cost, score_matrix, seqs[int(value)], seqs[int(key)],verbose=verbose) #the alignment call itself :) 
-        if verbose: print("\n now aligning...."+str(seqs[int(value)])+ " and "+ str(seqs[int(key)]))
+        if verbose: print("\n now aligning...."+str(seqs[int(key)])+ " and "+ str(seqs[int(value)]))
         cost_list.append(get_cost_2(cost))
         
         # prepare A-matrix for extension
@@ -408,6 +410,12 @@ def new_sp_approxi_combi(seqs: list[str], score_matrix: dict, gap_cost: int, ver
         alignment1, alignment2 = [*alignment1_str], [*alignment2_str] #splitting up the alignments into elements to have the right format for the list of lists (M)
         
         A = [list(e) for e in zip(alignment1,alignment2)] #zipping the elements of the two aligned strings together pairwisely
+        if ord(key) < ord(value):
+            key_for_A_dict=str(key)+"_"+str(value)
+        else:
+            key_for_A_dict=str(value)+"_"+str(key)
+        A_dict[key_for_A_dict]=A
+        #pair_al=A_dict[key_for_A_dict]
         if verbose: print("A right now is: "+str(A))
         if verbose: print("M right now: "+str(M))
         # extend
@@ -416,7 +424,9 @@ def new_sp_approxi_combi(seqs: list[str], score_matrix: dict, gap_cost: int, ver
     if verbose:
         print("Here is the alignment in full omg: \n")
         print(M)
-    
+    print("this is A_dict: ")
+    print(A_dict)
+    al_integrity_testt(A,alignment_pairs,index_dict,M,verbose=verbose)
     # ACTUALLY COMPUTE (approximate) COST
     total_cost = compute_cost(M, score_matrix, gap_cost)
     print("Total cost of MSA:"+str(total_cost))
