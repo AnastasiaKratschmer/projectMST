@@ -389,7 +389,7 @@ def new_sp_approxi_combi(seqs: list[str], score_matrix: dict, gap_cost: int, ver
     G=fill_graph(min_span_edges,str(int(max_row_index)),layout) #using the max_row_index as the starting key! (an making the graph!)
     alignment_pairs,index_dict=my_traversal_simply(G,str(int(max_row_index)),verbose=verbose) #'traverse' to get alignment_pairs (pairs of sucessors and predecessors) and their position in the MSA to come (index_dict)
     if verbose:
-        print("Here come your alignment pairs and the idex dict: \n")
+        print("Here come your alignment pairs and the idex dict: \n") 
         print(alignment_pairs)
         print(index_dict)
 
