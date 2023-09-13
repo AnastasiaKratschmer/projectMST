@@ -2,7 +2,7 @@ import numpy as np
 import sys
 import os
 from tqdm import tqdm # loading bar
-from utils import linear_C, get_cost_2, get_sequence_string, parse_fasta_multiple, create_score_matrix, write_alignments_to_file, linear_backtrack, extend_alignment
+from old_for_testing.utils import linear_C, get_cost_2, get_sequence_string, parse_fasta_multiple, create_score_matrix, write_alignments_to_file, linear_backtrack, extend_alignment
 
 
 
