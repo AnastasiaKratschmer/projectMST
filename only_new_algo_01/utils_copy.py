@@ -445,34 +445,35 @@ def sum_of_column(col: list[str], score_matrix: dict, gap: int):
                  cost = cost + score_matrix[col[i]][col[j]]  
     return cost
 
-def al_integrity_testt(A_dict, alignment_pairs, index_dict, MSA):
+def al_integrity_testt(A_dict, alignment_pairs, index_dict, MSA,verbose=False):
     integrity=True
     for key, value in alignment_pairs.items():
-        position_key = index_dict[key]
+        position_key = index_dict[key] #find the position in the MSA
         position_value = index_dict[value]
         seq1 = []
         seq2 = []
         for element in MSA:
-            seq1.append(element[int(position_key)])
+            seq1.append(element[int(position_key)]) #extract the 'column' for the
             seq2.append(element[int(position_value)])
-        zipped = [list(e) for e in zip(seq1, seq2)]
+        zipped = [list(e) for e in zip(seq1, seq2)] #zip the two lists to get the same format as in the pairwise alignment!
+        zipped = [sublist for sublist in zipped if not all(element == '-' for element in sublist)]#removing all-gap columns
 
         if ord(key) < ord(value):
-            key_for_A_dict = str(key) + "_" + str(value)
+            key_for_A_dict = str(key) + "_" + str(value) #to reflect naming practice in the big function..
         else:
             key_for_A_dict = str(value) + "_" + str(key)
 
         # Add debugging print statement
-        print("key_for_A_dict:", key_for_A_dict)
+        if verbose:
+            print("key_for_A_dict:", key_for_A_dict)
 
         # Check if key_for_A_dict exists in A_dict
         if key_for_A_dict in A_dict:
             pair_al = A_dict[key_for_A_dict]
-            for i in range(min(len(zipped), len(pair_al))):
+            for i in range(min(len(zipped), len(pair_al))): #iterate and compare columns!ch
                 if zipped[i] != pair_al[i]:
                     print("A problem occurred: At position " + str(i) + ", " + str(zipped[i]) + " is not " + str(pair_al[i]))
                     integrity=False
             print("A problem occurred: key_for_A_dict not found in A_dict")
-        if integrity:
+        if integrity and verbose:
             print("Alignment integrity looks fine!")
-
