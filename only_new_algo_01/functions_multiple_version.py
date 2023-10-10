@@ -243,7 +243,7 @@ def new_assembly(seqs,score_matrix,gapcost):
     # Loop over all pairs
     for i, seq1 in enumerate(seqs):
         for j, seq2 in enumerate(seqs):
-            matrix[i, j] = get_cost_2(linear_C(gap_cost, score_matrix, seq1, seq2))
+            matrix[i, j] = get_cost_2(linear_C(gapcost, score_matrix, seq1, seq2))
         print("Here comes the distance matrix produced by the alignments: \n")
         print(matrix)
     matrix_for_MST=matrix #copy the matrix, so that we can keep the old matrix and make a changed version to the "pseudomatrix" version
@@ -266,8 +266,8 @@ def new_assembly(seqs,score_matrix,gapcost):
             print(node1,node2)
             print("which correspond to these strings I align: "+ str(seqs[int(node1)])+" , "+str(seqs[int(node1)]) )
             who_aligned_to_who.append([node1,node2])
-            cost=linear_C(gap_cost,score_matrix,seqs[int(node1)],seqs[int(node2)])
-            alignment1_str,alignment2_str=linear_backtrack(seqs[int(node1)], seqs[int(node2)], cost, score_matrix, gap_cost)
+            cost=linear_C(gapcost,score_matrix,seqs[int(node1)],seqs[int(node2)])
+            alignment1_str,alignment2_str=linear_backtrack(seqs[int(node1)], seqs[int(node2)], cost, score_matrix, gapcost)
             alignment1, alignment2 = [*alignment1_str], [*alignment2_str]
             A = [list(e) for e in zip(alignment1,alignment2)]
             print("original alignment, which is gonna be the guide"+str(A))
@@ -341,14 +341,14 @@ def new_assembly(seqs,score_matrix,gapcost):
             union.append(tuple_like_zip)
             k+=1
         print("union of the two after merge looks like: "+str(union))
-        cost_after_MSA=compute_cost(union,score_matrix,gap_cost)
+        cost_after_MSA=compute_cost(union,score_matrix,gapcost)
         if cost_after_MSA==matrix[int(seq1_nr)][int(seq2_nr)]:
             print("integrity test 2 passed for: "+str(seq1_nr)+" and "+ str(seq2_nr))
         else:
             print("Yikes, integrity check 2 did not pas for: "+str(seq1_nr)+" and "+ str(seq2_nr))
             print("Costs were before and after:"+str(matrix[int(node1)][int(node2)])+" and "+str(cost_after_MSA))
-            cost_for_suppesed_to_have_been=linear_C(gap_cost,score_matrix,seqs[int(seq1_nr)],seqs[int(seq2_nr)])
-            alignment1_str,alignment2_str=linear_backtrack(seqs[int(seq1_nr)], seqs[int(seq2_nr)],cost_for_suppesed_to_have_been, score_matrix, gap_cost)
+            cost_for_suppesed_to_have_been=linear_C(gapcost,score_matrix,seqs[int(seq1_nr)],seqs[int(seq2_nr)])
+            alignment1_str,alignment2_str=linear_backtrack(seqs[int(seq1_nr)], seqs[int(seq2_nr)],cost_for_suppesed_to_have_been, score_matrix, gapcost)
             alignment1, alignment2 = [*alignment1_str], [*alignment2_str]
             should_have_been= [list(e) for e in zip(alignment1,alignment2)]
             print("should have been:"+ str(should_have_been))
@@ -362,9 +362,9 @@ def new_assembly(seqs,score_matrix,gapcost):
                     print("index of first error: " + str(h) + " out of approximately " + str(len(should_have_been)) + ". The cols are these (should have been, are): " + str(should_have_been[h]) + " and " + str(all_gaps_cols_removed_from_union[h]))
                     sys.exit()
                     h+=1
-    total_cost = compute_cost(MSA_list[0], score_matrix, gap_cost)
+    total_cost = compute_cost(MSA_list[0], score_matrix, gapcost)
     print(total_cost)
-    return(matrix,min_span_edges_res,in_which_MSA_is_it,MSA_list)
+    return(matrix,min_span_edges_res,in_which_MSA_is_it,MSA_list,total_cost)
 
 
 
