@@ -237,13 +237,14 @@ def alt_alt_merge_united(guide_PA,MSA_list,in_which_MSA_is_it,node1,node2):
     print("\n\n")
     return MSA_new
 
-def new_assembly(seqs,score_matrix,gapcost):
+def new_assembly(seqs,score_matrix,gap_cost):
+    print("yes; i was updated")
     # Make a matrix to hold pairwise alignment costs for all alignment combinations!
     matrix = np.full((len(seqs), len(seqs)), np.nan)
     # Loop over all pairs
     for i, seq1 in enumerate(seqs):
         for j, seq2 in enumerate(seqs):
-            matrix[i, j] = get_cost_2(linear_C(gapcost, score_matrix, seq1, seq2))
+            matrix[i, j] = get_cost_2(linear_C(gap_cost, score_matrix, seq1, seq2))
         print("Here comes the distance matrix produced by the alignments: \n")
         print(matrix)
     matrix_for_MST=matrix #copy the matrix, so that we can keep the old matrix and make a changed version to the "pseudomatrix" version
@@ -266,8 +267,8 @@ def new_assembly(seqs,score_matrix,gapcost):
             print(node1,node2)
             print("which correspond to these strings I align: "+ str(seqs[int(node1)])+" , "+str(seqs[int(node1)]) )
             who_aligned_to_who.append([node1,node2])
-            cost=linear_C(gapcost,score_matrix,seqs[int(node1)],seqs[int(node2)])
-            alignment1_str,alignment2_str=linear_backtrack(seqs[int(node1)], seqs[int(node2)], cost, score_matrix, gapcost)
+            cost=linear_C(gap_cost,score_matrix,seqs[int(node1)],seqs[int(node2)])
+            alignment1_str,alignment2_str=linear_backtrack(seqs[int(node1)], seqs[int(node2)], cost, score_matrix, gap_cost)
             alignment1, alignment2 = [*alignment1_str], [*alignment2_str]
             A = [list(e) for e in zip(alignment1,alignment2)]
             print("original alignment, which is gonna be the guide"+str(A))
@@ -278,17 +279,36 @@ def new_assembly(seqs,score_matrix,gapcost):
             MSA_list[which_spot_in_MSA_list_to_update]=united_MSA_new
             MSA_list.pop(which_spot_in_MSA_list_to_remove)
             companions_to_update=[]
-            for key, value in in_which_MSA_is_it.items():
-                how_many_cols_already_in_MS1=find_highest_second_element(in_which_MSA_is_it,which_spot_in_MSA_list_to_update)
-                if value[0]==which_spot_in_MSA_list_to_remove:
-                    companions_to_update.append(key)
-                if value[0]>which_spot_in_MSA_list_to_remove:
-                    value[0]=(value[0]-1)
-            for companion in companions_to_update:
-                print(in_which_MSA_is_it[companion])
-                in_which_MSA_is_it[companion][0]=which_spot_in_MSA_list_to_update
-                col_of_element_in_old_MSA2=in_which_MSA_is_it[companion][1]
-                in_which_MSA_is_it[companion][1]=(how_many_cols_already_in_MS1+col_of_element_in_old_MSA2+1)
+            if in_which_MSA_is_it[node1][0]<in_which_MSA_is_it[node2][0]:
+                print("here I went to the original updating stategy")
+                for key, value in in_which_MSA_is_it.items():
+                    how_many_cols_already_in_MS1=find_highest_second_element(in_which_MSA_is_it,which_spot_in_MSA_list_to_update)
+                    if value[0]==which_spot_in_MSA_list_to_remove:
+                        companions_to_update.append(key)
+                    if value[0]>which_spot_in_MSA_list_to_remove:
+                        value[0]=(value[0]-1)
+                for companion in companions_to_update:
+                    print(in_which_MSA_is_it[companion])
+                    in_which_MSA_is_it[companion][0]=which_spot_in_MSA_list_to_update
+                    col_of_element_in_old_MSA2=in_which_MSA_is_it[companion][1]
+                    in_which_MSA_is_it[companion][1]=(how_many_cols_already_in_MS1+col_of_element_in_old_MSA2+1)
+            else:
+                print("here I went to the new updating strategy!")
+                companions_to_update1=[]
+                companions_to_update2=[]
+                for key, value in in_which_MSA_is_it.items():
+                    how_many_cols_already_in_MS2=find_highest_second_element(in_which_MSA_is_it,which_spot_in_MSA_list_to_remove) #get the highest nr in MSA2. need to only update dict[0] for MSA1 and only dict[1] for MSA2
+                    if value[0]==which_spot_in_MSA_list_to_update: #these need their value[1] updated, because they were "pushed downwards" in their alignment
+                        companions_to_update1.append(key)
+                    if value[0]==which_spot_in_MSA_list_to_remove: #these need their value[0] updated, because they were moved to a new alignment.
+                        companions_to_update2.append(key)
+                    if value[0]>which_spot_in_MSA_list_to_remove: #these need -1 in their value[1]
+                        value[0]=(value[0]-1)
+                for companion1 in companions_to_update1:
+                    in_which_MSA_is_it[companion1][1]=int(in_which_MSA_is_it[companion1][1])+int(how_many_cols_already_in_MS2)+1
+                for companion2 in companions_to_update2:
+                    in_which_MSA_is_it[companion2][0]=which_spot_in_MSA_list_to_update
+
         print("this is the updated dict after it "+str(k)+": "+str(in_which_MSA_is_it))
     print(MSA_list)
     #integrity check part 1, to check if each string is the same before and after, except for gaps.
@@ -341,14 +361,14 @@ def new_assembly(seqs,score_matrix,gapcost):
             union.append(tuple_like_zip)
             k+=1
         print("union of the two after merge looks like: "+str(union))
-        cost_after_MSA=compute_cost(union,score_matrix,gapcost)
+        cost_after_MSA=compute_cost(union,score_matrix,gap_cost)
         if cost_after_MSA==matrix[int(seq1_nr)][int(seq2_nr)]:
             print("integrity test 2 passed for: "+str(seq1_nr)+" and "+ str(seq2_nr))
         else:
             print("Yikes, integrity check 2 did not pas for: "+str(seq1_nr)+" and "+ str(seq2_nr))
             print("Costs were before and after:"+str(matrix[int(node1)][int(node2)])+" and "+str(cost_after_MSA))
-            cost_for_suppesed_to_have_been=linear_C(gapcost,score_matrix,seqs[int(seq1_nr)],seqs[int(seq2_nr)])
-            alignment1_str,alignment2_str=linear_backtrack(seqs[int(seq1_nr)], seqs[int(seq2_nr)],cost_for_suppesed_to_have_been, score_matrix, gapcost)
+            cost_for_suppesed_to_have_been=linear_C(gap_cost,score_matrix,seqs[int(seq1_nr)],seqs[int(seq2_nr)])
+            alignment1_str,alignment2_str=linear_backtrack(seqs[int(seq1_nr)], seqs[int(seq2_nr)],cost_for_suppesed_to_have_been, score_matrix, gap_cost)
             alignment1, alignment2 = [*alignment1_str], [*alignment2_str]
             should_have_been= [list(e) for e in zip(alignment1,alignment2)]
             print("should have been:"+ str(should_have_been))
@@ -362,9 +382,17 @@ def new_assembly(seqs,score_matrix,gapcost):
                     print("index of first error: " + str(h) + " out of approximately " + str(len(should_have_been)) + ". The cols are these (should have been, are): " + str(should_have_been[h]) + " and " + str(all_gaps_cols_removed_from_union[h]))
                     sys.exit()
                     h+=1
-    total_cost = compute_cost(MSA_list[0], score_matrix, gapcost)
+
+
+
+    total_cost = compute_cost(MSA_list[0], score_matrix, gap_cost)
     print(total_cost)
-    return(matrix,min_span_edges_res,in_which_MSA_is_it,MSA_list,total_cost)
+
+
+
+
+
+    return(matrix,min_span_edges_res,in_which_MSA_is_it,MSA_list, total_cost)
 
 
 
