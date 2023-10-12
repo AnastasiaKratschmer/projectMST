@@ -59,9 +59,9 @@ def new_identify_merge_case_compact(guide_PA,MSA1,MSA2,node1,node2,MSA_position_
     if equality_here_test(a,c)==True and equality_here_test(b,d)==True: case=3 #a==c and b==d
     elif equality_here_test(a,c)==False and equality_here_test(b,d)==False:
         if equality_here_test(b,c)==True:
-            if MSA1[j+1][node1_col]==guide_PA[i][0]:
+            if MSA1[j+1][node1_col]==guide_PA[i][0] and guide_PA[i][0] != '-' :
                 look_forward_flag="col1"
-            if MSA2[l+1][node2_col]==guide_PA[i][1]:
+            elif MSA2[l+1][node2_col]==guide_PA[i][1] and guide_PA[i][1]!='-':
                 look_forward_flag="col2"
         case=4
     elif equality_here_test(a,c)==True:#a==c
@@ -372,4 +372,5 @@ def new_assembly(seqs,score_matrix,gapcost):
 
 
     return(matrix,min_span_edges_res,in_which_MSA_is_it,MSA_list, total_cost)
+
 
