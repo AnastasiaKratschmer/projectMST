@@ -243,7 +243,7 @@ def new_assembly(seqs,score_matrix,gapcost):
             node2=row[3]
             print("\n \n \n these are the nodes for the iteration "+ str(k))
             print(node1,node2)
-            print("which correspond to these strings I align: "+ str(seqs[int(node1)])+" , "+str(seqs[int(node1)]) )
+            print("which correspond to these strings I align: "+ str(seqs[int(node1)])+" , "+str(seqs[int(node2)]) )
             who_aligned_to_who.append([node1,node2])
             cost=linear_C(gap_cost,score_matrix,seqs[int(node1)],seqs[int(node2)])
             alignment1_str,alignment2_str=linear_backtrack(seqs[int(node1)], seqs[int(node2)], cost, score_matrix, gap_cost)
@@ -258,9 +258,9 @@ def new_assembly(seqs,score_matrix,gapcost):
             MSA_list.pop(which_spot_in_MSA_list_to_remove)
             companions_to_update=[]
             if in_which_MSA_is_it[node1][0]<in_which_MSA_is_it[node2][0]:
-                print("here I went to the original updating stategy")
+                print(str(in_which_MSA_is_it[node1][0])+"is smaller than+"+str( in_which_MSA_is_it[node2][0]) +"so here I went to the original updating stategy")
+                how_many_cols_already_in_MS1=find_highest_second_element(in_which_MSA_is_it,which_spot_in_MSA_list_to_update)
                 for key, value in in_which_MSA_is_it.items():
-                    how_many_cols_already_in_MS1=find_highest_second_element(in_which_MSA_is_it,which_spot_in_MSA_list_to_update)
                     if value[0]==which_spot_in_MSA_list_to_remove:
                         companions_to_update.append(key)
                     if value[0]>which_spot_in_MSA_list_to_remove:
@@ -271,11 +271,12 @@ def new_assembly(seqs,score_matrix,gapcost):
                     col_of_element_in_old_MSA2=in_which_MSA_is_it[companion][1]
                     in_which_MSA_is_it[companion][1]=(how_many_cols_already_in_MS1+col_of_element_in_old_MSA2+1)
             else:
-                print("here I went to the new updating strategy!")
+                print(str(in_which_MSA_is_it[node1][0])+"is bigger than+"+str( in_which_MSA_is_it[node2][0]) +"so here I went to the new updating stategy")
                 companions_to_update1=[]
                 companions_to_update2=[]
+                how_many_cols_already_in_MS2=find_highest_second_element(in_which_MSA_is_it,which_spot_in_MSA_list_to_remove) #get the highest nr in MSA2. need to only update dict[0] for MSA1 and only dict[1] for MSA2
                 for key, value in in_which_MSA_is_it.items():
-                    how_many_cols_already_in_MS2=find_highest_second_element(in_which_MSA_is_it,which_spot_in_MSA_list_to_remove) #get the highest nr in MSA2. need to only update dict[0] for MSA1 and only dict[1] for MSA2
+                    #how_many_cols_already_in_MS2=find_highest_second_element(in_which_MSA_is_it,which_spot_in_MSA_list_to_remove) #get the highest nr in MSA2. need to only update dict[0] for MSA1 and only dict[1] for MSA2
                     if value[0]==which_spot_in_MSA_list_to_update: #these need their value[1] updated, because they were "pushed downwards" in their alignment
                         companions_to_update1.append(key)
                     if value[0]==which_spot_in_MSA_list_to_remove: #these need their value[0] updated, because they were moved to a new alignment.
@@ -365,4 +366,10 @@ def new_assembly(seqs,score_matrix,gapcost):
 
     total_cost = compute_cost(MSA_list[0], score_matrix, gap_cost)
     print(total_cost)
+
+
+
+
+
     return(matrix,min_span_edges_res,in_which_MSA_is_it,MSA_list, total_cost)
+
