@@ -54,15 +54,24 @@ def new_identify_merge_case_compact(guide_PA,MSA1,MSA2,node1,node2,MSA_position_
     b=guide_PA[i][1]
     c= MSA1[j][node1_col]
     d=MSA2[l][node2_col]
-    look_forward_flag=False
+    look_forward_flag1=False
+    look_forward_flag2=False
 
     if equality_here_test(a,c)==True and equality_here_test(b,d)==True: case=3 #a==c and b==d
     elif equality_here_test(a,c)==False and equality_here_test(b,d)==False:
         if equality_here_test(b,c)==True:
-            if MSA1[j+1][node1_col]==guide_PA[i][0] and guide_PA[i][0] != '-' :
-                look_forward_flag="col1"
-            elif MSA2[l+1][node2_col]==guide_PA[i][1] and guide_PA[i][1]!='-':
-                look_forward_flag="col2"
+            if guide_PA[i][0]!='-':
+                k=1
+                while MSA1[j+k][node1_col]=='-' and guide_PA[i][0]!='-':
+                    k+=1
+                if MSA1[j+k][node1_col]==guide_PA[i][0]:
+                    look_forward_flag1=True
+            if guide_PA[i][1]!='-':
+                h=1
+                while MSA2[l+h][node2_col]=='-' and guide_PA[i][1]!='-':
+                    h+=1
+                if MSA2[l+h][node2_col]==guide_PA[i][1]:
+                    look_forward_flag2=True
         case=4
     elif equality_here_test(a,c)==True:#a==c
         if d!='-':
@@ -77,7 +86,7 @@ def new_identify_merge_case_compact(guide_PA,MSA1,MSA2,node1,node2,MSA_position_
     else: sys.exit()
     guide_was=guide_PA[i]
     MSA2_was=MSA2[l]
-    return case,move_on_in_guide_flag,guide_was,MSA2_was, look_forward_flag
+    return case,move_on_in_guide_flag,guide_was,MSA2_was, look_forward_flag1, look_forward_flag2
 
 def alt_handle_case1(MSA1,MSA2,i,j,l):
     how_many_cols_in_MSA1=len(MSA1[0])
@@ -120,6 +129,8 @@ def alt_alt_merge_united(guide_PA,MSA_list,in_which_MSA_is_it,node1,node2):
     print("the node2 is right now in the alignment nr "+str(MSA_of_node2))
     MSA1=MSA_list[int(MSA_of_node1)]
     MSA2=MSA_list[int(MSA_of_node2)]
+
+    
     j=0 
     i=0
     l=0
@@ -130,7 +141,7 @@ def alt_alt_merge_united(guide_PA,MSA_list,in_which_MSA_is_it,node1,node2):
         print("nodes pointing to cols: " + str(spot_of_node1) + " , " + str(spot_of_node2))
         print("i,j,l: "+str(i)+','+str(j)+','+str(l))
         print("max for those should be: "+str(len(guide_PA))+','+str(len(MSA1))+','+str(len(MSA2)))
-        case,move_on_in_guide_flag,guide_was,MSA2_was,look_forward_flag=new_identify_merge_case_compact(guide_PA,MSA1,MSA2,node1,node2, in_which_MSA_is_it,i,j,l)
+        case,move_on_in_guide_flag,guide_was,MSA2_was,look_forward_flag1, look_forward_flag2=new_identify_merge_case_compact(guide_PA,MSA1,MSA2,node1,node2, in_which_MSA_is_it,i,j,l)
         print("flag: "+str(move_on_in_guide_flag))
         print("case:"+str(case))
         print("guide_was: "+str(guide_was))
@@ -165,11 +176,11 @@ def alt_alt_merge_united(guide_PA,MSA_list,in_which_MSA_is_it,node1,node2):
             new_col.append(col)
         if case==4:
             col1,col2=alt_handle_case4(MSA1,MSA2,i,j,l)
-            if look_forward_flag=='col1':
+            if look_forward_flag1==True:
                 MSA_new.append(col1)
                 new_col.append(col1)
                 j+=1
-            elif look_forward_flag=='col2':
+            elif look_forward_flag2==True:
                 MSA_new.append(col2)
                 new_col.append(col2)
                 l+=1
@@ -215,6 +226,7 @@ def alt_alt_merge_united(guide_PA,MSA_list,in_which_MSA_is_it,node1,node2):
         i+=1
     print("\n\n")
     return MSA_new
+
 
 def new_assembly(seqs,score_matrix,gapcost):
     # Make a matrix to hold pairwise alignment costs for all alignment combinations!
