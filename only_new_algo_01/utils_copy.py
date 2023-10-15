@@ -410,7 +410,7 @@ def new_sp_approxi_combi(seqs: list[str], score_matrix: dict, gap_cost: int, ver
         alignment1, alignment2 = [*alignment1_str], [*alignment2_str] #splitting up the alignments into elements to have the right format for the list of lists (M)
         
         A = [list(e) for e in zip(alignment1,alignment2)] #zipping the elements of the two aligned strings together pairwisely
-        if ord(key) < ord(value):
+        if int(key) < int(value):
             key_for_A_dict=str(key)+"_"+str(value)
         else:
             key_for_A_dict=str(value)+"_"+str(key)
@@ -468,7 +468,7 @@ def al_integrity_testt(A_dict, alignment_pairs, index_dict, MSA,verbose=False):
         zipped = [list(e) for e in zip(seq1, seq2)] #zip the two lists to get the same format as in the pairwise alignment!
         zipped = [sublist for sublist in zipped if not all(element == '-' for element in sublist)]#removing all-gap columns
 
-        if ord(key) < ord(value):
+        if int(key) < int(value):
             key_for_A_dict = str(key) + "_" + str(value) #to reflect naming practice in the big function..
         else:
             key_for_A_dict = str(value) + "_" + str(key)
