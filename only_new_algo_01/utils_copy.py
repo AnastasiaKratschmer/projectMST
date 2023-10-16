@@ -347,13 +347,13 @@ def extend_alignment_chaos(M,str1_nr,A,index_dict, verbose: False): #needs inclu
             i = i + 1
             j = j + 1
     #when one of the strings has ended, put in gaps, till the other ends as well. 
-    if i < len(M):
+    if i < len(M)-1:
         while i < len(M):
             M[i].append('-')
             MA.append(M[i])
             i = i + 1
             
-    if j < len(A):
+    if j < len(A)-1:
         k = len(M[col_in_M_of_parent_string])
         while j < len(A):
             c = ['-']*(k-1)
