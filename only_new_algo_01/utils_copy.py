@@ -352,14 +352,17 @@ def extend_alignment_chaos(M,str1_nr,A,index_dict, verbose: False): #needs inclu
             M[i].append('-')
             MA.append(M[i])
             i = i + 1
-            
-    if j < len(A)-1:
-        k = len(M[col_in_M_of_parent_string])
-        while j < len(A):
-            c = ['-']*(k-1)
-            c.append(A[j][1])
-            MA.append(c)
-            j = j + 1
+
+     # Old verson that I'm not sure is correct, but now testing!
+     # if j < len(A)-1:
+     #   k = len(M[col_in_M_of_parent_string])
+     #   while j < len(A)-1:
+      #      c = ['-']*(k-1)         
+    while j < len(A)-1:
+        c = ['-']
+        c.append(A[j][1])
+        MA.append(c)
+        j = j + 1
     return MA
 
 def new_sp_approxi_combi(seqs: list[str], score_matrix: dict, gap_cost: int, verbose=False, return_center_string=False,layout="spring"):
