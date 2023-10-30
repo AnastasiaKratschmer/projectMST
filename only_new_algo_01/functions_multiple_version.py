@@ -576,3 +576,126 @@ def new_assembly_OBO(seqs,score_matrix,gapcost):
     return(matrix,min_span_edges_res,in_which_MSA_is_it,MSA_list, total_cost)
 
 
+def new_assembly_Gus(seqs,score_matrix,gapcost, verbose=False, return_center_string=False):
+    # STEP 1: Find the center string, s1
+    matrix = np.full((len(seqs), len(seqs)), np.nan)
+    # loop over all distinct pairs
+    for i, seq1 in enumerate(seqs):
+        for j, seq2 in enumerate(seqs):
+              matrix[i, j] = get_cost_2(linear_C(gap_cost, score_matrix, seq1, seq2))
+
+    # find center string/guide 
+    s1_idx = np.argmin(matrix.sum(axis = 1))
+    s1 = seqs[s1_idx]
+    seqs.insert(0, seqs.pop(s1_idx)) # move guide to front of list
+    if verbose: print("The center string, s1, is sequence no." + str(s1_idx+1)) # just a print statement to see which string is the center string
+
+    # STEP 2: Construct alignment M
+    M: list[list[str]] = [[letter] for letter in [*s1]]
+    cost_list = []
+    # print("first M = \n" + str(M))
+    for i in range(1, len(seqs)):
+        # if i == s1_idx: # skip the guide 
+        #    continue
+        cost = linear_C(gap_cost, score_matrix, s1, seqs[i])
+        cost_list.append(get_cost_2(cost))
+        
+        # prepare A-matrix for extension
+        alignment1_str, alignment2_str = linear_backtrack(s1, seqs[i], cost, score_matrix, gap_cost)
+        alignment1, alignment2 = [*alignment1_str], [*alignment2_str]
+        A = [list(e) for e in zip(alignment1,alignment2)]
+        
+        # extend
+        Mk = extend_alignment(M, A)
+        M = Mk
+    
+    # ACTUALLY COMPUTE (approximate) COST
+    total_cost = compute_cost(M, score_matrix, gap_cost)
+    
+    if return_center_string: return total_cost, M, s1_idx
+    return total_cost, M, matrix
+
+     #integrity check part 1, to check if each string is the same before and after, except for gaps.
+    for i,seq in enumerate(seqs):
+        j=0
+        new_str_with_gaps=[]
+        new_str_no_gaps=[]
+        while j<=len(M)-1:
+            found=M[j][i]
+            j+=1
+            new_str_with_gaps.append(found)
+            if found !='-':
+                new_str_no_gaps.append(found)
+        new_str_no_gaps=''.join(new_str_no_gaps)
+        new_str_with_gaps=''.join(new_str_with_gaps)
+        if new_str_no_gaps==seq:
+            print("integrity check 1 passed for seq "+str(i))
+        else:
+            print("Yikes, integrity check 1 did not pas for seq "+str(i)+". constrast( new, orig): \n"+str(new_str_no_gaps)+"\n"+str(seq))
+     #part 2 lol, are the alignments preserved, expect for gaps???
+    for i in range(1,len(seqs)):
+        seq1_nr=0
+        seq2_nr=i
+        seq1_from_MSA=[]
+        seq2_from_MSA=[]
+        j=0
+        while j<=len(M)-1:
+            found=M[j][0]
+            seq1_from_MSA.append(found)
+            j+=1
+        j=0
+        while j<=len(M)-1:
+            found=M[j][i]
+            seq2_from_MSA.append(found)
+            j+=1
+        union=[]
+        k=0
+        len_max=max(len(seq1_from_MSA),len(seq1_from_MSA))
+        while k<=(len_max-1):
+            el1=seq1_from_MSA[k]
+            el2=seq2_from_MSA[k]
+            tuple_like_zip=[el1,el2]
+            union.append(tuple_like_zip)
+            k+=1
+        print("union of the two after merge looks like: "+str(union))
+        cost_after_MSA=compute_cost(union,score_matrix,gap_cost)
+        if cost_after_MSA==matrix[int(seq1_nr)][int(seq2_nr)]:
+            print("integrity test 2 passed for: "+str(seq1_nr)+" and "+ str(seq2_nr))
+        else:
+            print("Yikes, integrity check 2 did not pas for: "+str(seq1_nr)+" and "+ str(seq2_nr))
+            print("Costs were before and after:"+str(matrix[int(node1)][int(node2)])+" and "+str(cost_after_MSA))
+            cost_for_suppesed_to_have_been=linear_C(gap_cost,score_matrix,seqs[int(seq1_nr)],seqs[int(seq2_nr)])
+            alignment1_str,alignment2_str=linear_backtrack(seqs[int(seq1_nr)], seqs[int(seq2_nr)],cost_for_suppesed_to_have_been, score_matrix, gap_cost)
+            alignment1, alignment2 = [*alignment1_str], [*alignment2_str]
+            should_have_been= [list(e) for e in zip(alignment1,alignment2)]
+            print("should have been:"+ str(should_have_been))
+            all_gaps_cols_removed_from_union=[sublist for sublist in union if not all(item == '-' for item in sublist)]
+            print(all_gaps_cols_removed_from_union)
+            h=0
+            while h<=len(should_have_been)-1:
+                if should_have_been[h]==all_gaps_cols_removed_from_union[h]:
+                    h+=1
+                else:
+                    print("index of first error: " + str(h) + " out of approximately " + str(len(should_have_been)) + ". The cols are these (should have been, are): " + str(should_have_been[h]) + " and " + str(all_gaps_cols_removed_from_union[h]))
+                    sys.exit()
+                    h+=1
+
+
+
+    total_cost = compute_cost(M, score_matrix, gap_cost)
+    print(total_cost)
+
+
+
+
+
+    return(matrix,M, total_cost)
+
+
+
+
+
+
+
+
+
