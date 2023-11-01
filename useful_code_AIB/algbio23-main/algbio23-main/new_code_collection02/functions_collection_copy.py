@@ -1,6 +1,6 @@
 import random as random
-#import Bio
-#import numpy as np
+import Bio
+import numpy as np
 import sys
 import os
 #import networkx as nx
@@ -9,7 +9,7 @@ import timeit
 
 # Basic functions
 
-"""def parse_fasta(filename):
+def parse_fasta(filename):
     seq = ""
     for record in SeqIO.parse(filename, "fasta"):
         seq = record.seq.lower()
@@ -71,7 +71,7 @@ def create_score_matrix(filename: str, verbose=False):
                 scores_for_this_row[l] = int(score)
             score_matrix[letter] = scores_for_this_row
         if verbose: print("Score matrix: ", score_matrix)
-    return score_matrix"""
+    return score_matrix
 
 def linear_C(gap, score_matrix, seq1, seq2, verbose=False):
     n = len(seq1)
@@ -616,7 +616,7 @@ def new_assembly_OBO_x(seqs,score_matrix,gap_cost, check_integrity=False):
             in_which_MSA_is_it, MSA_list=perform_updates_OBO(in_which_MSA_is_it, node1, node2, united_MSA_new, MSA_list)
     total_cost = compute_cost(MSA_list[0], score_matrix, gap_cost)
     if check_integrity==True:
-       integrity_check_OBO_and_gradual(seqs,in_which_MSA_is_it,who_aligned_to_who,MSA_list, matrix)
+       integrity_check_OBO_and_gradual(seqs,in_which_MSA_is_it,who_aligned_to_who,MSA_list, matrix,score_matrix,gap_cost)
     total_cost = compute_cost(MSA_list[0], score_matrix, gap_cost)
     return(matrix,MSA_list, total_cost)
 
@@ -785,7 +785,7 @@ def new_assembly_Gus_x(seqs, score_matrix, gap_cost, return_center_string=False,
     # ACTUALLY COMPUTE (approximate) COST
     total_cost = compute_cost(M, score_matrix, gap_cost)
     if check_integrity == True:
-        integrity_check_Gus(seqs, M)
+        integrity_check_Gus(seqs, M, score_matrix,gap_cost,matrix)
     return matrix, M, total_cost
 
 def perform_updates_gradual(in_which_MSA_is_it, node1, node2,united_MSA_new, MSA_list):
@@ -856,7 +856,7 @@ def new_assembly_gradual_x(seqs,score_matrix,gap_cost, check_integrity=False):
             united_MSA_new=alt_alt_merge_united(A,MSA_list,in_which_MSA_is_it,node1,node2)
             in_which_MSA_is_it, MSA_list=perform_updates_gradual(in_which_MSA_is_it, node1, node2, united_MSA_new, MSA_list)
     if check_integrity==True:
-        integrity_check_OBO_and_gradual(seqs, in_which_MSA_is_it, who_aligned_to_who, MSA_list,matrix)
+        integrity_check_OBO_and_gradual(seqs, in_which_MSA_is_it, who_aligned_to_who, MSA_list,matrix,score_matrix,gap_cost)
     total_cost = compute_cost(MSA_list[0], score_matrix, gap_cost)
     return(matrix,MSA_list, total_cost)
 
