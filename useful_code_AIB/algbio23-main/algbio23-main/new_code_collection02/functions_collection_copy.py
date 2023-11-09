@@ -504,7 +504,7 @@ def integrity_check_OBO_and_gradual(seqs, in_which_MSA_is_it, who_aligned_to_who
                 print("integrity test 2 passed for: "+str(seq1_nr)+" and "+ str(seq2_nr))
             else:
                 print("Yikes, integrity check 2 did not pas for: "+str(seq1_nr)+" and "+ str(seq2_nr))
-                print("Costs were before and after:"+str(matrix[int(seq1_nr)][int(seq2_nr)])+" and "+str(cost_after_MSA))
+                print("Costs were before and after:"+str(matrix[0][int(seq1_nr)][int(seq2_nr)])+" and "+str(cost_after_MSA))
                 cost_for_suppesed_to_have_been=linear_C(gap_cost,score_matrix,seqs[int(seq1_nr)],seqs[int(seq2_nr)])
                 alignment1_str,alignment2_str=linear_backtrack(seqs[int(seq1_nr)], seqs[int(seq2_nr)],cost_for_suppesed_to_have_been, score_matrix, gap_cost)
                 alignment1, alignment2 = [*alignment1_str], [*alignment2_str]
@@ -621,9 +621,11 @@ def new_assembly_OBO_x(seqs,score_matrix,gap_cost, check_integrity=False):
     return(matrix,MSA_list, total_cost)
 
 
-def integrity_check_Gus(seqs,M,score_matrix,gap_cost, matrix):
+def integrity_check_Gus(seqs,M,score_matrix,gap_cost, matrix, s1_idx):
     #integrity check part 1, to check if each string is the same before and after, except for gaps.
-    for i,seq in enumerate(seqs):
+    print("Im just gonna start this int check by printint the strings/sequences dammit: "+ str(seqs))
+    for i in range(len(seqs)):
+        seq=seqs[i] #extract the the old nr i from seqs. now we need to recover what the new name of nr i is.
         j=0
         new_str_with_gaps=[]
         new_str_no_gaps=[]
@@ -635,6 +637,7 @@ def integrity_check_Gus(seqs,M,score_matrix,gap_cost, matrix):
                 new_str_no_gaps.append(found)
         new_str_no_gaps=''.join(new_str_no_gaps)
         new_str_with_gaps=''.join(new_str_with_gaps)
+        print("seq and new_str_no_gaps were: "+ str(seq)+", "+ str(new_str_no_gaps))
         if new_str_no_gaps==seq:
             print("integrity check 1 passed for seq "+str(i))
         else:
@@ -642,6 +645,7 @@ def integrity_check_Gus(seqs,M,score_matrix,gap_cost, matrix):
             sys.exit()
      #part 2 lol, are the alignments preserved, expect for gaps???
     for i in range(1,len(seqs)):
+        seq=seqs[i]
         seq1_nr=0
         seq2_nr=i
         seq1_from_MSA=[]
@@ -667,12 +671,15 @@ def integrity_check_Gus(seqs,M,score_matrix,gap_cost, matrix):
             k+=1
         print("union of the two after merge looks like: "+str(union))
         cost_after_MSA=compute_cost(union,score_matrix,gap_cost)
-        if cost_after_MSA==matrix[int(seq1_nr)][int(seq2_nr)]:
+
+        cost_for_suppesed_to_have_been=linear_C(gap_cost,score_matrix,seqs[int(seq1_nr)],seqs[int(seq2_nr)])
+        if cost_after_MSA==cost_for_suppesed_to_have_been[-1,-1]:
             print("integrity test 2 passed for: "+str(seq1_nr)+" and "+ str(seq2_nr))
         else:
             print("Yikes, integrity check 2 did not pas for: "+str(seq1_nr)+" and "+ str(seq2_nr))
+            print("The big matrix with all alignment prices is here: ", str(matrix))
+            print("I'm just gonna print the big alignment too: "+ str(M))
             print("Costs were before and after:"+str(matrix[int(seq1_nr)][int(seq2_nr)])+" and "+str(cost_after_MSA))
-            cost_for_suppesed_to_have_been=linear_C(gap_cost,score_matrix,seqs[int(seq1_nr)],seqs[int(seq2_nr)])
             alignment1_str,alignment2_str=linear_backtrack(seqs[int(seq1_nr)], seqs[int(seq2_nr)],cost_for_suppesed_to_have_been, score_matrix, gap_cost)
             alignment1, alignment2 = [*alignment1_str], [*alignment2_str]
             should_have_been= [list(e) for e in zip(alignment1,alignment2)]
@@ -687,6 +694,7 @@ def integrity_check_Gus(seqs,M,score_matrix,gap_cost, matrix):
                     print("index of first error: " + str(h) + " out of approximately " + str(len(should_have_been)) + ". The cols are these (should have been, are): " + str(should_have_been[h]) + " and " + str(all_gaps_cols_removed_from_union[h]))
                     sys.exit()
                     h+=1
+            sys.exit()
     return("Passed all integrity tests")
 
 def extend_alignment(M, A):
@@ -764,6 +772,8 @@ def new_assembly_Gus_x(seqs, score_matrix, gap_cost, return_center_string=False,
     # find the center string/guide 
     s1_idx = np.argmin(matrix.sum(axis=1))
     s1 = seqs[s1_idx]
+    print("umm, s1 is: ", str(s1))
+    print("and the index was: ", str(s1_idx) )
     seqs.insert(0, seqs.pop(s1_idx))  # move guide to the front of the list
 
     # STEP 2: Construct alignment M
@@ -785,7 +795,7 @@ def new_assembly_Gus_x(seqs, score_matrix, gap_cost, return_center_string=False,
     # ACTUALLY COMPUTE (approximate) COST
     total_cost = compute_cost(M, score_matrix, gap_cost)
     if check_integrity == True:
-        integrity_check_Gus(seqs, M, score_matrix,gap_cost,matrix)
+        integrity_check_Gus(seqs, M, score_matrix,gap_cost,matrix,s1_idx)
     return matrix, M, total_cost
 
 def perform_updates_gradual(in_which_MSA_is_it, node1, node2,united_MSA_new, MSA_list):
