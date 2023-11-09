@@ -1,0 +1,7 @@
+{
+    "python.analysis.extraPaths": [
+        "./only_new_algo_01",
+        "./only_new_algo_01",
+        "./only_new_algo_01"
+    ]
+}
