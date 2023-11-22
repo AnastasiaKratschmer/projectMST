@@ -470,57 +470,58 @@ def integrity_check_OBO_and_gradual(seqs, in_which_MSA_is_it, who_aligned_to_who
             sys.exit()
         print("structure of who_aligned_to_who: ")
         print(who_aligned_to_who)
-        for element in who_aligned_to_who:
-            seq1_nr=element[0]
-            seq2_nr=element[1]
-            print("seq1_nr and seq2_nr are: "+str(seq1_nr)+" , "+str(seq2_nr))
-            pos_in_MSA_seq1=in_which_MSA_is_it[seq1_nr][1]
-            pos_in_MSA_seq2=in_which_MSA_is_it[seq2_nr][1]
-            print("pos_in_MSA_seq1,pos_in_MSA_seq2: "+str(pos_in_MSA_seq1)+" , "+str(pos_in_MSA_seq2))
-            seq1_from_MSA=[]
-            seq2_from_MSA=[]
-            j=0
-            while j<=len(MSA_list[0])-1:
-                found=MSA_list[0][j][pos_in_MSA_seq1]
-                seq1_from_MSA.append(found)
-                j+=1
-            j=0
-            while j<=len(MSA_list[0])-1:
-                found=MSA_list[0][j][pos_in_MSA_seq2]
-                seq2_from_MSA.append(found)
-                j+=1
-            union=[]
-            k=0
-            len_max=max(len(seq1_from_MSA),len(seq1_from_MSA))
-            while k<=(len_max-1):
-                el1=seq1_from_MSA[k]
-                el2=seq2_from_MSA[k]
-                tuple_like_zip=[el1,el2]
-                union.append(tuple_like_zip)
-                k+=1
-            print("union of the two after merge looks like: "+str(union))
-            cost_after_MSA=compute_cost(union,score_matrix,gap_cost)
-            if cost_after_MSA==matrix[int(seq1_nr)][int(seq2_nr)]:
-                print("integrity test 2 passed for: "+str(seq1_nr)+" and "+ str(seq2_nr))
-            else:
-                print("Yikes, integrity check 2 did not pas for: "+str(seq1_nr)+" and "+ str(seq2_nr))
-                print("Costs were before and after:"+str(matrix[0][int(seq1_nr)][int(seq2_nr)])+" and "+str(cost_after_MSA))
-                cost_for_suppesed_to_have_been=linear_C(gap_cost,score_matrix,seqs[int(seq1_nr)],seqs[int(seq2_nr)])
-                alignment1_str,alignment2_str=linear_backtrack(seqs[int(seq1_nr)], seqs[int(seq2_nr)],cost_for_suppesed_to_have_been, score_matrix, gap_cost)
-                alignment1, alignment2 = [*alignment1_str], [*alignment2_str]
-                should_have_been= [list(e) for e in zip(alignment1,alignment2)]
-                print("should have been:"+ str(should_have_been))
-                all_gaps_cols_removed_from_union=[sublist for sublist in union if not all(item == '-' for item in sublist)]
-                print(all_gaps_cols_removed_from_union)
-                h=0
-                while h<=len(should_have_been)-1:
-                    if should_have_been[h]==all_gaps_cols_removed_from_union[h]:
-                        h+=1
-                    else:
-                        print("index of first error: " + str(h) + " out of approximately " + str(len(should_have_been)) + ". The cols are these (should have been, are): " + str(should_have_been[h]) + " and " + str(all_gaps_cols_removed_from_union[h]))
-                        sys.exit()
-                        h+=1
+    for element in who_aligned_to_who:
+        seq1_nr=element[0]
+        seq2_nr=element[1]
+        print("seq1_nr and seq2_nr are: "+str(seq1_nr)+" , "+str(seq2_nr))
+        pos_in_MSA_seq1=in_which_MSA_is_it[seq1_nr][1]
+        pos_in_MSA_seq2=in_which_MSA_is_it[seq2_nr][1]
+        print("pos_in_MSA_seq1,pos_in_MSA_seq2: "+str(pos_in_MSA_seq1)+" , "+str(pos_in_MSA_seq2))
+        seq1_from_MSA=[]
+        seq2_from_MSA=[]
+        j=0
+        while j<=len(MSA_list[0])-1:
+            found=MSA_list[0][j][pos_in_MSA_seq1]
+            seq1_from_MSA.append(found)
+            j+=1
+        j=0
+        while j<=len(MSA_list[0])-1:
+            found=MSA_list[0][j][pos_in_MSA_seq2]
+            seq2_from_MSA.append(found)
+            j+=1
+        union=[]
+        k=0
+        len_max=max(len(seq1_from_MSA),len(seq1_from_MSA))
+        while k<=(len_max-1):
+            el1=seq1_from_MSA[k]
+            el2=seq2_from_MSA[k]
+            tuple_like_zip=[el1,el2]
+            union.append(tuple_like_zip)
+            k+=1
+        print("union of the two after merge looks like: "+str(union))
+        cost_after_MSA=compute_cost(union,score_matrix,gap_cost)
+        if cost_after_MSA==matrix[int(seq1_nr)][int(seq2_nr)]:
+            print("integrity test 2 passed for: "+str(seq1_nr)+" and "+ str(seq2_nr))
+        else:
+            print("Yikes, integrity check 2 did not pas for: "+str(seq1_nr)+" and "+ str(seq2_nr))
+            print("Costs were before and after:"+str(matrix[0][int(seq1_nr)][int(seq2_nr)])+" and "+str(cost_after_MSA))
+            cost_for_suppesed_to_have_been=linear_C(gap_cost,score_matrix,seqs[int(seq1_nr)],seqs[int(seq2_nr)])
+            alignment1_str,alignment2_str=linear_backtrack(seqs[int(seq1_nr)], seqs[int(seq2_nr)],cost_for_suppesed_to_have_been, score_matrix, gap_cost)
+            alignment1, alignment2 = [*alignment1_str], [*alignment2_str]
+            should_have_been= [list(e) for e in zip(alignment1,alignment2)]
+            print("should have been:"+ str(should_have_been))
+            all_gaps_cols_removed_from_union=[sublist for sublist in union if not all(item == '-' for item in sublist)]
+            print(all_gaps_cols_removed_from_union)
+            h=0
+            while h<=len(should_have_been)-1:
+                if should_have_been[h]==all_gaps_cols_removed_from_union[h]:
+                    h+=1
+                else:
+                    print("index of first error: " + str(h) + " out of approximately " + str(len(should_have_been)) + ". The cols are these (should have been, are): " + str(should_have_been[h]) + " and " + str(all_gaps_cols_removed_from_union[h]))
+                    sys.exit()
+                    h+=1
     return('Passed all integrity tests')
+
 
 def perform_updates_OBO(in_which_MSA_is_it, node1, node2,united_MSA_new, MSA_list ):
     which_spot_in_MSA_list_to_update=min(in_which_MSA_is_it[node1][0],in_which_MSA_is_it[node2][0])
@@ -867,6 +868,144 @@ def new_assembly_gradual_x(seqs,score_matrix,gap_cost, check_integrity=False):
             in_which_MSA_is_it, MSA_list=perform_updates_gradual(in_which_MSA_is_it, node1, node2, united_MSA_new, MSA_list)
     if check_integrity==True:
         integrity_check_OBO_and_gradual(seqs, in_which_MSA_is_it, who_aligned_to_who, MSA_list,matrix,score_matrix,gap_cost)
+    total_cost = compute_cost(MSA_list[0], score_matrix, gap_cost)
+    return(matrix,MSA_list, total_cost)
+
+def find_min_span_edges_Prim(pseudomatrix, starting_node, verbose=False):
+    r = str(starting_node)
+    unprocessed_list = [[element] for element in pseudomatrix]
+
+    if verbose:
+        print(unprocessed_list)
+
+    queue = []
+    used = set()
+    edges = []
+    remove_from_unprocessed_list = []
+    remove_from_queue_list = []
+    run = True
+
+    while run == True:
+        for element in unprocessed_list:
+            if (np.any(element[0][2] == str(r)) or np.any(element[0][3] == str(r))) and not any(
+                    np.array_equal(element[0], item) for item in queue):
+                if verbose:
+                    print(element[0])
+                queue.append(element[0])
+                remove_from_unprocessed_list.append(element)
+
+        if verbose:
+            print("unprocessed_list at this time: \n ", str(unprocessed_list))
+            print("this is what I wanna remove from unprocessed list:", str(remove_from_unprocessed_list))
+
+        for y in remove_from_unprocessed_list:
+            unprocessed_list = [element for element in unprocessed_list if not np.array_equal(element[0], y[0])]
+
+        remove_from_unprocessed_list.clear()
+
+        if verbose:
+            print("queue after filling up for the iteration!: ", str(queue))
+
+        used.add(int(r))
+        u = 100000000
+        edge = None
+
+        for x in queue:
+            if verbose:
+                print("i just went into the queue")
+                print(type(int(x[1])))
+                print("x here is ", str(x), " and x[1] is", str(x[1]))
+
+            if int(x[1]) < u:
+                u = int(x[1])
+
+                if int(x[2]) not in used:
+                    r = int(x[2])
+                    edge = x
+                    if verbose:
+                        print("I just for now assigned edge as", str(edge))
+                elif int(x[3]) not in used:
+                    r = int(x[3])
+                    edge = x
+                    if verbose:
+                        print("I just for now assigned edge as", str(edge))
+                else:
+                    if verbose:
+                        print("Yoikes, I found nothing to assign to edge because the if statements were not true.")
+
+        used.add(r)
+        edges.append(edge)
+
+        if verbose:
+            print("right now used are: ", str(used))
+
+        for z in queue:
+            if int(z[3]) in used and int(z[2]) in used:
+                remove_from_queue_list.append(z)
+
+        if verbose:
+            print("queue before removing from it:", str(queue))
+            print("I wanna remove: ", str(remove_from_queue_list))
+
+        for a in remove_from_queue_list:
+            queue = [element for element in queue if not np.array_equal(element, a)]
+
+        remove_from_queue_list.clear()
+
+        if verbose:
+            print("queue after removing from queue after iteration: ", str(queue))
+
+        if verbose:
+            print("u is: ", str(u))
+            print("r is: ", str(r))
+            print("edges used right now are:", str(edges))
+
+        if len(queue) < 1:
+            if verbose:
+                print("queue empty, you know...")
+            run = False
+
+    if verbose:
+        print("end up with these edges", str(edges))
+        
+    return edges
+
+
+def new_assembly_Prim_x(seqs,score_matrix,gap_cost, check_integrity=False):
+    # Make a matrix to hold pairwise alignment costs for all alignment combinations!
+    matrix = np.full((len(seqs), len(seqs)), np.nan)
+    # Loop over all pairs
+    for i, seq1 in enumerate(seqs):
+        for j, seq2 in enumerate(seqs):
+            matrix[i, j] = get_cost_2(linear_C(gap_cost, score_matrix, seq1, seq2))
+    matrix_for_MST=matrix #copy the matrix, so that we ca keep the old matrix and make a changed version to the "pseudomatrix" version
+    matrix_for_MST=convert_to_desired_format_nr_version(matrix_for_MST) #making the "pseudomatrix"
+    min_span_edges_res=find_min_span_edges_Prim(matrix_for_MST, starting_node='0')
+    in_which_MSA_is_it={}
+    names=set()
+    for element in min_span_edges_res:
+        print(element[2], element[3])
+        names.add(element[2])
+        names.add(element[3])
+    in_which_MSA_is_it ={name: [int(name),0] for name in names}
+    MSA_list=[[[char] for char in seq] for seq in seqs]
+    who_aligned_to_who=[]
+    for row in min_span_edges_res:
+        node1=row[2]
+        node2=row[3]
+        who_aligned_to_who.append([node1,node2])
+    for element in min_span_edges_res:
+            node1=element[2]
+            node2=element[3]
+            cost=linear_C(gap_cost,score_matrix,seqs[int(node1)],seqs[int(node2)])
+            alignment1_str,alignment2_str=linear_backtrack(seqs[int(node1)], seqs[int(node2)], cost, score_matrix, gap_cost)
+            alignment1, alignment2 = [*alignment1_str], [*alignment2_str]
+            A = [list(e) for e in zip(alignment1,alignment2)]
+            united_MSA_new=alt_alt_merge_united(A,MSA_list,in_which_MSA_is_it,node1,node2)
+            in_which_MSA_is_it, MSA_list=perform_updates_OBO(in_which_MSA_is_it, node1, node2, united_MSA_new, MSA_list)
+    total_cost = compute_cost(MSA_list[0], score_matrix, gap_cost)
+    if check_integrity==True:
+       integrity_check_OBO_and_gradual(seqs,in_which_MSA_is_it,who_aligned_to_who,MSA_list, matrix,score_matrix,gap_cost)
     total_cost = compute_cost(MSA_list[0], score_matrix, gap_cost)
     return(matrix,MSA_list, total_cost)
 
