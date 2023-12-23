@@ -4,7 +4,7 @@ import numpy as np
 import sys
 import os
 #import networkx as nx
-#import seqIO
+from Bio import SeqIO
 import timeit
 
 # Basic functions
@@ -1016,6 +1016,23 @@ def new_assembly_Prim_x(seqs,score_matrix,gap_cost, check_integrity=False):
     total_cost = compute_cost(MSA_list[0], score_matrix, gap_cost)
     return(matrix,MSA_list, total_cost,in_which_MSA_is_it)
 
+def make_names_list(output_in_which_MSA:dict):
+    names=[None]*len(output_in_which_MSA)
+    for key, value in output_in_which_MSA.items():
+        names[value[1]]=key
+    return(names)
 
-
+def make_str_from_cols(output_cols):
+    #making each string into it's own list (instead of the lists being column)
+    strings_list=[]
+    for i in range(len(output_cols[0])):
+        string=[]
+        for col in output_cols:
+            letter=col[i]
+            string.append(letter)
+        strings_list.append(string)
+    print(strings_list)
+    #test=[char for string in strings_list for char in string]
+    strings_list= [''.join(inner_list) for inner_list in strings_list]
+    return strings_list
 
