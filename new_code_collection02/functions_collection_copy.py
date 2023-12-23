@@ -769,13 +769,20 @@ def new_assembly_Gus_x(seqs, score_matrix, gap_cost, return_center_string=False,
     for i, seq1 in enumerate(seqs):
         for j, seq2 in enumerate(seqs):
             matrix[i, j] = get_cost_2(linear_C(gap_cost, score_matrix, seq1, seq2))
-
+    #making list to keep track of which string is which
+    numbers = [str(i) for i in range(len(seqs))]
     # find the center string/guide 
     s1_idx = np.argmin(matrix.sum(axis=1))
     s1 = seqs[s1_idx]
     print("umm, s1 is: ", str(s1))
     print("and the index was: ", str(s1_idx) )
     seqs.insert(0, seqs.pop(s1_idx))  # move guide to the front of the list
+    #keeping track of names
+    y=[]
+    y.append(numbers[s1_idx])
+    numbers.remove(numbers[s1_idx])
+    y.extend(numbers)
+    names=y
 
     # STEP 2: Construct alignment M
     M: list[list[str]] = [[letter] for letter in [*s1]]
@@ -797,7 +804,7 @@ def new_assembly_Gus_x(seqs, score_matrix, gap_cost, return_center_string=False,
     total_cost = compute_cost(M, score_matrix, gap_cost)
     if check_integrity == True:
         integrity_check_Gus(seqs, M, score_matrix,gap_cost,matrix,s1_idx)
-    return matrix, M, total_cost
+    return matrix, M, total_cost,names
 
 def perform_updates_gradual(in_which_MSA_is_it, node1, node2,united_MSA_new, MSA_list):
     which_spot_in_MSA_list_to_update=min(in_which_MSA_is_it[node1][0],in_which_MSA_is_it[node2][0])
@@ -869,7 +876,7 @@ def new_assembly_gradual_x(seqs,score_matrix,gap_cost, check_integrity=False):
     if check_integrity==True:
         integrity_check_OBO_and_gradual(seqs, in_which_MSA_is_it, who_aligned_to_who, MSA_list,matrix,score_matrix,gap_cost)
     total_cost = compute_cost(MSA_list[0], score_matrix, gap_cost)
-    return(matrix,MSA_list, total_cost)
+    return(matrix,MSA_list, total_cost,in_which_MSA_is_it)
 
 def find_min_span_edges_Prim(pseudomatrix, starting_node, verbose=False):
     r = str(starting_node)
@@ -1007,7 +1014,7 @@ def new_assembly_Prim_x(seqs,score_matrix,gap_cost, check_integrity=False):
     if check_integrity==True:
        integrity_check_OBO_and_gradual(seqs,in_which_MSA_is_it,who_aligned_to_who,MSA_list, matrix,score_matrix,gap_cost)
     total_cost = compute_cost(MSA_list[0], score_matrix, gap_cost)
-    return(matrix,MSA_list, total_cost)
+    return(matrix,MSA_list, total_cost,in_which_MSA_is_it)
 
 
 
