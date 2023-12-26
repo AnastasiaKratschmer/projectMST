@@ -642,7 +642,7 @@ def integrity_check_Gus(seqs,M,score_matrix,gap_cost, matrix, s1_idx):
         new_str_with_gaps=''.join(new_str_with_gaps)
         #print("seq and new_str_no_gaps were: "+ str(seq)+", "+ str(new_str_no_gaps))
         if new_str_no_gaps==seq:
-            print("integrity check 1 passed for seq "+str(i))
+            print("integrity check 1 passed for seq "+str(i)+": string same as original sequence")
         else:
             print("Yikes, integrity check 1 did not pas for seq "+str(i)+". constrast( new, orig): \n"+str(new_str_no_gaps)+"\n"+str(seq))
             sys.exit()
@@ -677,7 +677,7 @@ def integrity_check_Gus(seqs,M,score_matrix,gap_cost, matrix, s1_idx):
 
         cost_for_suppesed_to_have_been=linear_C(gap_cost,score_matrix,seqs[int(seq1_nr)],seqs[int(seq2_nr)])
         if cost_after_MSA==cost_for_suppesed_to_have_been[-1,-1]:
-            print("integrity test 2 passed for: "+str(seq1_nr)+" and "+ str(seq2_nr))
+            print("integrity test 2 passed for: "+str(seq1_nr)+" and "+ str(seq2_nr)+": alignment cost consistent with guide alignment")
         else:
             print("Yikes, integrity check 2 did not pass for: "+str(seq1_nr)+" and "+ str(seq2_nr))
             #print("The big matrix with all alignment prices is here: ", str(matrix))
@@ -698,6 +698,11 @@ def integrity_check_Gus(seqs,M,score_matrix,gap_cost, matrix, s1_idx):
                     sys.exit()
                     h+=1
             sys.exit()
+    for col in M:
+        if all(element == '-' for element in col):
+            print("integrity test 3 failed: empty columns in alignment")
+            sys.exit()
+    print("integrity test 3 passed: No empty columns in alignment")
     return("Passed")
 
 def extend_alignment(M, A):
@@ -811,8 +816,9 @@ def new_assembly_Gus_x(seqs, score_matrix, gap_cost, return_center_string=False,
 def perform_updates_gradual(in_which_MSA_is_it, node1, node2,united_MSA_new, MSA_list):
     which_spot_in_MSA_list_to_update=min(in_which_MSA_is_it[node1][0],in_which_MSA_is_it[node2][0])
     which_spot_in_MSA_list_to_remove=max(in_which_MSA_is_it[node1][0],in_which_MSA_is_it[node2][0])
-    MSA_list[which_spot_in_MSA_list_to_update]=united_MSA_new
-    MSA_list.pop(which_spot_in_MSA_list_to_remove)
+    MSA_list_copy=MSA_list
+    MSA_list_copy[which_spot_in_MSA_list_to_update]=united_MSA_new
+    MSA_list_copy.pop(which_spot_in_MSA_list_to_remove)
     companions_to_update=[]
     if in_which_MSA_is_it[node1][0]<in_which_MSA_is_it[node2][0]:
         #print(str(in_which_MSA_is_it[node1][0])+"is smaller than+"+str( in_which_MSA_is_it[node2][0]) +"so here I went to the original updating stategy")
@@ -844,7 +850,7 @@ def perform_updates_gradual(in_which_MSA_is_it, node1, node2,united_MSA_new, MSA
             in_which_MSA_is_it[companion1][1]=int(in_which_MSA_is_it[companion1][1])+int(how_many_cols_already_in_MS2)+1
         for companion2 in companions_to_update2:
             in_which_MSA_is_it[companion2][0]=which_spot_in_MSA_list_to_update
-    return in_which_MSA_is_it, MSA_list
+    return in_which_MSA_is_it, MSA_list_copy
 
 def new_assembly_gradual_x(seqs,score_matrix,gap_cost, check_integrity=False):
     # Make a matrix to hold pairwise alignment costs for all alignment combinations!
