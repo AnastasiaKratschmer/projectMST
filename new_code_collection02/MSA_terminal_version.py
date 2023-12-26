@@ -31,8 +31,6 @@ if __name__ == "__main__":
     print("It's running!!\n")
     print("Computing the approximate cost of aligning the " + str(len(seqs)) + " sequences...")
     print("check is:"+ str(check))
-    if check=="True":
-        print("omg")
     if type=="k":
         matrix, MSA_list, total_cost, in_which_MSA_is_it = new_assembly_gradual_x(seqs, score_matrix, gap,check_integrity=check)
         names=make_names_list(in_which_MSA_is_it)
@@ -41,7 +39,6 @@ if __name__ == "__main__":
     elif type=="p":
         matrix, MSA_list, total_cost, in_which_MSA_is_it = new_assembly_Prim_x(seqs, score_matrix, gap,check_integrity=check)
         names=make_names_list(in_which_MSA_is_it)
-        print(MSA_list)
         strings=make_str_from_cols(MSA_list[0])
     elif type=="g":
         matrix, MSA_list, total_cost, names = new_assembly_Gus_x(seqs, score_matrix, gap,check_integrity=check)

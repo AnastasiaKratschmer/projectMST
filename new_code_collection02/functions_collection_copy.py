@@ -465,7 +465,7 @@ def integrity_check_OBO_and_gradual(seqs, in_which_MSA_is_it, who_aligned_to_who
         new_str_no_gaps=''.join(new_str_no_gaps)
         new_str_with_gaps=''.join(new_str_with_gaps)
         if new_str_no_gaps==seq:
-            print("integrity check 1 passed for seq "+str(i))
+            print("integrity check 1 passed for seq "+str(i)+": string same as original sequence")
         else:
             print("Yikes, integrity check 1 did not pas for seq "+str(i)+". constrast( new, orig): \n"+str(new_str_no_gaps)+"\n"+str(seq))
             sys.exit()
@@ -502,7 +502,7 @@ def integrity_check_OBO_and_gradual(seqs, in_which_MSA_is_it, who_aligned_to_who
         #print("union of the two after merge looks like: "+str(union))
         cost_after_MSA=compute_cost(union,score_matrix,gap_cost)
         if cost_after_MSA==matrix[int(seq1_nr)][int(seq2_nr)]:
-            print("integrity test 2 passed for: "+str(seq1_nr)+" and "+ str(seq2_nr))
+            print("integrity test 2 passed for: "+str(seq1_nr)+" and "+ str(seq2_nr)+": alignment cost consistent with guide alignment")
         else:
             print("Yikes, integrity check 2 did not pas for: "+str(seq1_nr)+" and "+ str(seq2_nr))
             print("Costs were before and after:"+str(matrix[0][int(seq1_nr)][int(seq2_nr)])+" and "+str(cost_after_MSA))
@@ -521,6 +521,12 @@ def integrity_check_OBO_and_gradual(seqs, in_which_MSA_is_it, who_aligned_to_who
                     print("index of first error: " + str(h) + " out of approximately " + str(len(should_have_been)) + ". The cols are these (should have been, are): " + str(should_have_been[h]) + " and " + str(all_gaps_cols_removed_from_union[h]))
                     sys.exit()
                     h+=1
+    #integrity check 3
+    for col in MSA_list[0]:
+        if all(element == '-' for element in col):
+            print("integrity test 3 failed: empty columns in alignment")
+            sys.exit()
+    print("integrity test 3 passed: No empty columns in alignment")
     return('Pass')
 
 
@@ -698,6 +704,7 @@ def integrity_check_Gus(seqs,M,score_matrix,gap_cost, matrix, s1_idx):
                     sys.exit()
                     h+=1
             sys.exit()
+    #integrity check 3
     for col in M:
         if all(element == '-' for element in col):
             print("integrity test 3 failed: empty columns in alignment")
