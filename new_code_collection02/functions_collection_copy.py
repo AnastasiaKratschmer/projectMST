@@ -624,6 +624,7 @@ def new_assembly_OBO_x(seqs,score_matrix,gap_cost, check_integrity=False):
 
 
 def integrity_check_Gus(seqs,M,score_matrix,gap_cost, matrix, s1_idx):
+    print("Gus int check was called!!")
     #integrity check part 1, to check if each string is the same before and after, except for gaps.
     #print("Im just gonna start this int check by printint the strings/sequences dammit: "+ str(seqs))
     for i in range(len(seqs)):
@@ -697,7 +698,7 @@ def integrity_check_Gus(seqs,M,score_matrix,gap_cost, matrix, s1_idx):
                     sys.exit()
                     h+=1
             sys.exit()
-    return("Passed all integrity tests")
+    return("Passed")
 
 def extend_alignment(M, A):
     '''
@@ -1010,7 +1011,7 @@ def new_assembly_Prim_x(seqs,score_matrix,gap_cost, check_integrity=False):
             alignment1, alignment2 = [*alignment1_str], [*alignment2_str]
             A = [list(e) for e in zip(alignment1,alignment2)]
             united_MSA_new=alt_alt_merge_united(A,MSA_list,in_which_MSA_is_it,node1,node2)
-            in_which_MSA_is_it, MSA_list=perform_updates_OBO(in_which_MSA_is_it, node1, node2, united_MSA_new, MSA_list)
+            in_which_MSA_is_it, MSA_list=perform_updates_gradual(in_which_MSA_is_it, node1, node2, united_MSA_new, MSA_list)
     total_cost = compute_cost(MSA_list[0], score_matrix, gap_cost)
     if check_integrity==True:
        integrity_check_OBO_and_gradual(seqs,in_which_MSA_is_it,who_aligned_to_who,MSA_list, matrix,score_matrix,gap_cost)

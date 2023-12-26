@@ -16,6 +16,7 @@ if __name__ == "__main__":
                             "< gap cost >  < score matrix > < integrity check?(True or False) > < type (k,p or g for Kruskal, Prim or Gusfield) >\n" % sys.argv[0])
             sys.exit(1)
     seqs_input, gap_input, score_matrix_input,check,type = sys.argv[1:]
+    check=check.lower() == 'true'
 
     # Set sequences (extract from file if necessary) ...
     seqs, names = parse_fasta_multiple_remove_n(seqs_input)
@@ -29,6 +30,9 @@ if __name__ == "__main__":
     # ----- What we see in the terminal
     print("It's running!!\n")
     print("Computing the approximate cost of aligning the " + str(len(seqs)) + " sequences...")
+    print("check is:"+ str(check))
+    if check=="True":
+        print("omg")
     if type=="k":
         matrix, MSA_list, total_cost, in_which_MSA_is_it = new_assembly_gradual_x(seqs, score_matrix, gap,check_integrity=check)
         names=make_names_list(in_which_MSA_is_it)
