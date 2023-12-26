@@ -20,7 +20,7 @@ def parse_fasta_multiple(filename):
     name = []
     for record in SeqIO.parse(filename, "fasta"):
         seq.append(record.seq.lower())
-        print(record.name)
+        #print(record.name)
         name.append(record.name)
     return seq, name
 
@@ -338,17 +338,17 @@ def alt_handle_case4(MSA1,MSA2,i,j,l):
     return first_col,second_col #increade l and j after 
 
 def alt_alt_merge_united(guide_PA,MSA_list,in_which_MSA_is_it,node1,node2):
-    print(type(in_which_MSA_is_it))
-    print(in_which_MSA_is_it)
-    print(type(node1))
-    print(type(node2))
+    #print(type(in_which_MSA_is_it))
+    #print(in_which_MSA_is_it)
+    #print(type(node1))
+    #print(type(node2))
     MSA_of_node1=in_which_MSA_is_it[node1][0]
     MSA_of_node2=in_which_MSA_is_it[node2][0]
     spot_of_node1=in_which_MSA_is_it[node1][1]
     spot_of_node2=in_which_MSA_is_it[node2][1]
     
-    print("the node1 is right now in the alignment nr "+str(MSA_of_node1))
-    print("the node2 is right now in the alignment nr "+str(MSA_of_node2))
+    #print("the node1 is right now in the alignment nr "+str(MSA_of_node1))
+    #print("the node2 is right now in the alignment nr "+str(MSA_of_node2))
     MSA1=MSA_list[int(MSA_of_node1)]
     MSA2=MSA_list[int(MSA_of_node2)]
 
@@ -359,33 +359,33 @@ def alt_alt_merge_united(guide_PA,MSA_list,in_which_MSA_is_it,node1,node2):
     MSA_new=[]
     while i<=(len(guide_PA)-1) and j<=(len(MSA1)-1) and l<=(len(MSA2)-1):
         new_col=[]
-        print("I don't have the case identified yet, but MSA1 is: " + str(MSA1[j]) + " MSA2 is: " + str(MSA2[l]) + " ,and the guide is: " + str(guide_PA[i]))
-        print("nodes pointing to cols: " + str(spot_of_node1) + " , " + str(spot_of_node2))
-        print("i,j,l: "+str(i)+','+str(j)+','+str(l))
-        print("max for those should be: "+str(len(guide_PA))+','+str(len(MSA1))+','+str(len(MSA2)))
+        #print("I don't have the case identified yet, but MSA1 is: " + str(MSA1[j]) + " MSA2 is: " + str(MSA2[l]) + " ,and the guide is: " + str(guide_PA[i]))
+        #print("nodes pointing to cols: " + str(spot_of_node1) + " , " + str(spot_of_node2))
+        #print("i,j,l: "+str(i)+','+str(j)+','+str(l))
+        #print("max for those should be: "+str(len(guide_PA))+','+str(len(MSA1))+','+str(len(MSA2)))
         case,move_on_in_guide_flag,guide_was,MSA2_was,look_forward_flag1, look_forward_flag2=new_identify_merge_case_compact(guide_PA,MSA1,MSA2,node1,node2, in_which_MSA_is_it,i,j,l)
-        print("flag: "+str(move_on_in_guide_flag))
-        print("case:"+str(case))
-        print("guide_was: "+str(guide_was))
+        #print("flag: "+str(move_on_in_guide_flag))
+        #print("case:"+str(case))
+        #print("guide_was: "+str(guide_was))
         if case==1:
             col=alt_handle_case1(MSA1,MSA2,i,j,l)
             MSA_new.append(col) 
             if move_on_in_guide_flag==True:
-                print("the damn flag was true!")
+                #print("the damn flag was true!")
                 i+=1
             l+=1
-            print("I just made the new col: "+ str(col))
-            print("MSA_new now has len: "+ str(len(MSA_new)))
+            #print("I just made the new col: "+ str(col))
+            #print("MSA_new now has len: "+ str(len(MSA_new)))
             new_col.append(col)
         if case==2:
             col=alt_handle_case2(MSA1,MSA2,i,j,l)
             MSA_new.append(col)
             if move_on_in_guide_flag==True:
-                print("the flag was true dammit")
+                #print("the flag was true dammit")
                 i+=1
             j+=1
-            print("I just made the new col: "+ str(col))
-            print("MSA_new now has len: "+ str(len(MSA_new)))
+            #print("I just made the new col: "+ str(col))
+            #print("MSA_new now has len: "+ str(len(MSA_new)))
             new_col.append(col)
         if case==3:
             col=alt_handle_case3(MSA1,MSA2,i,j,l)
@@ -393,8 +393,8 @@ def alt_alt_merge_united(guide_PA,MSA_list,in_which_MSA_is_it,node1,node2):
             i+=1
             j+=1
             l+=1
-            print("I just made the new col: "+ str(col))
-            print("MSA_new now has len: "+ str(len(MSA_new)))
+            #print("I just made the new col: "+ str(col))
+            #print("MSA_new now has len: "+ str(len(MSA_new)))
             new_col.append(col)
         if case==4:
             col1,col2=alt_handle_case4(MSA1,MSA2,i,j,l)
@@ -411,17 +411,17 @@ def alt_alt_merge_united(guide_PA,MSA_list,in_which_MSA_is_it,node1,node2):
                 MSA_new.append(col2)
                 j+=1
                 l+=1
-                print("I just made the new col: "+ str(col1))
-                print("I just made the new col: "+ str(col2))
-                print("MSA_new now has len: "+ str(len(MSA_new)))
+                #print("I just made the new col: "+ str(col1))
+                #print("I just made the new col: "+ str(col2))
+                #print("MSA_new now has len: "+ str(len(MSA_new)))
                 new_col.append(col1)
                 new_col.append(col2)
         for object in new_col:
-            print(object)
+            #print(object)
             second_element_in_merged_pair=object[(-(len(MSA2_was))+spot_of_node2)]
             selected_stuff=[object[int(spot_of_node1)],second_element_in_merged_pair]
-            print("selected stuff from col made: ")
-            print(selected_stuff)
+            #print("selected stuff from col made: ")
+            #print(selected_stuff)
             if case==1 and move_on_in_guide_flag==False or case==2 and move_on_in_guide_flag==False or case==4:
                 if guide_was==selected_stuff: print("ALERT!")
             if guide_was!=selected_stuff and selected_stuff!=['-', '-']: print("ALARM!")
@@ -434,18 +434,19 @@ def alt_alt_merge_united(guide_PA,MSA_list,in_which_MSA_is_it,node1,node2):
             j+=1
             #l+=1
             MSA_new.append(column)
-            print("I just made the new col: "+ str(column))
-            print("MSA_new now has len: "+ str(len(MSA_new)))
+            #print("I just made the new col: "+ str(column))
+            #print("MSA_new now has len: "+ str(len(MSA_new)))
     if l<= (len(MSA2)-1):
         while l<= (len(MSA2)-1):
             column=finish_running_through_MSA2(MSA1,MSA2,j,i,l)
             l+=1
             MSA_new.append(column)
-            print("I just made the new col: "+ str(column))
-            print("MSA_new now has len: "+ str(len(MSA_new)))
-    if i<=(len(guide_PA)-1):
-        print('yikes, the strings have run out but the guide has not')
+            #print("I just made the new col: "+ str(column))
+            #print("MSA_new now has len: "+ str(len(MSA_new)))
+    if i<=(len(guide_PA)):
         i+=1
+    else:
+        print('yikes, the strings have run out but the guide has not')
     print("\n\n")
     return MSA_new
 
@@ -468,15 +469,15 @@ def integrity_check_OBO_and_gradual(seqs, in_which_MSA_is_it, who_aligned_to_who
         else:
             print("Yikes, integrity check 1 did not pas for seq "+str(i)+". constrast( new, orig): \n"+str(new_str_no_gaps)+"\n"+str(seq))
             sys.exit()
-        print("structure of who_aligned_to_who: ")
-        print(who_aligned_to_who)
+        #print("structure of who_aligned_to_who: ")
+        #print(who_aligned_to_who)
     for element in who_aligned_to_who:
         seq1_nr=element[0]
         seq2_nr=element[1]
-        print("seq1_nr and seq2_nr are: "+str(seq1_nr)+" , "+str(seq2_nr))
+        #print("seq1_nr and seq2_nr are: "+str(seq1_nr)+" , "+str(seq2_nr))
         pos_in_MSA_seq1=in_which_MSA_is_it[seq1_nr][1]
         pos_in_MSA_seq2=in_which_MSA_is_it[seq2_nr][1]
-        print("pos_in_MSA_seq1,pos_in_MSA_seq2: "+str(pos_in_MSA_seq1)+" , "+str(pos_in_MSA_seq2))
+        #print("pos_in_MSA_seq1,pos_in_MSA_seq2: "+str(pos_in_MSA_seq1)+" , "+str(pos_in_MSA_seq2))
         seq1_from_MSA=[]
         seq2_from_MSA=[]
         j=0
@@ -498,7 +499,7 @@ def integrity_check_OBO_and_gradual(seqs, in_which_MSA_is_it, who_aligned_to_who
             tuple_like_zip=[el1,el2]
             union.append(tuple_like_zip)
             k+=1
-        print("union of the two after merge looks like: "+str(union))
+        #print("union of the two after merge looks like: "+str(union))
         cost_after_MSA=compute_cost(union,score_matrix,gap_cost)
         if cost_after_MSA==matrix[int(seq1_nr)][int(seq2_nr)]:
             print("integrity test 2 passed for: "+str(seq1_nr)+" and "+ str(seq2_nr))
@@ -511,7 +512,7 @@ def integrity_check_OBO_and_gradual(seqs, in_which_MSA_is_it, who_aligned_to_who
             should_have_been= [list(e) for e in zip(alignment1,alignment2)]
             print("should have been:"+ str(should_have_been))
             all_gaps_cols_removed_from_union=[sublist for sublist in union if not all(item == '-' for item in sublist)]
-            print(all_gaps_cols_removed_from_union)
+            print("is: "+str(all_gaps_cols_removed_from_union))
             h=0
             while h<=len(should_have_been)-1:
                 if should_have_been[h]==all_gaps_cols_removed_from_union[h]:
@@ -520,7 +521,7 @@ def integrity_check_OBO_and_gradual(seqs, in_which_MSA_is_it, who_aligned_to_who
                     print("index of first error: " + str(h) + " out of approximately " + str(len(should_have_been)) + ". The cols are these (should have been, are): " + str(should_have_been[h]) + " and " + str(all_gaps_cols_removed_from_union[h]))
                     sys.exit()
                     h+=1
-    return('Passed all integrity tests')
+    return('Pass')
 
 
 def perform_updates_OBO(in_which_MSA_is_it, node1, node2,united_MSA_new, MSA_list ):
@@ -537,7 +538,7 @@ def perform_updates_OBO(in_which_MSA_is_it, node1, node2,united_MSA_new, MSA_lis
             if value[0]>which_spot_in_MSA_list_to_remove:
                 value[0]=(value[0]-1)
         for companion in companions_to_update:
-            print(in_which_MSA_is_it[companion])
+            #print(in_which_MSA_is_it[companion])
             in_which_MSA_is_it[companion][0]=which_spot_in_MSA_list_to_update
             col_of_element_in_old_MSA2=in_which_MSA_is_it[companion][1]
             in_which_MSA_is_it[companion][1]=(how_many_cols_already_in_MS1+col_of_element_in_old_MSA2+1)
@@ -624,7 +625,7 @@ def new_assembly_OBO_x(seqs,score_matrix,gap_cost, check_integrity=False):
 
 def integrity_check_Gus(seqs,M,score_matrix,gap_cost, matrix, s1_idx):
     #integrity check part 1, to check if each string is the same before and after, except for gaps.
-    print("Im just gonna start this int check by printint the strings/sequences dammit: "+ str(seqs))
+    #print("Im just gonna start this int check by printint the strings/sequences dammit: "+ str(seqs))
     for i in range(len(seqs)):
         seq=seqs[i] #extract the the old nr i from seqs. now we need to recover what the new name of nr i is.
         j=0
@@ -638,7 +639,7 @@ def integrity_check_Gus(seqs,M,score_matrix,gap_cost, matrix, s1_idx):
                 new_str_no_gaps.append(found)
         new_str_no_gaps=''.join(new_str_no_gaps)
         new_str_with_gaps=''.join(new_str_with_gaps)
-        print("seq and new_str_no_gaps were: "+ str(seq)+", "+ str(new_str_no_gaps))
+        #print("seq and new_str_no_gaps were: "+ str(seq)+", "+ str(new_str_no_gaps))
         if new_str_no_gaps==seq:
             print("integrity check 1 passed for seq "+str(i))
         else:
@@ -670,23 +671,23 @@ def integrity_check_Gus(seqs,M,score_matrix,gap_cost, matrix, s1_idx):
             tuple_like_zip=[el1,el2]
             union.append(tuple_like_zip)
             k+=1
-        print("union of the two after merge looks like: "+str(union))
+        #print("union of the two after merge looks like: "+str(union))
         cost_after_MSA=compute_cost(union,score_matrix,gap_cost)
 
         cost_for_suppesed_to_have_been=linear_C(gap_cost,score_matrix,seqs[int(seq1_nr)],seqs[int(seq2_nr)])
         if cost_after_MSA==cost_for_suppesed_to_have_been[-1,-1]:
             print("integrity test 2 passed for: "+str(seq1_nr)+" and "+ str(seq2_nr))
         else:
-            print("Yikes, integrity check 2 did not pas for: "+str(seq1_nr)+" and "+ str(seq2_nr))
-            print("The big matrix with all alignment prices is here: ", str(matrix))
-            print("I'm just gonna print the big alignment too: "+ str(M))
+            print("Yikes, integrity check 2 did not pass for: "+str(seq1_nr)+" and "+ str(seq2_nr))
+            #print("The big matrix with all alignment prices is here: ", str(matrix))
+            #print("I'm just gonna print the big alignment too: "+ str(M))
             print("Costs were before and after:"+str(matrix[int(seq1_nr)][int(seq2_nr)])+" and "+str(cost_after_MSA))
             alignment1_str,alignment2_str=linear_backtrack(seqs[int(seq1_nr)], seqs[int(seq2_nr)],cost_for_suppesed_to_have_been, score_matrix, gap_cost)
             alignment1, alignment2 = [*alignment1_str], [*alignment2_str]
             should_have_been= [list(e) for e in zip(alignment1,alignment2)]
             print("should have been:"+ str(should_have_been))
             all_gaps_cols_removed_from_union=[sublist for sublist in union if not all(item == '-' for item in sublist)]
-            print(all_gaps_cols_removed_from_union)
+            print("is: "+str(all_gaps_cols_removed_from_union))
             h=0
             while h<=len(should_have_been)-1:
                 if should_have_been[h]==all_gaps_cols_removed_from_union[h]:
@@ -774,8 +775,8 @@ def new_assembly_Gus_x(seqs, score_matrix, gap_cost, return_center_string=False,
     # find the center string/guide 
     s1_idx = np.argmin(matrix.sum(axis=1))
     s1 = seqs[s1_idx]
-    print("umm, s1 is: ", str(s1))
-    print("and the index was: ", str(s1_idx) )
+    #print("umm, s1 is: ", str(s1))
+    #print("and the index was: ", str(s1_idx) )
     seqs.insert(0, seqs.pop(s1_idx))  # move guide to the front of the list
     #keeping track of names
     y=[]
@@ -813,7 +814,7 @@ def perform_updates_gradual(in_which_MSA_is_it, node1, node2,united_MSA_new, MSA
     MSA_list.pop(which_spot_in_MSA_list_to_remove)
     companions_to_update=[]
     if in_which_MSA_is_it[node1][0]<in_which_MSA_is_it[node2][0]:
-        print(str(in_which_MSA_is_it[node1][0])+"is smaller than+"+str( in_which_MSA_is_it[node2][0]) +"so here I went to the original updating stategy")
+        #print(str(in_which_MSA_is_it[node1][0])+"is smaller than+"+str( in_which_MSA_is_it[node2][0]) +"so here I went to the original updating stategy")
         how_many_cols_already_in_MS1=find_highest_second_element(in_which_MSA_is_it,which_spot_in_MSA_list_to_update)
         for key, value in in_which_MSA_is_it.items():
             if value[0]==which_spot_in_MSA_list_to_remove:
@@ -821,12 +822,12 @@ def perform_updates_gradual(in_which_MSA_is_it, node1, node2,united_MSA_new, MSA
             if value[0]>which_spot_in_MSA_list_to_remove:
                 value[0]=(value[0]-1)
         for companion in companions_to_update:
-            print(in_which_MSA_is_it[companion])
+            #print(in_which_MSA_is_it[companion])
             in_which_MSA_is_it[companion][0]=which_spot_in_MSA_list_to_update
             col_of_element_in_old_MSA2=in_which_MSA_is_it[companion][1]
             in_which_MSA_is_it[companion][1]=(how_many_cols_already_in_MS1+col_of_element_in_old_MSA2+1)
     else:
-        print(str(in_which_MSA_is_it[node1][0])+"is bigger than+"+str( in_which_MSA_is_it[node2][0]) +"so here I went to the new updating stategy")
+        #print(str(in_which_MSA_is_it[node1][0])+"is bigger than+"+str( in_which_MSA_is_it[node2][0]) +"so here I went to the new updating stategy")
         companions_to_update1=[]
         companions_to_update2=[]
         how_many_cols_already_in_MS2=find_highest_second_element(in_which_MSA_is_it,which_spot_in_MSA_list_to_remove) #get the highest nr in MSA2. need to only update dict[0] for MSA1 and only dict[1] for MSA2
@@ -853,7 +854,7 @@ def new_assembly_gradual_x(seqs,score_matrix,gap_cost, check_integrity=False):
             matrix[i, j] = get_cost_2(linear_C(gap_cost, score_matrix, seq1, seq2))
     matrix_for_MST=matrix #copy the matrix, so that we can keep the old matrix and make a changed version to the "pseudomatrix" version
     matrix_for_MST=convert_to_desired_format_nr_version(matrix_for_MST) #making the "pseudomatrix"
-    print("matrix for MST: "+str(matrix_for_MST))
+    #print("matrix for MST: "+str(matrix_for_MST))
     min_span_edges_res=find_min_span_edges_testing(matrix_for_MST)
     in_which_MSA_is_it={}
     names= np.unique(min_span_edges_res[:, 2:])
@@ -991,7 +992,7 @@ def new_assembly_Prim_x(seqs,score_matrix,gap_cost, check_integrity=False):
     in_which_MSA_is_it={}
     names=set()
     for element in min_span_edges_res:
-        print(element[2], element[3])
+        #print(element[2], element[3])
         names.add(element[2])
         names.add(element[3])
     in_which_MSA_is_it ={name: [int(name),0] for name in names}
@@ -1031,7 +1032,7 @@ def make_str_from_cols(output_cols):
             letter=col[i]
             string.append(letter)
         strings_list.append(string)
-    print(strings_list)
+    #print(strings_list)
     #test=[char for string in strings_list for char in string]
     strings_list= [''.join(inner_list) for inner_list in strings_list]
     return strings_list

@@ -61,6 +61,7 @@ if __name__ == "__main__":
                 csvwriter = csv.writer(csvfile)
                 csvwriter.writerow(["type: "+type])
                 csvwriter.writerow(["nr of strings: "+str(len(seqs))])
+                csvwriter.writerow(["gap cost: "+str(gap)])
                 csvwriter.writerow(["total cost: "+str(total_cost)])
                 for i, string in enumerate(strings):
                     csvwriter.writerow([f"{names[i]} {string}"])
