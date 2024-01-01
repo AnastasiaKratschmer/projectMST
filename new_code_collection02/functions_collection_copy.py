@@ -891,7 +891,7 @@ def new_assembly_gradual_x(seqs,score_matrix,gap_cost, check_integrity=False):
     if check_integrity==True:
         integrity_check_OBO_and_gradual(seqs, in_which_MSA_is_it, who_aligned_to_who, MSA_list,matrix,score_matrix,gap_cost)
     total_cost = compute_cost(MSA_list[0], score_matrix, gap_cost)
-    return(matrix,MSA_list, total_cost,in_which_MSA_is_it)
+    return(matrix,MSA_list, total_cost,in_which_MSA_is_it,who_aligned_to_who)
 
 def find_min_span_edges_Prim(pseudomatrix, starting_node, verbose=False):
     r = str(starting_node)
@@ -1029,7 +1029,7 @@ def new_assembly_Prim_x(seqs,score_matrix,gap_cost, check_integrity=False):
     if check_integrity==True:
        integrity_check_OBO_and_gradual(seqs,in_which_MSA_is_it,who_aligned_to_who,MSA_list, matrix,score_matrix,gap_cost)
     total_cost = compute_cost(MSA_list[0], score_matrix, gap_cost)
-    return(matrix,MSA_list, total_cost,in_which_MSA_is_it)
+    return(matrix,MSA_list, total_cost,in_which_MSA_is_it,who_aligned_to_who)
 
 def make_names_list(output_in_which_MSA:dict):
     names=[None]*len(output_in_which_MSA)
