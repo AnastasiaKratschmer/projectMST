@@ -1051,3 +1051,45 @@ def make_str_from_cols(output_cols):
     strings_list= [''.join(inner_list) for inner_list in strings_list]
     return strings_list
 
+def make_related_strings(nr_of_str:int,len_of_str, degree_of_variation:float, start_string):
+    string_fam_collection=[]
+    first_string=[]
+    if start_string==False:
+        for k in range(0,int(len_of_str)):
+                first_string.append(random.choice(['a','c','t','g']))
+        first_string=''.join(first_string)
+        string_fam_collection.append(first_string)
+    else:
+         first_string=start_string
+         string_fam_collection.append(first_string)
+
+    for i in range(1,nr_of_str):
+        a_sequence=[]
+        for element in first_string:
+            if random.random() < degree_of_variation: #checking if we should change the charachter
+                a_sequence.append(random.choice(['a','c','t','g']))
+            else:
+                 a_sequence.append(element)
+        a_sequence=''.join(a_sequence)
+        string_fam_collection.append(a_sequence)
+    return string_fam_collection
+
+def make_strings_in_families(nr_of_fams, nr_str_pr_fam, len_of_str, internal_var_in_fams, degree_of_var_from_first_fam):
+    all_strings_coll = []
+    first_family = make_related_strings(nr_str_pr_fam, len_of_str, internal_var_in_fams, start_string=False)
+    all_strings_coll.append(first_family)
+    
+    for i in range(1, int(nr_of_fams)):
+        carry_over_string = first_family[0]
+        mutated_carry_over = []
+        for element in carry_over_string:
+            if random.random() < degree_of_var_from_first_fam:  # checking if we should change the character
+                mutated_carry_over.append(random.choice(['a', 'c', 't', 'g']))
+            else:
+                mutated_carry_over.append(element)
+        mutated_carry_over = ''.join(mutated_carry_over)  # Join the list of characters into a string
+        family = make_related_strings(nr_str_pr_fam, len_of_str, internal_var_in_fams,mutated_carry_over)
+        all_strings_coll.append(family)
+    all_strings_coll = [item for sublist in all_strings_coll for item in sublist]
+    #all_strings_coll = [''.join(sublist) for sublist in all_strings_coll]
+    return all_strings_coll
