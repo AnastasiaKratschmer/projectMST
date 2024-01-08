@@ -1,0 +1,236 @@
+type: g
+nr of strings: 8
+total cost: 11392
+4 -a-t-g-g--attt----atctg-ctgtt-cgcgttgaagaag-tac--aa-aat-g-tcattaatg-c-ta-tgca-gaaaatcttag--a-gtgtc-ca-at-c-tgtct-ggagttgatcaag-g-aacc-t-g-tctccacaaagtgtga-c-ca-c--a-tattttgcagat-t-ttg-catgc-t-gaa-ac-ttc-tca-acca-gaagaaagggcct-tcacagtgtc-c--tttg-tgtaagaatga-
+0 -a-t-g-g--attt----atctg-cggat-catgttgaagaag-tac--aa-aat-g-tcctcaatg-c-ta-tgca-gaaaatcttag--a-gtgtc-ca-at-a-tgtct-ggagttgatcaaa-g-agcc-t-g-tctctacaaagtgtga-c-ca-c--a-tattttgcaaat-t-ttg-tatgc-t-gaa-ac-ttc-tca-acca-gaagaaagggcct-tcacaatgtc-c--tttg-tgtaagaatgag
+1 -a-t-g-g--attt----atctg-cggat-cgtgttgaagaag-tac--aa-aat-g-ttcttaatg-c-ta-tgca-gaaaatcttag--a-gtgtc-ca-at-a-tgtct-ggagttgatcaaa-g-agcc-t-g-tttctacaaagtgtga-t-ca-c--a-tattttgcaaat-t-ttg-tatgc-t-gaa-ac-ttc-tca-acca-gaggaaggggcct-tcacagtgtc-c--tttg-tgtaagaacga-
+2 -g-c-g-a--a-------a--tg-taaca-cg-gtagaggtga-t-c--gg-ggt-g--cgtt-ata-c--g-tgcgtggtgacctcggtcg-gtgt--tg-acgg-tgcct-ggggttcctcaga-gtgttt-tgg-ggtctgaaggatg-ga-cttgtc--agtg-attgc-cat-tggagacgtgc-a-aaatgtgctt-tca-gccatgcag-aagaa-ct-t-ggagtgtc-cagtctg-tttagatgtgat
+3 -g-t-a-c--cttg----atttc-gtatt-c-tg-agaggctgctgcttagcggtagccccttggt--t-tc-cgt--ggcaacggaaa--a-gcgcg-gg-aa-t-ta-c--aga-taaattaa----aactgc-g-actgcgcggcgtgagc-t-cg-ctga-gacttcctggacgg-gggacaggc-t-gtg-gg-gtt-tc---tca-gataactgggccc-ctgc-gc-tcag--gaggccttcaccctct-
+5 -gttcc-g--a-aa----ggcta-gcgctaggcgcc-aagcgg-c-c-----ggt-t-tccttggcgacggagagcgcgggaattttag--atagattgta-at-tgcggct--gcg-cggccgct-g-cccg-t-g-cagccagaggatccag---ca-c--c-tctcttggggct-t-ctc-cgtcc-tcggc-gc-tt--gga-agta--cggatcttttttctcggagaaaa-g--ttca-c-t-ggaactg-
+6 -a-t-g-g--attt----atctg-ctctt-cgcgttgaagaag-tac--aa-aat-g-tcattaacg-c-ta-tgca-gaaaatcttag--a-gtgtc-cc-at-c-tgtct-ggagttgatcaag-g-aacc-t-g-tctccacaaagtgtga-c-ca-c--a-tattttgcaaat-t-ttg-catgc-t-gaa-ac-ttc-tca-acca-gaagaaagggcct-tcacagtgtc-c--ttta-tgtaagaatga-
+7 cgctggtgcaactcgaagacctatctcct-t-ccctggggggg-c-t--tc-tcc-g-gcatttagg-c-c--t-c--g-gcgtttgga--a-gtacg-gaggt-t-tttctcggaa--ga--aagtt-cact-g-gaagtggaagaaatg-gatt-ta-t--c-tgctgttcgaat-t-caa-gaagtac-aaa-atgtccttcatgctatgcagaaa--atct-t-ggagtgtc-c--aatc-tgt-----t-t-
+type: p
+nr of strings: 8
+total cost: 13744
+0 -atggatttatctgcggatcatgttgaa---g-a--agta-caaaat-gtc-c-tcaatgctatgca-gaaaatcttag----agtgtccaat-a---tgtctgga-gttgatc---aaa-gag-c--ct-g--t-ctcta-caa-a--g-tgtgac---c-a-c-a--tatt-ttg-c-aaatttt-g-tatgctgaa-ac----ttctca-acca-gaagaa-agggccttcacaatgtcc---tttgtgtaagaa--tgaa-
+1 -atggatttatctgcggatcgtgttgaa---g-a--agta-caaaat-gtt-c-ttaatgctatgca-gaaaatcttag----agtgtccaat-a---tgtctgga-gttgatc---aaa-gag-c--ct-g--t-ttcta-caa-a--g-tgtgat---c-a-c-a--tatt-ttg-c-aaatttt-g-tatgctgaa-ac----ttctca-acca-gaggaa-ggggccttcacagtgtcc---tttgtgtaagaa--cg-a-
+4 -atggatttatctgctgttcgcgttgaa---g-a--agta-caaaat-gtc-a-ttaatgctatgca-gaaaatcttag----agtgtccaat-c---tgtctgga-gttgatc---aag-gaa-c--ct-g--t-ctcca-caa-a--g-tgtgac---c-a-c-a--tatt-ttg-c-agatttt-g-catgctgaa-ac----ttctca-acca-gaagaa-agggccttcacagtgtcc---tttgtgtaagaa--tg-a-
+6 -atggatttatctgctcttcgcgttgaa---g-a--agta-caaaat-gtc-a-ttaacgctatgca-gaaaatcttag----agtgtcccat-c---tgtctgga-gttgatc---aag-gaa-c--ct-g--t-ctcca-caa-a--g-tgtgac---c-a-c-a--tatt-ttg-c-aaatttt-g-catgctgaa-ac----ttctca-acca-gaagaa-agggccttcacagtgtcc---tttatgtaagaa--tg-a-
+2 -gcgaa---a--tgt-aa-cacggtaga---g-gt-gat--cggggt-g-c-g-tt-atac-gtgcgtggtgacctcgg--tcggtgt-tgacgg---tgcctggg-gttcctc---aga-gtgtt--ttgg--g-gtctg-aag-g--a-tg-gac-t-t-gtc-ag-tg-a-ttg-c-cattgga-gacgtgcaaaatgt---gctttca-gccatgcag-a-agaa-ctt-ggagtgtccag-tctgtttagatg--tgat-
+7 cgc-tg---g--tgc-aa-ctcga-agacctatctccttcccagggg-g-g-gctt-ctcc-g-gcatttaggcctcgg---c-gt-t-tggaag---tacggaggtttttctcggaaga-aagttcactgg--a-agtgg-aagaa--a-tg-gat-t-t-atc-tgctg-t-tcg---aattcaa-gaagtacaaaatgt----ccttcatgctatgcag-a-aaat-ctt-ggagtgtccaa-tc----t-g-t---t--t-
+3 -gt-ac---c--t-t-ga-tttcgta-t---t-ct-ga---gaggct-g-ctg-ct--ta--gcg-gtagc-cccttggtttccgtgg-caacggaaaagcgcggg-aat-tac---agataaatt--aaaactgcgactgcgcg-g-cg-tg-agc-t-c-gct-ga--g-a-ct--t-c-ctggacgggggacaggctgt-ggggtttc---tcagataa-c-tggg-ccc--ctgcgctcag-gaggccttcacc--ctct-
+5 -gt--t---c----c-ga-----a-a-g---g-ct--a---g-cgctag-gcg-cc--aa--gc--g--g---cc--ggtttccttgg-cgacgg-agagcgcggg-aat-ttt---agatagatt--gtaattgcggctgcgcg-gccgctg-cccgtgcagccagag-g-atccagcac-ctctcttggggcttctccgtcctcggcgc---ttgga-ag-tacgga-tct--tttttctcggagaaaagttcactggaactg
+type: k
+nr of strings: 8
+total cost: 13738
+0 -atggatttatctgcggatcatgttgaa---g-a--agta-c-aaaat-gtc-ctcaatgctatgca-gaaaatcttag----agtgtccaat-a---tgtctgga-gttgatc---aaa-gag-c--ct-g--t-ctcta-caa-a--g-tgtgac---c-a-c-a--tatt-ttg-c-aaatttt-g-tatgctgaa-ac----ttctca-acca-gaagaa-agggccttcacaatgtcc---tttgtgtaagaa--tgag-
+1 -atggatttatctgcggatcgtgttgaa---g-a--agta-c-aaaat-gtt-cttaatgctatgca-gaaaatcttag----agtgtccaat-a---tgtctgga-gttgatc---aaa-gag-c--ct-g--t-ttcta-caa-a--g-tgtgat---c-a-c-a--tatt-ttg-c-aaatttt-g-tatgctgaa-ac----ttctca-acca-gaggaa-ggggccttcacagtgtcc---tttgtgtaagaa--cga--
+4 -atggatttatctgctgttcgcgttgaa---g-a--agta-c-aaaat-gtc-attaatgctatgca-gaaaatcttag----agtgtccaat-c---tgtctgga-gttgatc---aag-gaa-c--ct-g--t-ctcca-caa-a--g-tgtgac---c-a-c-a--tatt-ttg-c-agatttt-g-catgctgaa-ac----ttctca-acca-gaagaa-agggccttcacagtgtcc---tttgtgtaagaa--tga--
+6 -atggatttatctgctcttcgcgttgaa---g-a--agta-c-aaaat-gtc-attaacgctatgca-gaaaatcttag----agtgtcccat-c---tgtctgga-gttgatc---aag-gaa-c--ct-g--t-ctcca-caa-a--g-tgtgac---c-a-c-a--tatt-ttg-c-aaatttt-g-catgctgaa-ac----ttctca-acca-gaagaa-agggccttcacagtgtcc---tttatgtaagaa--tga--
+2 -gcgaa---a--tgt-aa-cacggtaga---g-gt-gat--c-ggggt-g-c-gtt-atac-gtgcgtggtgacctcgg--tcggtgt-tgacgg---tgcctggg-gttcctc---aga-gtgtt--ttgg--g-gtctg-aag-g--a-tg-gac-t-t-gtc-ag-tg-a-ttg-c-cattgga-gacgtgcaaaatgt---gctttca-gccatgcag-a-agaa-ctt-ggagtgtccag-tctgtttagatg--tgat-
+7 cgc-tg---g--tgc-aa-ctcga-agacctatctccttccctggggg-g-g-ctt-ctcc-g-gcatttaggcctcgg---c-gt-t-tggaag---tacggaggtttttctcggaaga-aagttcactgg--a-agtgg-aagaa--a-tg-gat-t-t-atc-tgctg-t-tcg---aattcaa-gaagtacaaaatgt----ccttcatgctatgcag-a-aaat-ctt-ggagtgtccaa-tc----t-g-t---t--t-
+3 -gt-ac---c--t-t-ga-tttcgta-t---t-ct-ga---g-aggct-g-ctgct--ta--gcg-gtagc-cccttggtttccgtgg-caacggaaaagcgcggg-aat-tac---agataaatt--aaaactgcgactgcgcg-g-cg-tg-agc-t-c-gct-ga--g-a-ct--t-c-ctggacgggggacaggctgt-ggggtttc---tcagataa-c-tggg-ccc--ctgcgctcag-gaggccttcacc--ctct-
+5 -gt--t---c----c-ga-----a-a-g---g-ct--a---g--cgctag-gcgcc--aa--gc--g--g---cc--ggtttccttgg-cgacgg-agagcgcggg-aat-ttt---agatagatt--gtaattgcggctgcgcg-gccgctg-cccgtgcagccaga-gg-atccagcac-ctctcttggggcttctccgtcctcggcgc---ttgga-ag-tacgga-tct--tttttctcggagaaaagttcactggaactg
+type: k
+nr of strings: 8
+total cost: 13719
+0 -atggatttatctgcggatcatgttgaa---g-a--agta-caaaat-gtc-c-tcaatgctatgca-gaaaatcttag----agtgtccaat-a---tgtctgga-gttgatc---aaa-gag-c--ct-g--t-ctcta-caa-a--g-tgtgac---c-a-c-a--tatt-ttg-c-aaatttt-g-tatgctgaa-ac----ttctca-acca-gaagaa-agggccttcacaatgtcc---tttgtgtaagaa--tgaa-
+1 -atggatttatctgcggatcgtgttgaa---g-a--agta-caaaat-gtt-c-ttaatgctatgca-gaaaatcttag----agtgtccaat-a---tgtctgga-gttgatc---aaa-gag-c--ct-g--t-ttcta-caa-a--g-tgtgat---c-a-c-a--tatt-ttg-c-aaatttt-g-tatgctgaa-ac----ttctca-acca-gaggaa-ggggccttcacagtgtcc---tttgtgtaagaa--cg-a-
+4 -atggatttatctgctgttcgcgttgaa---g-a--agta-caaaat-gtc-a-ttaatgctatgca-gaaaatcttag----agtgtccaat-c---tgtctgga-gttgatc---aag-gaa-c--ct-g--t-ctcca-caa-a--g-tgtgac---c-a-c-a--tatt-ttg-c-agatttt-g-catgctgaa-ac----ttctca-acca-gaagaa-agggccttcacagtgtcc---tttgtgtaagaa--tg-a-
+6 -atggatttatctgctcttcgcgttgaa---g-a--agta-caaaat-gtc-a-ttaacgctatgca-gaaaatcttag----agtgtcccat-c---tgtctgga-gttgatc---aag-gaa-c--ct-g--t-ctcca-caa-a--g-tgtgac---c-a-c-a--tatt-ttg-c-aaatttt-g-catgctgaa-ac----ttctca-acca-gaagaa-agggccttcacagtgtcc---tttatgtaagaa--tg-a-
+2 -gcgaa---a--tgt-aa-cacggtaga---g-gt-gat--cggggt-g-c-g-tt-atac-gtgcgtggtgacctcgg--tcggtgt-tgacgg---tgcctggg-gttcctc---aga-gtgtt--ttgg--g-gtctg-aag-g--a-tg-gac-t-t-gtc-ag-tg-a-ttg-c-cattgga-gacgtgcaaaatgt---gctttca-gccatgcag-a-agaa-ctt-ggagtgtccag-tctgtttagatg--tgat-
+7 cgc-tg---g--tgc-aa-ctcga-agacctatctccttcccagggg-g-g-gctt-ctcc-g-gcatttaggcctcgg---c-gt-t-tggaag---tacggaggtttttctcggaaga-aagttcactgg--a-agtgg-aagaa--a-tg-gat-t-t-atc-tgctg-t-tcg---aattcaa-gaagtacaaaatgt----ccttcatgctatgcag-a-aaat-ctt-ggagtgtccaa-tc----t-g-t---t--t-
+3 -gt-ac---c--t-t-ga-tttcgta-t---t-ct-ga---gaggct-g-ctg-ct--ta--gcg-gtagc-cccttggtttccgtgg-caacggaaaagcgcggg-aat-tac---agataaatt--aaaactgcgactgcgcg-g-cg-tg-agc-t-c-gct-ga--g-a-ct--t-c-ctggacgggggacaggctgt-ggggtttc---tcagataa-c-tggg-ccc--ctgcgctcag-gaggccttcacc--ctct-
+5 -gt--t---c----c-ga-----a-a-g---g-ct--a---g-cgctag-gcg-cc--aa--gc--g--g---cc--ggtttccttgg-cgacgg-agagcgcggg-aat-ttt---agatagatt--gtaattgcggctgcgcg-gccgctg-cccgtgcagccaga-gg-atccagcac-ctctcttggggcttctccgtcctcggcgc---ttgga-ag-tacgga-tct--tttttctcggagaaaagttcactggaactg
+"
+"
+type: k
+nr of strings: 8
+total cost: 13719
+0 -atggatttatctgcggatcatgttgaa---g-a--agta-caaaat-gtc-c-tcaatgctatgca-gaaaatcttag----agtgtccaat-a---tgtctgga-gttgatc---aaa-gag-c--ct-g--t-ctcta-caa-a--g-tgtgac---c-a-c-a--tatt-ttg-c-aaatttt-g-tatgctgaa-ac----ttctca-acca-gaagaa-agggccttcacaatgtcc---tttgtgtaagaa--tgag-
+1 -atggatttatctgcggatcgtgttgaa---g-a--agta-caaaat-gtt-c-ttaatgctatgca-gaaaatcttag----agtgtccaat-a---tgtctgga-gttgatc---aaa-gag-c--ct-g--t-ttcta-caa-a--g-tgtgat---c-a-c-a--tatt-ttg-c-aaatttt-g-tatgctgaa-ac----ttctca-acca-gaggaa-ggggccttcacagtgtcc---tttgtgtaagaa--cga--
+4 -atggatttatctgctgttcgcgttgaa---g-a--agta-caaaat-gtc-a-ttaatgctatgca-gaaaatcttag----agtgtccaat-c---tgtctgga-gttgatc---aag-gaa-c--ct-g--t-ctcca-caa-a--g-tgtgac---c-a-c-a--tatt-ttg-c-agatttt-g-catgctgaa-ac----ttctca-acca-gaagaa-agggccttcacagtgtcc---tttgtgtaagaa--tga--
+6 -atggatttatctgctcttcgcgttgaa---g-a--agta-caaaat-gtc-a-ttaacgctatgca-gaaaatcttag----agtgtcccat-c---tgtctgga-gttgatc---aag-gaa-c--ct-g--t-ctcca-caa-a--g-tgtgac---c-a-c-a--tatt-ttg-c-aaatttt-g-catgctgaa-ac----ttctca-acca-gaagaa-agggccttcacagtgtcc---tttatgtaagaa--tga--
+2 -gcgaa---a--tgt-aa-cacggtaga---g-gt-gat--cggggt-g-c-g-tt-atac-gtgcgtggtgacctcgg--tcggtgt-tgacgg---tgcctggg-gttcctc---aga-gtgtt--ttgg--g-gtctg-aag-g--a-tg-gac-t-t-gtc-ag-tg-a-ttg-c-cattgga-gacgtgcaaaatgt---gctttca-gccatgcag-a-agaa-ctt-ggagtgtccag-tctgtttagatg--tgat-
+7 cgc-tg---g--tgc-aa-ctcga-agacctatctccttcccagggg-g-g-gctt-ctcc-g-gcatttaggcctcgg---c-gt-t-tggaag---tacggaggtttttctcggaaga-aagttcactgg--a-agtgg-aagaa--a-tg-gat-t-t-atc-tgctg-t-tcg---aattcaa-gaagtacaaaatgt----ccttcatgctatgcag-a-aaat-ctt-ggagtgtccaa-tc----t-g-t---t--t-
+3 -gt-ac---c--t-t-ga-tttcgta-t---t-ct-ga---gaggct-g-ctg-ct--ta--gcg-gtagc-cccttggtttccgtgg-caacggaaaagcgcggg-aat-tac---agataaatt--aaaactgcgactgcgcg-g-cg-tg-agc-t-c-gct-ga--g-a-ct--t-c-ctggacgggggacaggctgt-ggggtttc---tcagataa-c-tggg-ccc--ctgcgctcag-gaggccttcacc--ctct-
+5 -gt--t---c----c-ga-----a-a-g---g-ct--a---g-cgctag-gcg-cc--aa--gc--g--g---cc--ggtttccttgg-cgacgg-agagcgcggg-aat-ttt---agatagatt--gtaattgcggctgcgcg-gccgctg-cccgtgcagccaga-gg-atccagcac-ctctcttggggcttctccgtcctcggcgc---ttgga-ag-tacgga-tct--tttttctcggagaaaagttcactggaactg
+"
+"
+type: k
+nr of strings: 8
+total cost: 13738
+0 -atggatttatctgcggatcatgttgaa---g-a--agta-c-aaaat-gtc-ctcaatgctatgca-gaaaatcttag----agtgtccaat-a---tgtctgga-gttgatc---aaa-gag-c--ct-g--t-ctcta-caa-a--g-tgtgac---c-a-c-a--tatt-ttg-c-aaatttt-g-tatgctgaa-ac----ttctca-acca-gaagaa-agggccttcacaatgtcc---tttgtgtaagaa--tgaa-
+1 -atggatttatctgcggatcgtgttgaa---g-a--agta-c-aaaat-gtt-cttaatgctatgca-gaaaatcttag----agtgtccaat-a---tgtctgga-gttgatc---aaa-gag-c--ct-g--t-ttcta-caa-a--g-tgtgat---c-a-c-a--tatt-ttg-c-aaatttt-g-tatgctgaa-ac----ttctca-acca-gaggaa-ggggccttcacagtgtcc---tttgtgtaagaa--cg-a-
+4 -atggatttatctgctgttcgcgttgaa---g-a--agta-c-aaaat-gtc-attaatgctatgca-gaaaatcttag----agtgtccaat-c---tgtctgga-gttgatc---aag-gaa-c--ct-g--t-ctcca-caa-a--g-tgtgac---c-a-c-a--tatt-ttg-c-agatttt-g-catgctgaa-ac----ttctca-acca-gaagaa-agggccttcacagtgtcc---tttgtgtaagaa--tg-a-
+6 -atggatttatctgctcttcgcgttgaa---g-a--agta-c-aaaat-gtc-attaacgctatgca-gaaaatcttag----agtgtcccat-c---tgtctgga-gttgatc---aag-gaa-c--ct-g--t-ctcca-caa-a--g-tgtgac---c-a-c-a--tatt-ttg-c-aaatttt-g-catgctgaa-ac----ttctca-acca-gaagaa-agggccttcacagtgtcc---tttatgtaagaa--tg-a-
+2 -gcgaa---a--tgt-aa-cacggtaga---g-gt-gat--c-ggggt-g-c-gtt-atac-gtgcgtggtgacctcgg--tcggtgt-tgacgg---tgcctggg-gttcctc---aga-gtgtt--ttgg--g-gtctg-aag-g--a-tg-gac-t-t-gtc-ag-tg-a-ttg-c-cattgga-gacgtgcaaaatgt---gctttca-gccatgcag-a-agaa-ctt-ggagtgtccag-tctgtttagatg--tgat-
+7 cgc-tg---g--tgc-aa-ctcga-agacctatctccttccctggggg-g-g-ctt-ctcc-g-gcatttaggcctcgg---c-gt-t-tggaag---tacggaggtttttctcggaaga-aagttcactgg--a-agtgg-aagaa--a-tg-gat-t-t-atc-tgctg-t-tcg---aattcaa-gaagtacaaaatgt----ccttcatgctatgcag-a-aaat-ctt-ggagtgtccaa-tc----t-g-t---t--t-
+3 -gt-ac---c--t-t-ga-tttcgta-t---t-ct-ga---g-aggct-g-ctgct--ta--gcg-gtagc-cccttggtttccgtgg-caacggaaaagcgcggg-aat-tac---agataaatt--aaaactgcgactgcgcg-g-cg-tg-agc-t-c-gct-ga--g-a-ct--t-c-ctggacgggggacaggctgt-ggggtttc---tcagataa-c-tggg-ccc--ctgcgctcag-gaggccttcacc--ctct-
+5 -gt--t---c----c-ga-----a-a-g---g-ct--a---g--cgctag-gcgcc--aa--gc--g--g---cc--ggtttccttgg-cgacgg-agagcgcggg-aat-ttt---agatagatt--gtaattgcggctgcgcg-gccgctg-cccgtgcagccaga-gg-atccagcac-ctctcttggggcttctccgtcctcggcgc---ttgga-ag-tacgga-tct--tttttctcggagaaaagttcactggaactg
+
+type: p
+nr of strings: 8
+total cost: 13744
+0 -atggatttatctgcggatcatgttgaa---g-a--agta-caaaat-gtc-c-tcaatgctatgca-gaaaatcttag----agtgtccaat-a---tgtctgga-gttgatc---aaa-gag-c--ct-g--t-ctcta-caa-a--g-tgtgac---c-a-c-a--tatt-ttg-c-aaatttt-g-tatgctgaa-ac----ttctca-acca-gaagaa-agggccttcacaatgtcc---tttgtgtaagaa--tgaa-
+1 -atggatttatctgcggatcgtgttgaa---g-a--agta-caaaat-gtt-c-ttaatgctatgca-gaaaatcttag----agtgtccaat-a---tgtctgga-gttgatc---aaa-gag-c--ct-g--t-ttcta-caa-a--g-tgtgat---c-a-c-a--tatt-ttg-c-aaatttt-g-tatgctgaa-ac----ttctca-acca-gaggaa-ggggccttcacagtgtcc---tttgtgtaagaa--cg-a-
+4 -atggatttatctgctgttcgcgttgaa---g-a--agta-caaaat-gtc-a-ttaatgctatgca-gaaaatcttag----agtgtccaat-c---tgtctgga-gttgatc---aag-gaa-c--ct-g--t-ctcca-caa-a--g-tgtgac---c-a-c-a--tatt-ttg-c-agatttt-g-catgctgaa-ac----ttctca-acca-gaagaa-agggccttcacagtgtcc---tttgtgtaagaa--tg-a-
+6 -atggatttatctgctcttcgcgttgaa---g-a--agta-caaaat-gtc-a-ttaacgctatgca-gaaaatcttag----agtgtcccat-c---tgtctgga-gttgatc---aag-gaa-c--ct-g--t-ctcca-caa-a--g-tgtgac---c-a-c-a--tatt-ttg-c-aaatttt-g-catgctgaa-ac----ttctca-acca-gaagaa-agggccttcacagtgtcc---tttatgtaagaa--tg-a-
+2 -gcgaa---a--tgt-aa-cacggtaga---g-gt-gat--cggggt-g-c-g-tt-atac-gtgcgtggtgacctcgg--tcggtgt-tgacgg---tgcctggg-gttcctc---aga-gtgtt--ttgg--g-gtctg-aag-g--a-tg-gac-t-t-gtc-ag-tg-a-ttg-c-cattgga-gacgtgcaaaatgt---gctttca-gccatgcag-a-agaa-ctt-ggagtgtccag-tctgtttagatg--tgat-
+7 cgc-tg---g--tgc-aa-ctcga-agacctatctccttcccagggg-g-g-gctt-ctcc-g-gcatttaggcctcgg---c-gt-t-tggaag---tacggaggtttttctcggaaga-aagttcactgg--a-agtgg-aagaa--a-tg-gat-t-t-atc-tgctg-t-tcg---aattcaa-gaagtacaaaatgt----ccttcatgctatgcag-a-aaat-ctt-ggagtgtccaa-tc----t-g-t---t--t-
+3 -gt-ac---c--t-t-ga-tttcgta-t---t-ct-ga---gaggct-g-ctg-ct--ta--gcg-gtagc-cccttggtttccgtgg-caacggaaaagcgcggg-aat-tac---agataaatt--aaaactgcgactgcgcg-g-cg-tg-agc-t-c-gct-ga--g-a-ct--t-c-ctggacgggggacaggctgt-ggggtttc---tcagataa-c-tggg-ccc--ctgcgctcag-gaggccttcacc--ctct-
+5 -gt--t---c----c-ga-----a-a-g---g-ct--a---g-cgctag-gcg-cc--aa--gc--g--g---cc--ggtttccttgg-cgacgg-agagcgcggg-aat-ttt---agatagatt--gtaattgcggctgcgcg-gccgctg-cccgtgcagccagag-g-atccagcac-ctctcttggggcttctccgtcctcggcgc---ttgga-ag-tacgga-tct--tttttctcggagaaaagttcactggaactg
+
+type: k
+nr of strings: 8
+total cost: 13738
+0 -atggatttatctgcggatcatgttgaa---g-a--agta-c-aaaat-gtc-ctcaatgctatgca-gaaaatcttag----agtgtccaat-a---tgtctgga-gttgatc---aaa-gag-c--ct-g--t-ctcta-caa-a--g-tgtgac---c-a-c-a--tatt-ttg-c-aaatttt-g-tatgctgaa-ac----ttctca-acca-gaagaa-agggccttcacaatgtcc---tttgtgtaagaa--tgag-
+1 -atggatttatctgcggatcgtgttgaa---g-a--agta-c-aaaat-gtt-cttaatgctatgca-gaaaatcttag----agtgtccaat-a---tgtctgga-gttgatc---aaa-gag-c--ct-g--t-ttcta-caa-a--g-tgtgat---c-a-c-a--tatt-ttg-c-aaatttt-g-tatgctgaa-ac----ttctca-acca-gaggaa-ggggccttcacagtgtcc---tttgtgtaagaa--cga--
+4 -atggatttatctgctgttcgcgttgaa---g-a--agta-c-aaaat-gtc-attaatgctatgca-gaaaatcttag----agtgtccaat-c---tgtctgga-gttgatc---aag-gaa-c--ct-g--t-ctcca-caa-a--g-tgtgac---c-a-c-a--tatt-ttg-c-agatttt-g-catgctgaa-ac----ttctca-acca-gaagaa-agggccttcacagtgtcc---tttgtgtaagaa--tga--
+6 -atggatttatctgctcttcgcgttgaa---g-a--agta-c-aaaat-gtc-attaacgctatgca-gaaaatcttag----agtgtcccat-c---tgtctgga-gttgatc---aag-gaa-c--ct-g--t-ctcca-caa-a--g-tgtgac---c-a-c-a--tatt-ttg-c-aaatttt-g-catgctgaa-ac----ttctca-acca-gaagaa-agggccttcacagtgtcc---tttatgtaagaa--tga--
+2 -gcgaa---a--tgt-aa-cacggtaga---g-gt-gat--c-ggggt-g-c-gtt-atac-gtgcgtggtgacctcgg--tcggtgt-tgacgg---tgcctggg-gttcctc---aga-gtgtt--ttgg--g-gtctg-aag-g--a-tg-gac-t-t-gtc-ag-tg-a-ttg-c-cattgga-gacgtgcaaaatgt---gctttca-gccatgcag-a-agaa-ctt-ggagtgtccag-tctgtttagatg--tgat-
+7 cgc-tg---g--tgc-aa-ctcga-agacctatctccttccctggggg-g-g-ctt-ctcc-g-gcatttaggcctcgg---c-gt-t-tggaag---tacggaggtttttctcggaaga-aagttcactgg--a-agtgg-aagaa--a-tg-gat-t-t-atc-tgctg-t-tcg---aattcaa-gaagtacaaaatgt----ccttcatgctatgcag-a-aaat-ctt-ggagtgtccaa-tc----t-g-t---t--t-
+3 -gt-ac---c--t-t-ga-tttcgta-t---t-ct-ga---g-aggct-g-ctgct--ta--gcg-gtagc-cccttggtttccgtgg-caacggaaaagcgcggg-aat-tac---agataaatt--aaaactgcgactgcgcg-g-cg-tg-agc-t-c-gct-ga--g-a-ct--t-c-ctggacgggggacaggctgt-ggggtttc---tcagataa-c-tggg-ccc--ctgcgctcag-gaggccttcacc--ctct-
+5 -gt--t---c----c-ga-----a-a-g---g-ct--a---g--cgctag-gcgcc--aa--gc--g--g---cc--ggtttccttgg-cgacgg-agagcgcggg-aat-ttt---agatagatt--gtaattgcggctgcgcg-gccgctg-cccgtgcagccaga-gg-atccagcac-ctctcttggggcttctccgtcctcggcgc---ttgga-ag-tacgga-tct--tttttctcggagaaaagttcactggaactg
+
+type: k
+nr of strings: 8
+total cost: 13738
+0 -atggatttatctgcggatcatgttgaa---g-a--agta-c-aaaat-gtc-ctcaatgctatgca-gaaaatcttag----agtgtccaat-a---tgtctgga-gttgatc---aaa-gag-c--ct-g--t-ctcta-caa-a--g-tgtgac---c-a-c-a--tatt-ttg-c-aaatttt-g-tatgctgaa-ac----ttctca-acca-gaagaa-agggccttcacaatgtcc---tttgtgtaagaa--tgaa-
+1 -atggatttatctgcggatcgtgttgaa---g-a--agta-c-aaaat-gtt-cttaatgctatgca-gaaaatcttag----agtgtccaat-a---tgtctgga-gttgatc---aaa-gag-c--ct-g--t-ttcta-caa-a--g-tgtgat---c-a-c-a--tatt-ttg-c-aaatttt-g-tatgctgaa-ac----ttctca-acca-gaggaa-ggggccttcacagtgtcc---tttgtgtaagaa--cg-a-
+4 -atggatttatctgctgttcgcgttgaa---g-a--agta-c-aaaat-gtc-attaatgctatgca-gaaaatcttag----agtgtccaat-c---tgtctgga-gttgatc---aag-gaa-c--ct-g--t-ctcca-caa-a--g-tgtgac---c-a-c-a--tatt-ttg-c-agatttt-g-catgctgaa-ac----ttctca-acca-gaagaa-agggccttcacagtgtcc---tttgtgtaagaa--tg-a-
+6 -atggatttatctgctcttcgcgttgaa---g-a--agta-c-aaaat-gtc-attaacgctatgca-gaaaatcttag----agtgtcccat-c---tgtctgga-gttgatc---aag-gaa-c--ct-g--t-ctcca-caa-a--g-tgtgac---c-a-c-a--tatt-ttg-c-aaatttt-g-catgctgaa-ac----ttctca-acca-gaagaa-agggccttcacagtgtcc---tttatgtaagaa--tg-a-
+2 -gcgaa---a--tgt-aa-cacggtaga---g-gt-gat--c-ggggt-g-c-gtt-atac-gtgcgtggtgacctcgg--tcggtgt-tgacgg---tgcctggg-gttcctc---aga-gtgtt--ttgg--g-gtctg-aag-g--a-tg-gac-t-t-gtc-ag-tg-a-ttg-c-cattgga-gacgtgcaaaatgt---gctttca-gccatgcag-a-agaa-ctt-ggagtgtccag-tctgtttagatg--tgat-
+7 cgc-tg---g--tgc-aa-ctcga-agacctatctccttccctggggg-g-g-ctt-ctcc-g-gcatttaggcctcgg---c-gt-t-tggaag---tacggaggtttttctcggaaga-aagttcactgg--a-agtgg-aagaa--a-tg-gat-t-t-atc-tgctg-t-tcg---aattcaa-gaagtacaaaatgt----ccttcatgctatgcag-a-aaat-ctt-ggagtgtccaa-tc----t-g-t---t--t-
+3 -gt-ac---c--t-t-ga-tttcgta-t---t-ct-ga---g-aggct-g-ctgct--ta--gcg-gtagc-cccttggtttccgtgg-caacggaaaagcgcggg-aat-tac---agataaatt--aaaactgcgactgcgcg-g-cg-tg-agc-t-c-gct-ga--g-a-ct--t-c-ctggacgggggacaggctgt-ggggtttc---tcagataa-c-tggg-ccc--ctgcgctcag-gaggccttcacc--ctct-
+5 -gt--t---c----c-ga-----a-a-g---g-ct--a---g--cgctag-gcgcc--aa--gc--g--g---cc--ggtttccttgg-cgacgg-agagcgcggg-aat-ttt---agatagatt--gtaattgcggctgcgcg-gccgctg-cccgtgcagccaga-gg-atccagcac-ctctcttggggcttctccgtcctcggcgc---ttgga-ag-tacgga-tct--tttttctcggagaaaagttcactggaactg
+
+type: p
+nr of strings: 8
+total cost: 13724
+0 -atggatttatctgcggatcatgttgaa---g-a--agta-caaaat-gtc-c-tcaatgctatgca-gaaaatcttag----agtgtccaat-a---tgtctgga-gttgatc---aaa-gag-c--ct-g--t-ctcta-caa-a--g-tgtgac---c-a-c-a--tatt-ttg-c-aaatttt-g-tatgctgaa-ac----ttctca-acca-gaagaa-agggccttcacaatgtcc---tttgtgtaagaa--tgat-
+1 -atggatttatctgcggatcgtgttgaa---g-a--agta-caaaat-gtt-c-ttaatgctatgca-gaaaatcttag----agtgtccaat-a---tgtctgga-gttgatc---aaa-gag-c--ct-g--t-ttcta-caa-a--g-tgtgat---c-a-c-a--tatt-ttg-c-aaatttt-g-tatgctgaa-ac----ttctca-acca-gaggaa-ggggccttcacagtgtcc---tttgtgtaagaa--cga--
+4 -atggatttatctgctgttcgcgttgaa---g-a--agta-caaaat-gtc-a-ttaatgctatgca-gaaaatcttag----agtgtccaat-c---tgtctgga-gttgatc---aag-gaa-c--ct-g--t-ctcca-caa-a--g-tgtgac---c-a-c-a--tatt-ttg-c-agatttt-g-catgctgaa-ac----ttctca-acca-gaagaa-agggccttcacagtgtcc---tttgtgtaagaa--tga--
+6 -atggatttatctgctcttcgcgttgaa---g-a--agta-caaaat-gtc-a-ttaacgctatgca-gaaaatcttag----agtgtcccat-c---tgtctgga-gttgatc---aag-gaa-c--ct-g--t-ctcca-caa-a--g-tgtgac---c-a-c-a--tatt-ttg-c-aaatttt-g-catgctgaa-ac----ttctca-acca-gaagaa-agggccttcacagtgtcc---tttatgtaagaa--tga--
+2 -gcgaa---a--tgt-aa-cacggtaga---g-gt-gat--cggggt-g-c-g-tt-atac-gtgcgtggtgacctcgg--tcggtgt-tgacgg---tgcctggg-gttcctc---aga-gtgtt--ttgg--g-gtctg-aag-g--a-tg-gac-t-t-gtc-ag-tg-a-ttg-c-cattgga-gacgtgcaaaatgt---gctttca-gccatgcag-a-agaa-ctt-ggagtgtccag-tctgtttagatg--tgat-
+7 cgc-tg---g--tgc-aa-ctcga-agacctatctccttcccagggg-g-g-gctt-ctcc-g-gcatttaggcctcgg---c-gt-t-tggaag---tacggaggtttttctcggaaga-aagttcactgg--a-agtgg-aagaa--a-tg-gat-t-t-atc-tgctg-t-tcg---aattcaa-gaagtacaaaatgt----ccttcatgctatgcag-a-aaat-ctt-ggagtgtccaa-tc----t-g-t---t--t-
+3 -gt-ac---c--t-t-ga-tttcgta-t---t-ct-ga---gaggct-g-ctg-ct--ta--gcg-gtagc-cccttggtttccgtgg-caacggaaaagcgcggg-aat-tac---agataaatt--aaaactgcgactgcgcg-g-cg-tg-agc-t-c-gct-ga--g-a-ct--t-c-ctggacgggggacaggctgt-ggggtttc---tcagataa-c-tggg-ccc--ctgcgctcag-gaggccttcacc--ctct-
+5 -gt--t---c----c-ga-----a-a-g---g-ct--a---g-cgctag-gcg-cc--aa--gc--g--g---cc--ggtttccttgg-cgacgg-agagcgcggg-aat-ttt---agatagatt--gtaattgcggctgcgcg-gccgctg-cccgtgcagccagag-g-atccagcac-ctctcttggggcttctccgtcctcggcgc---ttgga-ag-tacgga-tct--tttttctcggagaaaagttcactggaactg
+
+type: p
+nr of strings: 8
+total cost: 13751
+gap cost: 5
+0 -atggatttatctgcggatcatgttgaa---g-a--agta--caaaat-gtc-ctcaatgctatgca-gaaaatcttag----agtgtccaat-a---tgtctgga-gttgatc---aaa-gag-c--ct-g--t-ctcta-caa-a--g-tgtgac---c-a-c-a--tatt-ttg-c-aaatttt-g-tatgctgaa-ac----ttctca-acca-gaagaa-agggccttcacaatgtcc---tttgtgtaagaa--tgac-
+1 -atggatttatctgcggatcgtgttgaa---g-a--agta--caaaat-gtt-cttaatgctatgca-gaaaatcttag----agtgtccaat-a---tgtctgga-gttgatc---aaa-gag-c--ct-g--t-ttcta-caa-a--g-tgtgat---c-a-c-a--tatt-ttg-c-aaatttt-g-tatgctgaa-ac----ttctca-acca-gaggaa-ggggccttcacagtgtcc---tttgtgtaagaa--cga--
+4 -atggatttatctgctgttcgcgttgaa---g-a--agta--caaaat-gtc-attaatgctatgca-gaaaatcttag----agtgtccaat-c---tgtctgga-gttgatc---aag-gaa-c--ct-g--t-ctcca-caa-a--g-tgtgac---c-a-c-a--tatt-ttg-c-agatttt-g-catgctgaa-ac----ttctca-acca-gaagaa-agggccttcacagtgtcc---tttgtgtaagaa--tga--
+6 -atggatttatctgctcttcgcgttgaa---g-a--agta--caaaat-gtc-attaacgctatgca-gaaaatcttag----agtgtcccat-c---tgtctgga-gttgatc---aag-gaa-c--ct-g--t-ctcca-caa-a--g-tgtgac---c-a-c-a--tatt-ttg-c-aaatttt-g-catgctgaa-ac----ttctca-acca-gaagaa-agggccttcacagtgtcc---tttatgtaagaa--tga--
+2 -gcgaa---a--tgt-aa-cacggtaga---g-gt-gat---cggggt-g-c-gtt-atac-gtgcgtggtgacctcgg--tcggtgt-tgacgg---tgcctggg-gttcctc---aga-gtgtt--ttgg--g-gtctg-aag-g--a-tg-gac-t-t-gtc-ag-tg-a-ttg-c-cattgga-gacgtgcaaaatgt---gctttca-gccatgcag-a-agaa-ctt-ggagtgtccag-tctgtttagatg--tgat-
+7 cgc-tg---g--tgc-aa-ctcga-agacctatctccttccccggggg-g-g-ctt-ctcc-g-gcatttaggcctcgg---c-gt-t-tggaag---tacggaggtttttctcggaaga-aagttcactgg--a-agtgg-aagaa--a-tg-gat-t-t-atc-tgctg-t-tcg---aattcaa-gaagtacaaaatgt----ccttcatgctatgcag-a-aaat-ctt-ggagtgtccaa-tc----t-g-t---t--t-
+3 -gt-ac---c--t-t-ga-tttcgta-t---t-ct-ga----gaggct-g-ctgct--ta--gcg-gtagc-cccttggtttccgtgg-caacggaaaagcgcggg-aat-tac---agataaatt--aaaactgcgactgcgcg-g-cg-tg-agc-t-c-gct-ga--g-a-ct--t-c-ctggacgggggacaggctgt-ggggtttc---tcagataa-c-tggg-ccc--ctgcgctcag-gaggccttcacc--ctct-
+5 -gt--t---c----c-ga-----a-a-g---g-ct--a----g-cgctag-gcgcc--aa--gc--g--g---cc--ggtttccttgg-cgacgg-agagcgcggg-aat-ttt---agatagatt--gtaattgcggctgcgcg-gccgctg-cccgtgcagccagag-g-atccagcac-ctctcttggggcttctccgtcctcggcgc---ttgga-ag-tacgga-tct--tttttctcggagaaaagttcactggaactg
+
+type: g
+nr of strings: 8
+gap cost: 5
+total cost: 11411
+4 -a-t-ggat-tta-tc--tg--ctgt-t-cgcgttgaagaag-tac--aa-aat-g-tcattaatg-c-ta-tgca-gaaaatcttag--a-gtgtc-ca-at-c-tgtct-ggagttgatcaag-g-aacc-t-g-tctccacaaagtgtga-c-ca-c--a-tattttgcagat-t-ttg-catgc-t-gaa-ac-ttc-tca-acca-gaagaaagggcct-tcacagtgtc-c--tttg-tgtaagaatga-
+0 -a-t-ggat-tta-tc--tg--cgga-t-catgttgaagaag-tac--aa-aat-g-tcctcaatg-c-ta-tgca-gaaaatcttag--a-gtgtc-ca-at-a-tgtct-ggagttgatcaaa-g-agcc-t-g-tctctacaaagtgtga-c-ca-c--a-tattttgcaaat-t-ttg-tatgc-t-gaa-ac-ttc-tca-acca-gaagaaagggcct-tcacaatgtc-c--tttg-tgtaagaatgag
+1 -a-t-ggat-tta-tc--tg--cgga-t-cgtgttgaagaag-tac--aa-aat-g-ttcttaatg-c-ta-tgca-gaaaatcttag--a-gtgtc-ca-at-a-tgtct-ggagttgatcaaa-g-agcc-t-g-tttctacaaagtgtga-t-ca-c--a-tattttgcaaat-t-ttg-tatgc-t-gaa-ac-ttc-tca-acca-gaggaaggggcct-tcacagtgtc-c--tttg-tgtaagaacga-
+2 -g-c-gaa----a-----tg--taac-a-cg-gtagaggtga-t-c--gg-ggt-g--cgtt-ata-c--g-tgcgtggtgacctcggtcg-gtgt--tg-acgg-tgcct-ggggttcctcaga-gtgttt-tgg-ggtctgaaggatg-ga-cttgtc--agtg-attgc-cat-tggagacgtgc-a-aaatgtgctt-tca-gccatgcag-aagaa-ct-t-ggagtgtc-cagtctg-tttagatgtgat
+3 -g-t-acct-tga-tt--tc--gtat-t-c-tg-agaggctgctgcttagcggtagccccttggt--t-tc-cgt--ggcaacggaaa--a-gcgcg-gg-aa-t-ta-c--aga-taaattaa----aactgc-g-actgcgcggcgtgagc-t-cg-ctga-gacttcctggacgg-gggacaggc-t-gtg-gg-gtt-tc---tca-gataactgggccc-ctgc-gc-tcag--gaggccttcaccctct-
+5 -gttccga--aag-gc--ta--gcgc-taggcgcc-aagcgg-c-c-----ggt-t-tccttggcgacggagagcgcgggaattttag--atagattgta-at-tgcggct--gcg-cggccgct-g-cccg-t-g-cagccagaggatccag---ca-c--c-tctcttggggct-t-ctc-cgtcc-tcggc-gc-tt--gga-agta--cggatcttttttctcggagaaaa-g--ttca-c-t-ggaactg-
+6 -a-t-ggat-tta-tc--tg--ctct-t-cgcgttgaagaag-tac--aa-aat-g-tcattaacg-c-ta-tgca-gaaaatcttag--a-gtgtc-cc-at-c-tgtct-ggagttgatcaag-g-aacc-t-g-tctccacaaagtgtga-c-ca-c--a-tattttgcaaat-t-ttg-catgc-t-gaa-ac-ttc-tca-acca-gaagaaagggcct-tcacagtgtc-c--ttta-tgtaagaatga-
+7 cg-c-tggtgcaactcgaagacctatctccttcccggggggg-gct--tc-tcc-g-gcatttagg-c-c--t-c--g-gcgtttgga--a-gtacg-gaggt-t-tttctcggaa--ga--aagtt-cact-g-gaagtggaagaaatg-gatt-ta-t--c-tgctgttcgaat-t-caa-gaagtac-aaa-atgtccttcatgctatgcagaaa--atct-t-ggagtgtc-c--aatc-tgt-----t-t-
+
+type: p
+nr of strings: 8
+gap cost: 5
+total cost: 13743
+0 -atggatttatctgcggatcatgttgaa---g-a--agta--caaaat-gtc-ctcaatgctatgca-gaaaatcttag----agtgtccaat-a---tgtctgga-gttgatc---aaa-gag-c--ct-g--t-ctcta-caa-a--g-tgtgac---c-a-c-a--tatt-ttg-c-aaatttt-g-tatgctgaa-ac----ttctca-acca-gaagaa-agggccttcacaatgtcc---tttgtgtaagaa--tgat-
+1 -atggatttatctgcggatcgtgttgaa---g-a--agta--caaaat-gtt-cttaatgctatgca-gaaaatcttag----agtgtccaat-a---tgtctgga-gttgatc---aaa-gag-c--ct-g--t-ttcta-caa-a--g-tgtgat---c-a-c-a--tatt-ttg-c-aaatttt-g-tatgctgaa-ac----ttctca-acca-gaggaa-ggggccttcacagtgtcc---tttgtgtaagaa--cga--
+4 -atggatttatctgctgttcgcgttgaa---g-a--agta--caaaat-gtc-attaatgctatgca-gaaaatcttag----agtgtccaat-c---tgtctgga-gttgatc---aag-gaa-c--ct-g--t-ctcca-caa-a--g-tgtgac---c-a-c-a--tatt-ttg-c-agatttt-g-catgctgaa-ac----ttctca-acca-gaagaa-agggccttcacagtgtcc---tttgtgtaagaa--tga--
+6 -atggatttatctgctcttcgcgttgaa---g-a--agta--caaaat-gtc-attaacgctatgca-gaaaatcttag----agtgtcccat-c---tgtctgga-gttgatc---aag-gaa-c--ct-g--t-ctcca-caa-a--g-tgtgac---c-a-c-a--tatt-ttg-c-aaatttt-g-catgctgaa-ac----ttctca-acca-gaagaa-agggccttcacagtgtcc---tttatgtaagaa--tga--
+2 -gcgaa---a--tgt-aa-cacggtaga---g-gt-gat---cggggt-g-c-gtt-atac-gtgcgtggtgacctcgg--tcggtgt-tgacgg---tgcctggg-gttcctc---aga-gtgtt--ttgg--g-gtctg-aag-g--a-tg-gac-t-t-gtc-ag-tg-a-ttg-c-cattgga-gacgtgcaaaatgt---gctttca-gccatgcag-a-agaa-ctt-ggagtgtccag-tctgtttagatg--tgat-
+7 cgc-tg---g--tgc-aa-ctcga-agacctatctccttccccggggg-g-g-ctt-ctcc-g-gcatttaggcctcgg---c-gt-t-tggaag---tacggaggtttttctcggaaga-aagttcactgg--a-agtgg-aagaa--a-tg-gat-t-t-atc-tgctg-t-tcg---aattcaa-gaagtacaaaatgt----ccttcatgctatgcag-a-aaat-ctt-ggagtgtccaa-tc----t-g-t---t--t-
+3 -gt-ac---c--t-t-ga-tttcgta-t---t-ct-ga----gaggct-g-ctgct--ta--gcg-gtagc-cccttggtttccgtgg-caacggaaaagcgcggg-aat-tac---agataaatt--aaaactgcgactgcgcg-g-cg-tg-agc-t-c-gct-ga--g-a-ct--t-c-ctggacgggggacaggctgt-ggggtttc---tcagataa-c-tggg-ccc--ctgcgctcag-gaggccttcacc--ctct-
+5 -gt--t---c----c-ga-----a-a-g---g-ct--a----g-cgctag-gcgcc--aa--gc--g--g---cc--ggtttccttgg-cgacgg-agagcgcggg-aat-ttt---agatagatt--gtaattgcggctgcgcg-gccgctg-cccgtgcagccagag-g-atccagcac-ctctcttggggcttctccgtcctcggcgc---ttgga-ag-tacgga-tct--tttttctcggagaaaagttcactggaactg
+
+type: g
+nr of strings: 8
+gap cost: 5
+total cost: 11411
+4 -a-t-ggat-tta-tc--tg--ctgt-t-cgcgttgaagaag-tac--aa-aat-g-tcattaatg-c-ta-tgca-gaaaatcttag--a-gtgtc-ca-at-c-tgtct-ggagttgatcaag-g-aacc-t-g-tctccacaaagtgtga-c-ca-c--a-tattttgcagat-t-ttg-catgc-t-gaa-ac-ttc-tca-acca-gaagaaagggcct-tcacagtgtc-c--tttg-tgtaagaatga-
+0 -a-t-ggat-tta-tc--tg--cgga-t-catgttgaagaag-tac--aa-aat-g-tcctcaatg-c-ta-tgca-gaaaatcttag--a-gtgtc-ca-at-a-tgtct-ggagttgatcaaa-g-agcc-t-g-tctctacaaagtgtga-c-ca-c--a-tattttgcaaat-t-ttg-tatgc-t-gaa-ac-ttc-tca-acca-gaagaaagggcct-tcacaatgtc-c--tttg-tgtaagaatgag
+1 -a-t-ggat-tta-tc--tg--cgga-t-cgtgttgaagaag-tac--aa-aat-g-ttcttaatg-c-ta-tgca-gaaaatcttag--a-gtgtc-ca-at-a-tgtct-ggagttgatcaaa-g-agcc-t-g-tttctacaaagtgtga-t-ca-c--a-tattttgcaaat-t-ttg-tatgc-t-gaa-ac-ttc-tca-acca-gaggaaggggcct-tcacagtgtc-c--tttg-tgtaagaacga-
+2 -g-c-gaa----a-----tg--taac-a-cg-gtagaggtga-t-c--gg-ggt-g--cgtt-ata-c--g-tgcgtggtgacctcggtcg-gtgt--tg-acgg-tgcct-ggggttcctcaga-gtgttt-tgg-ggtctgaaggatg-ga-cttgtc--agtg-attgc-cat-tggagacgtgc-a-aaatgtgctt-tca-gccatgcag-aagaa-ct-t-ggagtgtc-cagtctg-tttagatgtgat
+3 -g-t-acct-tga-tt--tc--gtat-t-c-tg-agaggctgctgcttagcggtagccccttggt--t-tc-cgt--ggcaacggaaa--a-gcgcg-gg-aa-t-ta-c--aga-taaattaa----aactgc-g-actgcgcggcgtgagc-t-cg-ctga-gacttcctggacgg-gggacaggc-t-gtg-gg-gtt-tc---tca-gataactgggccc-ctgc-gc-tcag--gaggccttcaccctct-
+5 -gttccga--aag-gc--ta--gcgc-taggcgcc-aagcgg-c-c-----ggt-t-tccttggcgacggagagcgcgggaattttag--atagattgta-at-tgcggct--gcg-cggccgct-g-cccg-t-g-cagccagaggatccag---ca-c--c-tctcttggggct-t-ctc-cgtcc-tcggc-gc-tt--gga-agta--cggatcttttttctcggagaaaa-g--ttca-c-t-ggaactg-
+6 -a-t-ggat-tta-tc--tg--ctct-t-cgcgttgaagaag-tac--aa-aat-g-tcattaacg-c-ta-tgca-gaaaatcttag--a-gtgtc-cc-at-c-tgtct-ggagttgatcaag-g-aacc-t-g-tctccacaaagtgtga-c-ca-c--a-tattttgcaaat-t-ttg-catgc-t-gaa-ac-ttc-tca-acca-gaagaaagggcct-tcacagtgtc-c--ttta-tgtaagaatga-
+7 cg-c-tggtgcaactcgaagacctatctccttcccggggggg-gct--tc-tcc-g-gcatttagg-c-c--t-c--g-gcgtttgga--a-gtacg-gaggt-t-tttctcggaa--ga--aagtt-cact-g-gaagtggaagaaatg-gatt-ta-t--c-tgctgttcgaat-t-caa-gaagtac-aaa-atgtccttcatgctatgcagaaa--atct-t-ggagtgtc-c--aatc-tgt-----t-t-
+
+type: p
+nr of strings: 8
+gap cost: 5
+total cost: 13763
+0 -atggatttatctgcggatcatgttgaa---g-a--agta-c-aaaat-gtc-ctcaatgctatgca-gaaaatcttag----agtgtccaat-a---tgtctgga-gttgatc---aaa-gag-c--ct-g--t-ctcta-caa-a--g-tgtgac---c-a-c-a--tatt-ttg-c-aaatttt-g-tatgctgaa-ac----ttctca-acca-gaagaa-agggccttcacaatgtcc---tttgtgtaagaa--tgag-
+1 -atggatttatctgcggatcgtgttgaa---g-a--agta-c-aaaat-gtt-cttaatgctatgca-gaaaatcttag----agtgtccaat-a---tgtctgga-gttgatc---aaa-gag-c--ct-g--t-ttcta-caa-a--g-tgtgat---c-a-c-a--tatt-ttg-c-aaatttt-g-tatgctgaa-ac----ttctca-acca-gaggaa-ggggccttcacagtgtcc---tttgtgtaagaa--cga--
+4 -atggatttatctgctgttcgcgttgaa---g-a--agta-c-aaaat-gtc-attaatgctatgca-gaaaatcttag----agtgtccaat-c---tgtctgga-gttgatc---aag-gaa-c--ct-g--t-ctcca-caa-a--g-tgtgac---c-a-c-a--tatt-ttg-c-agatttt-g-catgctgaa-ac----ttctca-acca-gaagaa-agggccttcacagtgtcc---tttgtgtaagaa--tga--
+6 -atggatttatctgctcttcgcgttgaa---g-a--agta-c-aaaat-gtc-attaacgctatgca-gaaaatcttag----agtgtcccat-c---tgtctgga-gttgatc---aag-gaa-c--ct-g--t-ctcca-caa-a--g-tgtgac---c-a-c-a--tatt-ttg-c-aaatttt-g-catgctgaa-ac----ttctca-acca-gaagaa-agggccttcacagtgtcc---tttatgtaagaa--tga--
+2 -gcgaa---a--tgt-aa-cacggtaga---g-gt-gat--c-ggggt-g-c-gtt-atac-gtgcgtggtgacctcgg--tcggtgt-tgacgg---tgcctggg-gttcctc---aga-gtgtt--ttgg--g-gtctg-aag-g--a-tg-gac-t-t-gtc-ag-tg-a-ttg-c-cattgga-gacgtgcaaaatgt---gctttca-gccatgcag-a-agaa-ctt-ggagtgtccag-tctgtttagatg--tgat-
+7 cgc-tg---g--tgc-aa-ctcga-agacctatctccttccctggggg-g-g-ctt-ctcc-g-gcatttaggcctcgg---c-gt-t-tggaag---tacggaggtttttctcggaaga-aagttcactgg--a-agtgg-aagaa--a-tg-gat-t-t-atc-tgctg-t-tcg---aattcaa-gaagtacaaaatgt----ccttcatgctatgcag-a-aaat-ctt-ggagtgtccaa-tc----t-g-t---t--t-
+3 -gt-ac---c--t-t-ga-tttcgta-t---t-ct-ga---g-aggct-g-ctgct--ta--gcg-gtagc-cccttggtttccgtgg-caacggaaaagcgcggg-aat-tac---agataaatt--aaaactgcgactgcgcg-g-cg-tg-agc-t-c-gct-ga--g-a-ct--t-c-ctggacgggggacaggctgt-ggggtttc---tcagataa-c-tggg-ccc--ctgcgctcag-gaggccttcacc--ctct-
+5 -gt--t---c----c-ga-----a-a-g---g-ct--a---g--cgctag-gcgcc--aa--gc--g--g---cc--ggtttccttgg-cgacgg-agagcgcggg-aat-ttt---agatagatt--gtaattgcggctgcgcg-gccgctg-cccgtgcagccagag-g-atccagcac-ctctcttggggcttctccgtcctcggcgc---ttgga-ag-tacgga-tct--tttttctcggagaaaagttcactggaactg
+
+type: k
+nr of strings: 8
+gap cost: 5
+total cost: 13715
+0 -atggatttatctgcggatcatgttgaa---g-a--agta-caaaat-gtc-c-tcaatgctatgca-gaaaatcttag----agtgtccaat-a---tgtctgga-gttgatc---aaa-gag-c--ct-g--t-ctcta-caa-a--g-tgtgac---c-a-c-a--tatt-ttg-c-aaatttt-g-tatgctgaa-ac----ttctca-acca-gaagaa-agggccttcacaatgtcc---tttgtgtaagaa--tgac-
+1 -atggatttatctgcggatcgtgttgaa---g-a--agta-caaaat-gtt-c-ttaatgctatgca-gaaaatcttag----agtgtccaat-a---tgtctgga-gttgatc---aaa-gag-c--ct-g--t-ttcta-caa-a--g-tgtgat---c-a-c-a--tatt-ttg-c-aaatttt-g-tatgctgaa-ac----ttctca-acca-gaggaa-ggggccttcacagtgtcc---tttgtgtaagaa--cga--
+4 -atggatttatctgctgttcgcgttgaa---g-a--agta-caaaat-gtc-a-ttaatgctatgca-gaaaatcttag----agtgtccaat-c---tgtctgga-gttgatc---aag-gaa-c--ct-g--t-ctcca-caa-a--g-tgtgac---c-a-c-a--tatt-ttg-c-agatttt-g-catgctgaa-ac----ttctca-acca-gaagaa-agggccttcacagtgtcc---tttgtgtaagaa--tga--
+6 -atggatttatctgctcttcgcgttgaa---g-a--agta-caaaat-gtc-a-ttaacgctatgca-gaaaatcttag----agtgtcccat-c---tgtctgga-gttgatc---aag-gaa-c--ct-g--t-ctcca-caa-a--g-tgtgac---c-a-c-a--tatt-ttg-c-aaatttt-g-catgctgaa-ac----ttctca-acca-gaagaa-agggccttcacagtgtcc---tttatgtaagaa--tga--
+2 -gcgaa---a--tgt-aa-cacggtaga---g-gt-gat--cggggt-g-c-g-tt-atac-gtgcgtggtgacctcgg--tcggtgt-tgacgg---tgcctggg-gttcctc---aga-gtgtt--ttgg--g-gtctg-aag-g--a-tg-gac-t-t-gtc-ag-tg-a-ttg-c-cattgga-gacgtgcaaaatgt---gctttca-gccatgcag-a-agaa-ctt-ggagtgtccag-tctgtttagatg--tgat-
+7 cgc-tg---g--tgc-aa-ctcga-agacctatctccttcccggggg-g-g-gctt-ctcc-g-gcatttaggcctcgg---c-gt-t-tggaag---tacggaggtttttctcggaaga-aagttcactgg--a-agtgg-aagaa--a-tg-gat-t-t-atc-tgctg-t-tcg---aattcaa-gaagtacaaaatgt----ccttcatgctatgcag-a-aaat-ctt-ggagtgtccaa-tc----t-g-t---t--t-
+3 -gt-ac---c--t-t-ga-tttcgta-t---t-ct-ga---gaggct-g-ctg-ct--ta--gcg-gtagc-cccttggtttccgtgg-caacggaaaagcgcggg-aat-tac---agataaatt--aaaactgcgactgcgcg-g-cg-tg-agc-t-c-gct-ga--g-a-ct--t-c-ctggacgggggacaggctgt-ggggtttc---tcagataa-c-tggg-ccc--ctgcgctcag-gaggccttcacc--ctct-
+5 -gt--t---c----c-ga-----a-a-g---g-ct--a---g-cgctag-gcg-cc--aa--gc--g--g---cc--ggtttccttgg-cgacgg-agagcgcggg-aat-ttt---agatagatt--gtaattgcggctgcgcg-gccgctg-cccgtgcagccaga-gg-atccagcac-ctctcttggggcttctccgtcctcggcgc---ttgga-ag-tacgga-tct--tttttctcggagaaaagttcactggaactg
+
+type: p
+nr of strings: 8
+gap cost: 5
+total cost: 13763
+0 -atggatttatctgcggatcatgttgaa---g-a--agta--caaaat-gtc-ctcaatgctatgca-gaaaatcttag----agtgtccaat-a---tgtctgga-gttgatc---aaa-gag-c--ct-g--t-ctcta-caa-a--g-tgtgac---c-a-c-a--tatt-ttg-c-aaatttt-g-tatgctgaa-ac----ttctca-acca-gaagaa-agggccttcacaatgtcc---tttgtgtaagaa--tgag-
+1 -atggatttatctgcggatcgtgttgaa---g-a--agta--caaaat-gtt-cttaatgctatgca-gaaaatcttag----agtgtccaat-a---tgtctgga-gttgatc---aaa-gag-c--ct-g--t-ttcta-caa-a--g-tgtgat---c-a-c-a--tatt-ttg-c-aaatttt-g-tatgctgaa-ac----ttctca-acca-gaggaa-ggggccttcacagtgtcc---tttgtgtaagaa--cga--
+4 -atggatttatctgctgttcgcgttgaa---g-a--agta--caaaat-gtc-attaatgctatgca-gaaaatcttag----agtgtccaat-c---tgtctgga-gttgatc---aag-gaa-c--ct-g--t-ctcca-caa-a--g-tgtgac---c-a-c-a--tatt-ttg-c-agatttt-g-catgctgaa-ac----ttctca-acca-gaagaa-agggccttcacagtgtcc---tttgtgtaagaa--tga--
+6 -atggatttatctgctcttcgcgttgaa---g-a--agta--caaaat-gtc-attaacgctatgca-gaaaatcttag----agtgtcccat-c---tgtctgga-gttgatc---aag-gaa-c--ct-g--t-ctcca-caa-a--g-tgtgac---c-a-c-a--tatt-ttg-c-aaatttt-g-catgctgaa-ac----ttctca-acca-gaagaa-agggccttcacagtgtcc---tttatgtaagaa--tga--
+2 -gcgaa---a--tgt-aa-cacggtaga---g-gt-gat---cggggt-g-c-gtt-atac-gtgcgtggtgacctcgg--tcggtgt-tgacgg---tgcctggg-gttcctc---aga-gtgtt--ttgg--g-gtctg-aag-g--a-tg-gac-t-t-gtc-ag-tg-a-ttg-c-cattgga-gacgtgcaaaatgt---gctttca-gccatgcag-a-agaa-ctt-ggagtgtccag-tctgtttagatg--tgat-
+7 cgc-tg---g--tgc-aa-ctcga-agacctatctccttccccggggg-g-g-ctt-ctcc-g-gcatttaggcctcgg---c-gt-t-tggaag---tacggaggtttttctcggaaga-aagttcactgg--a-agtgg-aagaa--a-tg-gat-t-t-atc-tgctg-t-tcg---aattcaa-gaagtacaaaatgt----ccttcatgctatgcag-a-aaat-ctt-ggagtgtccaa-tc----t-g-t---t--t-
+3 -gt-ac---c--t-t-ga-tttcgta-t---t-ct-ga----gaggct-g-ctgct--ta--gcg-gtagc-cccttggtttccgtgg-caacggaaaagcgcggg-aat-tac---agataaatt--aaaactgcgactgcgcg-g-cg-tg-agc-t-c-gct-ga--g-a-ct--t-c-ctggacgggggacaggctgt-ggggtttc---tcagataa-c-tggg-ccc--ctgcgctcag-gaggccttcacc--ctct-
+5 -gt--t---c----c-ga-----a-a-g---g-ct--a----g-cgctag-gcgcc--aa--gc--g--g---cc--ggtttccttgg-cgacgg-agagcgcggg-aat-ttt---agatagatt--gtaattgcggctgcgcg-gccgctg-cccgtgcagccagag-g-atccagcac-ctctcttggggcttctccgtcctcggcgc---ttgga-ag-tacgga-tct--tttttctcggagaaaagttcactggaactg
+
+type: k
+nr of strings: 8
+gap cost: 5
+total cost: 13738
+0 -atggatttatctgcggatcatgttgaa---g-a--agta-c-aaaat-gtc-ctcaatgctatgca-gaaaatcttag----agtgtccaat-a---tgtctgga-gttgatc---aaa-gag-c--ct-g--t-ctcta-caa-a--g-tgtgac---c-a-c-a--tatt-ttg-c-aaatttt-g-tatgctgaa-ac----ttctca-acca-gaagaa-agggccttcacaatgtcc---tttgtgtaagaa--tgaa-
+1 -atggatttatctgcggatcgtgttgaa---g-a--agta-c-aaaat-gtt-cttaatgctatgca-gaaaatcttag----agtgtccaat-a---tgtctgga-gttgatc---aaa-gag-c--ct-g--t-ttcta-caa-a--g-tgtgat---c-a-c-a--tatt-ttg-c-aaatttt-g-tatgctgaa-ac----ttctca-acca-gaggaa-ggggccttcacagtgtcc---tttgtgtaagaa--cg-a-
+4 -atggatttatctgctgttcgcgttgaa---g-a--agta-c-aaaat-gtc-attaatgctatgca-gaaaatcttag----agtgtccaat-c---tgtctgga-gttgatc---aag-gaa-c--ct-g--t-ctcca-caa-a--g-tgtgac---c-a-c-a--tatt-ttg-c-agatttt-g-catgctgaa-ac----ttctca-acca-gaagaa-agggccttcacagtgtcc---tttgtgtaagaa--tg-a-
+6 -atggatttatctgctcttcgcgttgaa---g-a--agta-c-aaaat-gtc-attaacgctatgca-gaaaatcttag----agtgtcccat-c---tgtctgga-gttgatc---aag-gaa-c--ct-g--t-ctcca-caa-a--g-tgtgac---c-a-c-a--tatt-ttg-c-aaatttt-g-catgctgaa-ac----ttctca-acca-gaagaa-agggccttcacagtgtcc---tttatgtaagaa--tg-a-
+2 -gcgaa---a--tgt-aa-cacggtaga---g-gt-gat--c-ggggt-g-c-gtt-atac-gtgcgtggtgacctcgg--tcggtgt-tgacgg---tgcctggg-gttcctc---aga-gtgtt--ttgg--g-gtctg-aag-g--a-tg-gac-t-t-gtc-ag-tg-a-ttg-c-cattgga-gacgtgcaaaatgt---gctttca-gccatgcag-a-agaa-ctt-ggagtgtccag-tctgtttagatg--tgat-
+7 cgc-tg---g--tgc-aa-ctcga-agacctatctccttccctggggg-g-g-ctt-ctcc-g-gcatttaggcctcgg---c-gt-t-tggaag---tacggaggtttttctcggaaga-aagttcactgg--a-agtgg-aagaa--a-tg-gat-t-t-atc-tgctg-t-tcg---aattcaa-gaagtacaaaatgt----ccttcatgctatgcag-a-aaat-ctt-ggagtgtccaa-tc----t-g-t---t--t-
+3 -gt-ac---c--t-t-ga-tttcgta-t---t-ct-ga---g-aggct-g-ctgct--ta--gcg-gtagc-cccttggtttccgtgg-caacggaaaagcgcggg-aat-tac---agataaatt--aaaactgcgactgcgcg-g-cg-tg-agc-t-c-gct-ga--g-a-ct--t-c-ctggacgggggacaggctgt-ggggtttc---tcagataa-c-tggg-ccc--ctgcgctcag-gaggccttcacc--ctct-
+5 -gt--t---c----c-ga-----a-a-g---g-ct--a---g--cgctag-gcgcc--aa--gc--g--g---cc--ggtttccttgg-cgacgg-agagcgcggg-aat-ttt---agatagatt--gtaattgcggctgcgcg-gccgctg-cccgtgcagccaga-gg-atccagcac-ctctcttggggcttctccgtcctcggcgc---ttgga-ag-tacgga-tct--tttttctcggagaaaagttcactggaactg
+
+type: k
+nr of strings: 8
+gap cost: 6
+total cost: 14057
+0 -atggatttatctgcggatcatgttga---agaa-gta--caaaatgtc-c-tcaatgctat-gca-gaaaatcttag--agtgtccaatatgt-ctgga-gtt-g-atc---aaaga-g-c--ct-gtctc-tacaa--ag-tgtgac---c-a-c-a-tatt-ttg-c-aaatttt-g-tatgctgaa-ac--ttctca-accagaagaa-agggccttcacaatgtcc---tttgtgtaagaa--tgaa-
+1 -atggatttatctgcggatcgtgttga---agaa-gta--caaaatgtt-c-ttaatgctat-gca-gaaaatcttag--agtgtccaatatgt-ctgga-gtt-g-atc---aaaga-g-c--ct-gtttc-tacaa--ag-tgtgat---c-a-c-a-tatt-ttg-c-aaatttt-g-tatgctgaa-ac--ttctca-accagaggaa-ggggccttcacagtgtcc---tttgtgtaagaa--cg-a-
+4 -atggatttatctgctgttcgcgttga---agaa-gta--caaaatgtc-a-ttaatgctat-gca-gaaaatcttag--agtgtccaatctgt-ctgga-gtt-g-atc---aagga-a-c--ct-gtctc-cacaa--ag-tgtgac---c-a-c-a-tatt-ttg-c-agatttt-g-catgctgaa-ac--ttctca-accagaagaa-agggccttcacagtgtcc---tttgtgtaagaa--tg-a-
+6 -atggatttatctgctcttcgcgttga---agaa-gta--caaaatgtc-a-ttaacgctat-gca-gaaaatcttag--agtgtcccatctgt-ctgga-gtt-g-atc---aagga-a-c--ct-gtctc-cacaa--ag-tgtgac---c-a-c-a-tatt-ttg-c-aaatttt-g-catgctgaa-ac--ttctca-accagaagaa-agggccttcacagtgtcc---tttatgtaagaa--tg-a-
+2 -gcgaa---a--tgt-aa-cacggtag---aggt-gat--cggggtg-c-g-tt-atac-gt-gcgtggtgacctcggtcggtgttgacggtgc-ctggg-gtt-c-ctc---agagt-gtt--ttggggtc-tgaag--ga-tg-gac-t-t-gtc-agtg-a-ttg-c-cattgga-gacgtgcaaaatgt-gctttca-gccatgcaga-agaa-ctt-ggagtgtccag-tctgtttagatg--tgat-
+7 cgc-tg---g--tgc-aa-ctcgaagacctatctccttcccaggggg-g-gctt-ctcc-g--gcatttaggcctcgg-c-gt-ttggaagtac-ggaggtttt-t-ctcggaagaaa-gttcactggaagt-ggaaga-aa-tg-gat-t-t-atc-tgct-g-ttc-g-aattcaa-gaagtacaaaatgt--ccttcatgctatgcaga-aaat-ctt-ggagtgtccaa-tc----t-g-t---t--t-
+3 -gt-ac---c--t-t-ga-tttcgta----ttct-ga---gaggctg-ctg-ct-tagcggtagccccttggtttccgt-ggcaacggaaaagcgcggga-attacagat---aaattaaaa--ctgcgactgcgcgg--cg-tg-agc-t-c-gct-ga-g-a-ct--t-c-ctggacgggggacaggctgt-ggggttt-ctcagataac-tggg-ccc--ctgcgctcag-gaggccttcacc--ctct-
+5 -gt--t---c--c-g-aa-aggc-ta-----gc--gc---taggc-g-cca-----agc-g--g--cc--ggtttcctt-ggcgacgg-agagcgcggga-attttagat---agattgtaa--ttgcggctgcgcgg-ccgctg-cccgtgcagccagagg-atccagcac-ctctcttggggcttctccgtcctcggcg-cttgga-agtacgga-tct--tttttctcggagaaaagttcactggaactg
+
