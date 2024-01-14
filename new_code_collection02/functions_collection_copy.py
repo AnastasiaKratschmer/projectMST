@@ -818,7 +818,7 @@ def new_assembly_Gus_x(seqs, score_matrix, gap_cost, return_center_string=False,
     total_cost = compute_cost(M, score_matrix, gap_cost)
     if check_integrity == True:
         integrity_check_Gus(seqs, M, score_matrix,gap_cost,matrix,s1_idx)
-    return matrix, M, total_cost,names
+    return matrix, M, total_cost,names, s1_idx
 
 def perform_updates_gradual(in_which_MSA_is_it, node1, node2,united_MSA_new, MSA_list):
     which_spot_in_MSA_list_to_update=min(in_which_MSA_is_it[node1][0],in_which_MSA_is_it[node2][0])
@@ -1093,3 +1093,91 @@ def make_strings_in_families(nr_of_fams, nr_str_pr_fam, len_of_str, internal_var
     all_strings_coll = [item for sublist in all_strings_coll for item in sublist]
     #all_strings_coll = [''.join(sublist) for sublist in all_strings_coll]
     return all_strings_coll
+
+import numpy as np
+import heapq
+
+def find_min_span_edges_Primzeyy(pseudomatrix, starting_node, verbose=False):
+    r = str(starting_node)
+    num_nodes = len(np.unique(pseudomatrix[:, 2:3]))
+    edges = []
+    unprocessed_set = [(int(weight), node1, node2) for _, weight, node1, node2 in pseudomatrix]
+    used = set()
+    used.add(r)
+
+    while unprocessed_set:
+        new_candidate_edges = [element for element in unprocessed_set if
+                               (element[2] not in used and element[1] in used) or
+                               (element[2] in used and element[1] not in used)]
+
+        # Find the minimum weight edge
+        element = min(new_candidate_edges)
+
+        if element[1] not in used:
+            used.add(element[1])
+        if element[2] not in used:
+            used.add(element[2])
+
+        edges.append(element)
+
+        # Update unprocessed_set
+        unprocessed_set = [edge for edge in unprocessed_set if
+                           edge[1] not in used or edge[2] not in used]
+
+    edges = [np.array([''] + list(map(str, tpl)), dtype='<U21') for tpl in edges]
+    return edges
+
+
+def new_assembly_Primzeyy_x(seqs,score_matrix,gap_cost, check_integrity=False):
+    # Make a matrix to hold pairwise alignment costs for all alignment combinations!
+    matrix = np.full((len(seqs), len(seqs)), np.nan)
+    # Loop over all pairs
+    for i, seq1 in enumerate(seqs):
+        for j, seq2 in enumerate(seqs):
+            matrix[i, j] = get_cost_2(linear_C(gap_cost, score_matrix, seq1, seq2))
+    matrix_for_MST=matrix #copy the matrix, so that we ca keep the old matrix and make a changed version to the "pseudomatrix" version
+    matrix_for_MST=convert_to_desired_format_nr_version(matrix_for_MST) #making the "pseudomatrix"
+    min_span_edges_res=find_min_span_edges_Primzeyy(matrix_for_MST, starting_node='0')
+    print("I WENT PAST MAKING THE EDGES")
+    print("just gonna print the new min span edges")
+    print(min_span_edges_res)
+    print(min_span_edges_res[0])
+    print(min_span_edges_res[0][1])
+
+    in_which_MSA_is_it={}
+    names=set()
+    print("ILL JUST PRINT MIN SPAN EGEDS")
+    print(min_span_edges_res)
+    for element in min_span_edges_res:
+        print("gonna print an elemnet")
+        print(element)
+        print("gonna print element[0], 1 and 2")
+        print(element[0])
+        print("I said hey")
+        print(element[1])
+        print(element[2])
+        print(element[3])
+        names.add(element[2])
+        names.add(element[3])
+    in_which_MSA_is_it ={name: [int(name),0] for name in names}
+    MSA_list=[[[char] for char in seq] for seq in seqs]
+    who_aligned_to_who=[]
+    for row in min_span_edges_res:
+        node1=row[2]
+        node2=row[3]
+        who_aligned_to_who.append([node1,node2])
+    for element in min_span_edges_res:
+            print(element)
+            node1=element[2]
+            node2=element[3]
+            cost=linear_C(gap_cost,score_matrix,seqs[int(node1)],seqs[int(node2)])
+            alignment1_str,alignment2_str=linear_backtrack(seqs[int(node1)], seqs[int(node2)], cost, score_matrix, gap_cost)
+            alignment1, alignment2 = [*alignment1_str], [*alignment2_str]
+            A = [list(e) for e in zip(alignment1,alignment2)]
+            united_MSA_new=alt_alt_merge_united(A,MSA_list,in_which_MSA_is_it,node1,node2)
+            in_which_MSA_is_it, MSA_list=perform_updates_gradual(in_which_MSA_is_it, node1, node2, united_MSA_new, MSA_list)
+    total_cost = compute_cost(MSA_list[0], score_matrix, gap_cost)
+    if check_integrity==True:
+       integrity_check_OBO_and_gradual(seqs,in_which_MSA_is_it,who_aligned_to_who,MSA_list, matrix,score_matrix,gap_cost)
+    total_cost = compute_cost(MSA_list[0], score_matrix, gap_cost)
+    return(matrix,MSA_list, total_cost,in_which_MSA_is_it,who_aligned_to_who)

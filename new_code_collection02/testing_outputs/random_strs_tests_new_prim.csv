@@ -1,0 +1,8 @@
+nr_of_str,str_len,mode,Kruskal,Prim,Gusfield
+5,10,random,280,280,280
+10,10,random,1573,1568,1381
+15,10,random,3934,3942,3512
+5,50,random,1435,1435,1424
+10,50,random,8584,8574,7135
+15,50,random,22212,22030,16712
+5,100,random,2827,2827,2793
