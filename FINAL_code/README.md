@@ -1,5 +1,5 @@
 > [!NOTE]
-> Go to /FINAL_code to see actually finished code :)
+> Only contents of /FINAL_code are relevant to you, the rest is sketches. So please don't leave this folder ;)
 
 You can try aligning strings using either Gusfield's Sum Of Pairs Approximation Algorithm for multiple sequence alignment, or modifications of the algorithm which use Kruskal and Prim minimum spanning trees as an alignment guide tree.  
 
