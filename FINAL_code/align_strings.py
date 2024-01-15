@@ -912,7 +912,6 @@ if __name__ == "__main__":
 
     # Set sequences (extract from file if necessary) ...
     seqs, names = parse_fasta_multiple_remove_n(seqs_input)
-    
     # Set gap and score matrix ...
     gap = int(gap_input)
 
@@ -935,7 +934,7 @@ if __name__ == "__main__":
         matrix, MSA_list, total_cost, names,s1_idx = align_with_Gusfield(seqs, score_matrix, gap,check_integrity=check)
         strings=make_str_from_cols(MSA_list)
     else:
-         print("Please choose either k (Kruskal),p (Prim) or g (Gusfield) as type")
+         print("Error! Please choose either k (Kruskal),p (Prim) or g (Gusfield) as type")
          sys.exit()
          
     print("Done!\nTotal cost of your alignment was:" )
